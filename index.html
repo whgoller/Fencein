@@ -43,15 +43,19 @@
   <ng-view></ng-view>
     
     
+<!--    {{tournamentList}}-->
     
     
     
+   <div ng-repeat="tournament in tournamentsList">
+     {{tournament.name}}
+    </div> 
     
     
 
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">&copy; Wendy Goller 2015</p>
+        <p class="text-muted">&copy; Wendy Goller & Eric Allen 2015</p>
       </div>
     </footer>
 
