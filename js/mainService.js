@@ -1,14 +1,6 @@
-var app = angular.module('fencein');
+var app = angular.module('fencin');
         
-app.service('mainService', function($window, $http){
-  
-  //firebase url
-  var fbURL = new Firebase("https://fencein.firebaseio.com/fencin");
-  //This will need a get tournaments from askFred.
-  
-  var getEnv= function () {
-    return $window.env;
-  }
+app.service('mainService', function($http){
   
   
 
