@@ -1,17 +1,17 @@
-var app = angular.module('fencin', []);
+var app = angular.module('fencin', ['ngRoute']);
         
-//app.config(function($routeProvider, $httpProvider){
-//  $httpProvider.interceptors.push('httpRequestInterceptor');
-//  
-//  $routeProvider
-//    .when('/tournamentSelection', {
-//      templateUrl: 'pages/tournaments/tournaments.html',
-//      controller: 'tournamentsController',
+app.config(function($routeProvider, $httpProvider){
+  //$httpProvider.interceptors.push('httpRequestInterceptor');
+  
+  $routeProvider
+    .when('/tournamentSelection', {
+      templateUrl: '/js/pages/tournaments/tournamentSelection.html',
+      controller: 'tournamentSelectionController'//,
 //      resolve: {
 //        
 //        }
-//  }).otherwise({
-//    redirectTo: '/'
-//  });
-//
-//});
+  }).otherwise({
+    redirectTo: '/'
+  });
+
+});
