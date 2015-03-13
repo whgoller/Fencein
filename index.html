@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Welcome page">
     <meta name="author" content="Wendy Goller">
-    <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
     <title>Welcome</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
   </head>
 
-  <body ng-controller="MainController">
+  <body ng-controller="mainController">
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -39,8 +41,8 @@
       </div>
     </nav>
 
-    
-  <ng-view></ng-view>
+    <div class="container">
+     <ng-view></ng-view>
   
     
     
@@ -48,10 +50,14 @@
     
     
     
-   <div ng-repeat="tournament in tournamentsList">
-     {{tournament.name}}
-    </div> 
+     <div ng-repeat="tournament in tournaments">
+    {{tournament.name}}
+    {{tournament.start_date}}
+  </div>
+
     
+    </div>
+ 
     
 
     <footer class="footer">
@@ -63,14 +69,23 @@
 
 
 
-    <script src="js/plugins/jquery-1.11.2.min.js"></script>
-    <script src="js/plugins/angular.js"></script>
-    <script src="js/plugins/angularfire.min.js"></script>
-    <script src="js/plugins/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular-route.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
     <script src="js/app.js"></script>
     <script src="js/mainService.js"></script>
+    <script src="js/keys.js"></script>
     <script src="js/askfredService.js"></script>
     <script src="js/mainController.js"></script>
+    <script src="pages/tournaments/tournamentsController.js"></script>
+    <script src="pages/checkin/checkinController.js"></script>
+    <script src="pages/backroom/backroomController.js"></script>
+    <script src="pages/login/loginControler.js"></script>
+    <script src="pages/login/loginService.js"></script>
   </body>
 </html>
 

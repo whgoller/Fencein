@@ -1,15 +1,18 @@
 var app = angular.module('fencin');
 
-app.controller("MainController", function($scope, askfredService){
-    $scope.tournamentName;
+app.controller("mainController", function($scope, askfredService){
+    $scope.tournamentName = 'Utah Swords Academy Fencing Club';
+  
     $scope.tournamentlogin = function(){
       href="welcome.html";
     };
   
   
-  $scope.getFredData = function(){
-    askfredService.getClubTournamentList().then(function(response){
-      console.log(response);
+  $scope.getTournamentData = function(){
+    askfredService.getTournaments($scope.tournamentName).then(function(response){
+      //console.log('ctrl', response);
+      $scope.tournaments = response;
+      console.log('$scope.tournaments', $scope.tournaments);
     });
   }();
 
