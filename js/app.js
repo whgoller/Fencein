@@ -10,6 +10,9 @@ app.config(function($routeProvider, $httpProvider){
 //      resolve: {
 //        
 //        }
+  }).when('/backroom', {
+      templateUrl: '/js/pages/backroom/backroom.html',
+      controller: 'backroomController'
   }).otherwise({
     redirectTo: '/'
   });
