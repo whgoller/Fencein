@@ -1,5 +1,13 @@
     
-  <div ng-repeat="tournament in tournaments">
-    {{tournament.name}}
-    {{tournament.start_date}}
-  </div>
+<!--<div ng-repeat="tournament in tournaments">-->
+<!--  {{tournament.name}}-->
+<!--  {{tournament.start_date}}-->
+<!--</div>-->
+<div>
+  <select ng-change="selectAction()" ng-options="t.id as t.name group by t.group for t in tournaments" ng-model="selectedTournament"></select>
+</div>
+<div ng-repeat="event in selectedTournamentInfo">
+  Event Name: {{event.full_name}}
+  Age Limit: {{event.age_limit}}
+  Gender: {{event.gender}}
+</div>

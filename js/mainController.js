@@ -8,13 +8,13 @@ app.controller("mainController", function($scope, askfredService){
     };
   
   
-  $scope.getTournamentData = function(){
-    askfredService.getTournaments($scope.tournamentName).then(function(response){
-      //console.log('ctrl', response);
-      $scope.tournaments = response;
-      console.log('$scope.tournaments', $scope.tournaments);
-    });
-  }();
+//  $scope.getTournamentData = function(){
+//    askfredService.getTournaments($scope.tournamentName).then(function(response){
+//      //console.log('ctrl', response);
+//      $scope.tournaments = response;
+//      console.log('$scope.tournaments', $scope.tournaments);
+//    });
+//  }();
 
 });
 
