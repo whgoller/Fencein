@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.service('askfredService', function ($http, $q, Keys) {
+app.service('askfredService', function ($http, $q, keys) {
     this.apiKey = Keys.getFredApi;
     this.tournament = 'https://api.askfred.net/v1/tournament';
     this.fencer = 'https://api.askfred.net/v1/fencer?_api_key=';
