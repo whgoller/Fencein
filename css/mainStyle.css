@@ -3,3 +3,14 @@
     Author     : whgol_000
 */
 
+#loginModal {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    top: 5%;
+}
+
+#eventTable{
+    max-width: 500px;
+}
+
