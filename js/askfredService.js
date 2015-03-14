@@ -1,7 +1,7 @@
 var app = angular.module('fencin');
 
-app.service('askfredService', function ($http, $q, Keys) {
-    this.apiKey = Keys.getFredApi;
+app.service('askfredService', function ($http, $q, keys) {
+    this.apiKey = keys.getFredApi;
     this.tournament = 'https://api.askfred.net/v1/tournament';
     this.fencer = 'https://api.askfred.net/v1/fencer?_api_key=';
     this.format = '&_format=jsonp&_jsonp_callback=JSON_CALLBACK&_per_page=100';
