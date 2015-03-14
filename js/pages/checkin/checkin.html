@@ -1,3 +1,4 @@
+<!--
 <h1>Checkin</h1>
 
 <div>
@@ -47,3 +48,21 @@
     </select>
     
 </div>
+
+-->
+
+<table class='table table-striped table-bordered' id='participantTable'>
+    <thead>
+        <tr>
+            <th class='col-sm-4'>Last name</th>
+            <th class='col-sm-4'>First name</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr ng-repeat='participant in participants'>
+            <td>{{participant.lastName}}</td>
+            <td>{{participant.firstName}}</td>
+        </tr>
+    </tbody>
+</table>
