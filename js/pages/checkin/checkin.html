@@ -61,8 +61,8 @@
 
     <tbody>
         <tr ng-repeat='participant in participants'>
-            <td>{{participant.lastName}}</td>
-            <td>{{participant.firstName}}</td>
+            <td data-ng-click="getParticipant(participant)">{{participant.lastName}}</td>
+            <td data-ng-click="getParticipant(participant)">{{participant.firstName}}</td>
         </tr>
     </tbody>
 </table>
