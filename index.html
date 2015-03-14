@@ -28,7 +28,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#/checkin">Check In</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#checkinModal">Check In</a></li>
                         <li><a href="#/backroom">Backroom</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -50,6 +50,19 @@
                     <p><input type="email" class="span3" name="email" id="email" placeholder="Enter Email" value="" ng-model="user.email"></p>
                     <p><input type="password" class="span3" name="loginPassword" id="loginPassword" placeholder="Enter Password" ng-model="user.password"></p>
                     <p><button type="submit" class="btn btn-success">Sign in</button> <a href="<? base_url();?>/forgotpassword">Forgot Password</a></p>
+                </form>
+            </div>
+        </div>
+        
+                <!-- Check in Modal -->
+        <div class="modal" id="checkinModal" ng-submit="checkIn()">
+            <div class="modal-header">
+                <a href="#" class="btn btn-success pull-right" data-dismiss="modal">x</a>
+                <h4>Select Tournament</h4>
+            </div>
+            <div class="modal-body">
+                <form name="checkinForm">
+                    <select ng-options='tournament as tournament for tournament in tournaments' ng-change='tournamentSelected()' ng-model="selectedTournament">Select Tournament</select>
                 </form>
             </div>
         </div>

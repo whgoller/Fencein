@@ -10,7 +10,19 @@
     top: 5%;
 }
 
+#checkinModal {
+    width: 250px;
+    height: 150px;
+    margin: 0 auto;
+    top: 5%;
+    text-align: center;
+}
+
 #eventTable{
+    max-width: 500px;
+}
+
+#participantTable{
     max-width: 500px;
 }
 
