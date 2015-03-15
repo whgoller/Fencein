@@ -6,21 +6,48 @@ app.service('firebaseService', function ($firebase, $firebaseArray, $firebaseObj
   
   // Not sure if the following are correct yet for our data structure. we can talk about it on Sat.
 
+  this.setClub = function(clubId, clubName){
+    
+  };
+  
   this.getClub = function(clubId){
     return $firebase(new Firebase(firebaseUrl + 'clubs/' + clubId)).$asObject();
   };
 
+  
+  this.setTournament = function(){
+    
+  }
+  
   this.getTournament = function(clubId){
-    return $firebase(new Firebase(firebaseUrl + 'clubss/' + clubId + '/tournaments')).$asArray();
+    return $firebase(new Firebase(firebaseUrl + 'clubs/' + clubId + '/tournaments')).$asArray();
+  }
+  
+  
+  this.setTournamentEvents = function(clubId, tournamentId, tournamentName, ){
+    
   }
   
   this.getTournamentEvents = function(clubId, tournamentId){
-    return $firebase(new Firebase(firebaseUrl + 'clubss/' + clubId + '/tournaments/' + tournamentId)).$asArray();
+    return $firebase(new Firebase(firebaseUrl + 'clubs/' + clubId + '/tournaments/' + tournamentId)).$asArray();
   }
   
-  this.setClub = function(clubId){
-    
+  
+  this.setCompetitor = function(competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn){
     
   }
+  
+  this.getCompetitor = function(competitorId){
+    
+  }
+  
+  this.setEquipment = function(competitorId, equipmentList){
+    
+  }
+  
+  this.getEquipment = function(){
+    
+  }
+  
   
 })
