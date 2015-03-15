@@ -2,16 +2,22 @@ var app = angular.module('fencin');
 
 app.controller('checkInController', function ($scope) {
 
-
+$scope.text = 'hi';
+$scope.currentParticipant = {firstName: 'test', lastName: 'allen'};
     $scope.getParticipants = function () {
         $scope.participants = [{firstName: 'bob', lastName: 'sam'}, {firstName: 'fred', lastName: 'both'}]; //TODO call firebase
     }();    //self calling function
 
     $scope.getParticipant = function (participant) {
+        debugger
         $scope.currentParticipant = participant;
-        console.log('$scope.currentParticipant', $scope.currentParticipant)
+        console.log('$scope.currentParticipant', $scope);
         window.location.hash = '/checkinParticipant';
     };
+    
+    $scope.testFunc = function (){
+       console.log('test', $scope); 
+    }
 
 
 //    $scope.tournaments = ['one', 'two', 'three'];
