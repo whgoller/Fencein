@@ -1,5 +1,5 @@
 var app = angular.module('fencin');
-app.service('checkInService', function() {
+app.service('checkinService', function() {
     this.getTournamentData = function(tournament) {
         console.log('getTournamentData service', tournament);
         return [
@@ -24,6 +24,14 @@ app.service('checkInService', function() {
             lastName: secondName,
             usfaID: 1234
         };
+    };
+    
+    this.setParticipant = function(participant){
+        this.currentParticipant = participant;
+    };
+    
+    this.getParticipant = function(){
+        return this.currentParticipant;
     };
 });
 

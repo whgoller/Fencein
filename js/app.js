@@ -12,7 +12,7 @@ app.config(function ($routeProvider, $httpProvider) {
 //        }
             }).when('/checkin', {
         templateUrl: '/js/pages/checkin/checkin.html',
-        controller: 'checkInController'
+        controller: 'checkinController'
 
     }).when('/backroom', {
         templateUrl: '/js/pages/backroom/backroom.html',
@@ -20,7 +20,7 @@ app.config(function ($routeProvider, $httpProvider) {
 
     }).when('/checkinParticipant', {
         templateUrl: '/js/pages/checkin/checkinParticipant.html',
-        controller: 'checkInController'
+        controller: 'checkinParticipantController'
 
     }).otherwise({
         redirectTo: '/'
