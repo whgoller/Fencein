@@ -23,4 +23,3 @@ app.config(function ($routeProvider, $httpProvider) {
         redirectTo: '/'
     });
 });
-

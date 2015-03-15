@@ -1,12 +1,12 @@
 var app = angular.module('fencin');
         
-app.controller('tournamentSelectionController', function($scope, askfredService){
-  $scope.tournamentName = 'Utah Swords Academy Fencing Club';
+app.controller('tournamentSelectionController', function($scope, askfredService, $firebaseObject, $firebaseArray){
+  $scope.clubName = 'Utah Swords Academy Fencing Club';
   $scope.tournaments = [];
   $scope.events = [];
   
   $scope.getTournamentsList = function(){
-    askfredService.getTournaments($scope.tournamentName).then(function(response){
+    askfredService.getTournaments($scope.clubName).then(function(response){
       $scope.tournaments = response;
       console.log('$scope.tournaments', $scope.tournaments);
     });
@@ -38,9 +38,23 @@ app.controller('tournamentSelectionController', function($scope, askfredService)
     
   }
   
-  $scope.importIntoFirebase = function(){
-    
+  
+  
+  var firebaseUrl = 'https://fencein.firebaseio.com/';
+  $scope.addClub = function(){
+    $scope.club = $firebaseArray(firebaseUrl + '/clubs');
+    $scope.club.$add({
+      clubName: $scope.clubName,
+      clubId: clubId
+    });
   }
+  
+  
+  
+  
+  
+  
+  
   
   
 });
