@@ -3,16 +3,21 @@
 <!--  {{tournament.name}}-->
 <!--  {{tournament.start_date}}-->
 <!--</div>-->
-<div>
-  <select ng-change="selectAction()" ng-options="t.id as t.name group by t.group for t in tournaments" ng-model="selectedTournament"></select>
-</div>
-<div ng-repeat="event in events">
-  Event Name: {{event.full_name}}
-  Age Limit: {{event.age_limit}}
-  Gender: {{event.gender}}
-  
-  <div ng-repeat="fencer in event.preRegisteredFencers">
-    Name: {{fencer.competitor.first_name}} {{fencer.competitor.last_name}}
-    Rating: {{fencer.rating}}
+<div class="container">
+  <div>
+    <select ng-change="selectAction()" ng-options="t.id as t.name group by t.group for t in tournaments" ng-model="selectedTournament"></select>
+  </div>
+  <div ng-repeat="event in events">
+    Event Name: {{event.full_name}}
+    Age Limit: {{event.age_limit}}
+    Gender: {{event.gender}}
+
+    <div ng-repeat="fencer in event.preRegisteredFencers">
+      Name: {{fencer.competitor.first_name}} {{fencer.competitor.last_name}}
+      Rating: {{fencer.rating}}
+    </div>
+  </div>
+  <div>
+    <button ng-click="importIntoFirebase()">Import Data</button>
   </div>
 </div>

@@ -1,16 +1,13 @@
-var app = angular.module('fencin', ['ngRoute']);
+var app = angular.module('fencin', ['ngRoute', 'firebase']);
 
 app.config(function ($routeProvider, $httpProvider) {
     //$httpProvider.interceptors.push('httpRequestInterceptor');
 
     $routeProvider
-            .when('/tournamentSelection', {
-                templateUrl: '/js/pages/tournaments/tournamentSelection.html',
-                controller: 'tournamentSelectionController'//,
-//      resolve: {
-//        
-//        }
-            }).when('/checkin', {
+    .when('/tournamentSelection', {
+        templateUrl: '/js/pages/tournaments/tournamentSelection.html',
+        controller: 'tournamentSelectionController'
+    }).when('/checkin', {
         templateUrl: '/js/pages/checkin/checkin.html',
         controller: 'checkInController'
 

@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
         
-app.service('firebaseService', function ($firebase) {
+app.service('firebaseService', function ($firebase, $firebaseArray, $firebaseObject) {
   var firebaseUrl = 'https://fencein.firebaseio.com/';
   
   
@@ -18,6 +18,9 @@ app.service('firebaseService', function ($firebase) {
     return $firebase(new Firebase(firebaseUrl + 'clubss/' + clubId + '/tournaments/' + tournamentId)).$asArray();
   }
   
-  
+  this.setClub = function(clubId){
+    
+    
+  }
   
 })

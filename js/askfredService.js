@@ -9,7 +9,7 @@ app.service('askfredService', function ($http, $q, keys) {
     this.getTournaments = function (tournamentName) {
       return $http({
           method: 'jsonp',
-          url: 'https://api.askfred.net/v1/tournament?_api_key=' + this.apiKey + '&_format=jsonp&_jsonp_callback=JSON_CALLBACK&_per_page=100&location=' + tournamentName
+          url: 'https://api.askfred.net/v1/tournament?_api_key=' + this.apiKey + this.format + '&location=' + tournamentName
       }).then(function (response) {
           console.log('askfredservice getTournaments', response.data.tournaments);
           return response.data.tournaments;
@@ -19,7 +19,7 @@ app.service('askfredService', function ($http, $q, keys) {
     this.getSingleTournamentEvents = function (tournamentId) {
       return $http({
           method: 'jsonp',
-          url: 'https://api.askfred.net/v1/tournament/' + tournamentId + '?_api_key=' + this.apiKey + '&_format=jsonp&_jsonp_callback=JSON_CALLBACK&_per_page=100'
+          url: 'https://api.askfred.net/v1/tournament/' + tournamentId + '?_api_key=' + this.apiKey + this.format
       }).then(function (response) {
           console.log('askfredservice getSingleTournamentEvents', response.data.tournament.events);
           return response.data.tournament.events;
@@ -29,7 +29,7 @@ app.service('askfredService', function ($http, $q, keys) {
     this.getPreRegisteredFencersInEvent = function(eventId){
       return $http({
           method: 'jsonp',
-          url: 'https://api.askfred.net/v1/event/' + eventId + '?_api_key=' + this.apiKey + '&_format=jsonp&_jsonp_callback=JSON_CALLBACK&_per_page=100'
+          url: 'https://api.askfred.net/v1/event/' + eventId + '?_api_key=' + this.apiKey + this.format
       }).then(function (response) {
           console.log('askfredservice getPreRegisteredFencersInEvent', response.data.event.preregs);
           return response.data.event.preregs

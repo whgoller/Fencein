@@ -38,6 +38,9 @@ app.controller('tournamentSelectionController', function($scope, askfredService)
     
   }
   
+  $scope.importIntoFirebase = function(){
+    
+  }
   
   
 });
