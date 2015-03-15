@@ -1,6 +1,10 @@
 var app = angular.module('fencin');
-app.service('checkInService', function() {
-    this.getTournamentData = function(tournament) {
+app.service('checkinService', function () {
+    this.creditTotal = 0;
+    this.cashTotal = 0;
+    this.checkTotal = 0;
+
+    this.getTournamentData = function (tournament) {
         console.log('getTournamentData service', tournament);
         return [
             {name: 'foil',
@@ -11,19 +15,42 @@ app.service('checkInService', function() {
                 cost: '30'}
         ];
     };
-    this.getAthleteByID = function(usfaID) {
+    this.getAthleteByID = function (usfaID) {
         return {
             firstName: 'Bob',
             lastName: 'Fred',
             usfaID: usfaID
         };
     };
-    this.getAthleteByName = function(firstName, secondName) {
+    this.getAthleteByName = function (firstName, secondName) {
         return {
             firstName: firstName,
             lastName: secondName,
             usfaID: 1234
         };
+    };
+
+    this.setParticipant = function (participant) {
+        this.currentParticipant = participant;
+    };
+
+    this.getParticipant = function () {
+        return this.currentParticipant;
+    };
+
+    this.setPaidCredit = function (amount) {
+        this.creditTotal += amount;
+        console.log('this.creditTotal',this.creditTotal);
+    };
+
+    this.setPaidCash = function (amount) {
+        this.cashTotal += amount;
+        console.log('this.cashTotal',this.cashTotal);
+    };
+
+    this.setPaidCheck = function (amount) {
+        this.checkTotal += amount;
+        console.log('this.checkTotal',this.checkTotal);
     };
 });
 

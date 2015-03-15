@@ -61,7 +61,7 @@
                 <h4>Select Tournament</h4>
             </div>
             <div class="modal-body">
-                <form name="checkinForm">
+                <form name="checkinForm">            
                     <select ng-options='tournament as tournament for tournament in tournaments' ng-change='tournamentSelected()' ng-model="selectedTournament">Select Tournament</select>
                 </form>
             </div>
@@ -105,6 +105,7 @@
         <script src="js/pages/tournaments/tournamentsSelectionController.js"></script>
         <script src="js/pages/checkin/checkinController.js"></script>
         <script src="js/pages/checkin/checkinService.js"></script>
+        <script src="js/pages/checkin/checkinParticipantController.js"></script>
         <script src="js/pages/backroom/backroomController.js"></script>
         <script src="js/pages/login/loginControler.js"></script>
         <script src="js/pages/login/loginService.js"></script>
