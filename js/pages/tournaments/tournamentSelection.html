@@ -4,17 +4,43 @@
 <!--  {{tournament.start_date}}-->
 <!--</div>-->
 <div class="container">
-  <div>
-    <select ng-change="selectAction()" ng-options="t.id as t.name group by t.group for t in tournaments" ng-model="selectedTournament"></select>
+  <div class="row">
+    <h1>{{clubName}}</h1>
+    <label for="selectTournamnt" >Select a tournament</label>
+    <select id="selectTournamnt" ng-change="selectAction()" ng-options="t.id as t.start_date + '  ' + t.name  group by t.group for t in tournaments" ng-model="selectedTournament"></select>
   </div>
-  <div ng-repeat="event in events">
-    Event Name: {{event.full_name}}
-    Age Limit: {{event.age_limit}}
-    Gender: {{event.gender}}
-
-    <div ng-repeat="fencer in event.preRegisteredFencers">
-      Name: {{fencer.competitor.first_name}} {{fencer.competitor.last_name}}
-      Rating: {{fencer.rating}}
+  <div class="row"></div>  
+  <div class="row" ng-repeat="event in events">
+    <div class="panel panel-success">
+      <!-- Default panel contents -->
+      <div class="panel-heading">{{event.full_name}}</div>
+      <div class="panel-body">
+        <p>Age Limit: {{event.age_limit}}</p>
+        <p>Gender: {{event.gender}}</p>
+        <p>weapon: {{event.weapon}}</p>
+        <p>rating: {{event.rating}}</p>
+      </div>
+      <!-- Table -->
+      <table class="table table-success">
+        <thead>
+          <th>Fencer</th>
+          <th>USFA Membership Id</th>
+          <th>Rating</th>
+          <th>Birthyear</th>
+          <th>Gender</th>
+          <th>Club</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="fencer in event.preRegisteredFencers">
+            <td>{{fencer.competitor.first_name}} {{fencer.competitor.last_name}}</td>
+            <td>{{fencer.competitor.usfa_id}}</td>
+            <td>{{fencer.rating}}</td>
+            <td>{{fencer.competitor.birthyear}}</td>
+            <td>{{fencer.competitor.gender}}</td>
+            <td>{{fencer.club.name}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div>

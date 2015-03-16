@@ -6,6 +6,17 @@ app.service('askfredService', function ($http, $q, keys) {
     this.fencer = 'https://api.askfred.net/v1/fencer?_api_key=';
     this.format = '&_format=jsonp&_jsonp_callback=JSON_CALLBACK&_per_page=100';
 
+    this.getClub = function (clubInitials) {
+      return $http({
+          method: 'jsonp',
+          url: 'https://api.askfred.net/v1/club?_api_key=' + this.apiKey + this.format + '&initials='  + clubInitials
+      }).then(function(response){        
+          console.log('askfredservice getClub', response);
+          console.log('askfredservice getClub', response.data.clubs);
+          return response.data.clubs;
+      });
+    };
+  
     this.getTournaments = function (tournamentName) {
       return $http({
           method: 'jsonp',
