@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
         
-app.controller('tournamentSelectionController', function($scope, askfredService){
+app.controller('tournamentSelectionController', function($scope, askfredService, firebaseService){
   $scope.clubInitials = 'USAFC';
   $scope.tournaments = [];
   $scope.events = [];
@@ -63,6 +63,35 @@ app.controller('tournamentSelectionController', function($scope, askfredService)
   }
   
   
+
+   $scope.importIntoFirebase = function(){
+     firebaseService.setCompetitor();
+//     var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/clubs'));
+//     var cId;
+//     var tId;
+//     
+//     list.$add({
+//       clubName: $scope.clubName,
+//       clubId: $scope.clubId
+//               
+//     }).then(function(ref){
+//       var cid = ref.key();
+//       console.log("added record with id " + id);
+//       list.$indexFor(id); // returns location in the array
+//            
+//     });
+//     
+//     var tournament = $firebaseArray(new Firebase('https://fencein.firebaseio.com/tournaments/'))
+//     tournament.$add({
+//       tournamentName: $scope.clubName,
+//       tournamentId: $scope.clubId
+//               
+//     }).then(function(ref){
+//       var tId = ref.key();
+//       console.log("added record with id " + id);
+//       list.$indexFor(id); // returns location in the array
+//            
+//     });
      
    }
   
