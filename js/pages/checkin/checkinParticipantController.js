@@ -10,7 +10,6 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 
 //Calculates the amount owed when they select/unselect events to participate in
     $scope.eventSelected = function (selected) {
-        console.log('selected', selected);
         if (selected.preRegistered) {
             $scope.totalAmountDue += parseInt(selected.fee);
         }

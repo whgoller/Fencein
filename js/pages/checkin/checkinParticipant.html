@@ -1,5 +1,5 @@
 
-<h4>{{currentParticipant.firstName}} {{currentParticipant.lastName}} </h4>
+<h4 class="whiteBackground">{{currentParticipant.firstName}} {{currentParticipant.lastName}} </h4>
 
 
 <table class='table table-striped table-bordered' id='eventTable'>
@@ -15,13 +15,13 @@
         <tr ng-repeat='event in currentTournament.tournamentEvents'>
             <td>{{event.full_name}}</td>
             <td style="text-align: center; vertical-align: middle;"><input type="checkbox" ng-model='event.preRegistered' ng-change="eventSelected(event)"></td>
-            <td>{{event.fee}}</td>
+            <td>{{event.fee | currency}}</td>
         </tr>
     </tbody>
 </table>
 
-<div>
-    Amount Due: {{totalAmountDue}} 
+<div class="whiteBackground">
+    Amount Due: {{totalAmountDue | currency}} 
     <select ng-change='paidBy()' ng-model="paymentType">
         <option value="" disabled selected>Payment type?</option>
         <option value="cash">Cash</option>
