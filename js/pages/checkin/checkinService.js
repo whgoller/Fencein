@@ -4,6 +4,16 @@ app.service('checkinService', function () {
     this.cashTotal = 0;
     this.checkTotal = 0;
 
+    this.setCurrentTournament = function (tournament) {
+        this.currentTournament = tournament;
+        console.log('currentTournament', this);
+    };
+    
+    this.getCurrentTournament = function(){
+        console.log('this', this);
+        return this.currentTournament;
+    };
+
     this.getTournamentData = function (tournament) {
         console.log('getTournamentData service', tournament);
         return [
@@ -40,17 +50,17 @@ app.service('checkinService', function () {
 
     this.setPaidCredit = function (amount) {
         this.creditTotal += amount;
-        console.log('this.creditTotal',this.creditTotal);
+        console.log('this.creditTotal', this.creditTotal);
     };
 
     this.setPaidCash = function (amount) {
         this.cashTotal += amount;
-        console.log('this.cashTotal',this.cashTotal);
+        console.log('this.cashTotal', this.cashTotal);
     };
 
     this.setPaidCheck = function (amount) {
         this.checkTotal += amount;
-        console.log('this.checkTotal',this.checkTotal);
+        console.log('this.checkTotal', this.checkTotal);
     };
 });
 
