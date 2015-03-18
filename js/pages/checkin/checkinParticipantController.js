@@ -8,9 +8,15 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         $scope.currentTournament = checkinService.getCurrentTournament();
     }();    //self call
 
+//Calculates the amount owed when they select/unselect events to participate in
     $scope.eventSelected = function (selected) {
-        console.log('selected', selected.cost);
-        $scope.totalAmountDue += parseInt(selected.cost);
+        console.log('selected', selected);
+        if (selected.preRegistered) {
+            $scope.totalAmountDue += parseInt(selected.fee);
+        }
+        else {
+            $scope.totalAmountDue -= parseInt(selected.fee);
+        }
     };
 
     $scope.paidBy = function () {
@@ -21,7 +27,6 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         } else if ($scope.paymentType === 'card') {
             checkinService.setPaidCredit($scope.totalAmountDue);
         }
-
         window.location.hash = '/checkin';
     };
 });
