@@ -20,7 +20,7 @@ app.service('askfredService', function ($http, $q, keys) {
     this.getTournaments = function (tournamentName) {
       return $http({
           method: 'jsonp',
-          url: 'https://api.askfred.net/v1/tournament?_api_key=' + this.apiKey + this.format + '&location=' + tournamentName
+          url: 'https://api.askfred.net/v1/tournament?_api_key=' + this.apiKey + this.format + '&location_contains=' + tournamentName
       }).then(function (response) {
           console.log('askfredservice getTournaments', response.data.tournaments);
           return response.data.tournaments;
