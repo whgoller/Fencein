@@ -65,7 +65,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
   
   this.setFencer = function (fencer){
       
-  };
+  }; 
   
 
 
@@ -134,4 +134,4 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
 //  }
 //  
 
-})
+});
