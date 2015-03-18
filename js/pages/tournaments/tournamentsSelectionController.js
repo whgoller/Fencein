@@ -16,7 +16,6 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         });
     }();
 
-  
     $scope.getTournamentsList = function (clubName) {
         askfredService.getTournaments(clubName).then(function (response) {
             $scope.tournaments = response;
@@ -35,7 +34,6 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         });
     };
 
-  
     $scope.getEventFencers = function (eventId) {
         askfredService.getPreRegisteredFencersInEvent(eventId).then(function (fencers) {
             $scope.fencers = fencers;
@@ -50,11 +48,11 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         });
     };
 
-  
     $scope.selectAction = function () {
         $scope.getTournamentEvents($scope.selectedTournament);
     };
-  
+
+
 
     $scope.importIntoFirebase = function () {
       var tournament = {};
@@ -74,6 +72,8 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
       console.log('tournament', tournament);
       firebaseService.setTournament(tournament);
     };
-  
+
+
+
 
 });

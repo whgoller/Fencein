@@ -63,7 +63,6 @@ this.getFencers = function(){
   var deffered = $q.defer();    
   deffered.resolve($firebaseArray(new Firebase(fencersUrl)).$loaded().then(function (data) {
     return data;
-    }
   }));       
   return deffered.promise;
 };
@@ -82,8 +81,8 @@ this.setFencers = function (fencers){
     for(i in data){
       this.getFencer(data[i].competitor_Id);        
     }
-  this.setFencersInFirebase();
-
+    this.setFencersInFirebase();
+  });
 }; 
 
 this.setFencersInFirebase = function(){
