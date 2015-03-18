@@ -16,6 +16,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         });
     }();
 
+  
     $scope.getTournamentsList = function (clubName) {
         askfredService.getTournaments(clubName).then(function (response) {
             $scope.tournaments = response;
@@ -34,6 +35,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         });
     };
 
+  
     $scope.getEventFencers = function (eventId) {
         askfredService.getPreRegisteredFencersInEvent(eventId).then(function (fencers) {
             $scope.fencers = fencers;
@@ -48,62 +50,30 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         });
     };
 
+  
     $scope.selectAction = function () {
         $scope.getTournamentEvents($scope.selectedTournament);
     };
-
-
+  
 
     $scope.importIntoFirebase = function () {
-        var tournament = {};
-        for (i in $scope.tournaments) {
-            if ($scope.tournaments[i].id === $scope.selectedTournament) {
-                tournament = {
-                    id: $scope.tournaments[i].id,
-                    name: $scope.tournaments[i].name,
-                    events: $scope.tournaments[i].events,
-                    clubId: $scope.clubName,
-                    clubName: $scope.clubId,
-                    startDate: $scope.tournaments[i].start_date
-                };
-                break;
-            }
+      var tournament = {};
+      for (i in $scope.tournaments) {
+        if ($scope.tournaments[i].id === $scope.selectedTournament) {
+          tournament = {
+            id: $scope.tournaments[i].id,
+            name: $scope.tournaments[i].name,
+            events: $scope.tournaments[i].events,
+            clubId: $scope.clubName,
+            clubName: $scope.clubId,
+            startDate: $scope.tournaments[i].start_date
+          };
+          break;
         }
-console.log('tournament', tournament);
-        firebaseService.setTournament(tournament);
+      }
+      console.log('tournament', tournament);
+      firebaseService.setTournament(tournament);
     };
-
-
-//     var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/clubs'));
-//     var cId;
-//     var tId;
-//     
-//     list.$add({
-//       clubName: $scope.clubName,
-//       clubId: $scope.clubId
-//               
-//     }).then(function(ref){
-//       var cid = ref.key();
-//       console.log("added record with id " + id);
-//       list.$indexFor(id); // returns location in the array
-//            
-//     });
-//     
-//     var tournament = $firebaseArray(new Firebase('https://fencein.firebaseio.com/tournaments/'))
-//     tournament.$add({
-//       tournamentName: $scope.clubName,
-//       tournamentId: $scope.clubId
-//               
-//     }).then(function(ref){
-//       var tId = ref.key();
-//       console.log("added record with id " + id);
-//       list.$indexFor(id); // returns location in the array
-//            
-//     });
-
-//    }
-
-
-
+  
 
 });
