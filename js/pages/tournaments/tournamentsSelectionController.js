@@ -66,8 +66,8 @@ app.controller('tournamentSelectionController', function($scope, askfredService,
   
   
   
-//   $scope.importIntoFirebase = function(){
-//     firebaseService.setCompetitor();
+   $scope.importIntoFirebase = function(){
+     firebaseService.setCompetitor();
 //     var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/clubs'));
 //     var cId;
 //     var tId;
@@ -95,7 +95,7 @@ app.controller('tournamentSelectionController', function($scope, askfredService,
 //            
 //     });
      
-//   }
+   }
   
   
   

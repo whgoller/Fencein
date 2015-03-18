@@ -1,24 +1,24 @@
 var app = angular.module('fencin');
         
-app.service('firebaseService', function () {
+app.service('firebaseService', function ($firebaseArray, $firebaseObject) {
   console.log('here')
   
-//  var fencersRef = new Firebase("https://fencein.firebaseio.com/fencers");
-//  // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
-//  this.setCompetitor = function(){
-//      var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/clubs'));
-//
-//     list.$add({
-//       clubName: $scope.clubName,
-//       clubId: $scope.clubId
-//               
-//     }).then(function(ref){
-//       var id = ref.key();
-//       console.log("added record with id " + id);
-//       list.$indexFor(id); // returns location in the array
-//            
-//     });
-//  }
+  var fencersRef = new Firebase("https://fencein.firebaseio.com/fencers");
+  // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
+  this.setCompetitor = function(){
+      var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/clubs'));
+
+     list.$add({
+       clubName: 'bob',
+       clubId: 'this.clubId'
+               
+     }).then(function(ref){
+       var id = ref.key();
+       console.log("added record with id " + id);
+       list.$indexFor(id); // returns location in the array
+            
+     });
+  }
 //  
 //  this.getCompetitor = function(competitorId){
 //
