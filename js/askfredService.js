@@ -11,8 +11,6 @@ app.service('askfredService', function ($http, $q, keys) {
           method: 'jsonp',
           url: 'https://api.askfred.net/v1/club?_api_key=' + this.apiKey + this.format + '&initials='  + clubInitials
       }).then(function(response){        
-          console.log('askfredservice getClub', response);
-          console.log('askfredservice getClub', response.data.clubs);
           return response.data.clubs;
       });
     };
@@ -22,7 +20,6 @@ app.service('askfredService', function ($http, $q, keys) {
           method: 'jsonp',
           url: 'https://api.askfred.net/v1/tournament?_api_key=' + this.apiKey + this.format + '&location_contains=' + tournamentName
       }).then(function (response) {
-          console.log('askfredservice getTournaments', response.data.tournaments);
           return response.data.tournaments;
       });
     };
@@ -32,7 +29,6 @@ app.service('askfredService', function ($http, $q, keys) {
           method: 'jsonp',
           url: 'https://api.askfred.net/v1/tournament/' + tournamentId + '?_api_key=' + this.apiKey + this.format
       }).then(function (response) {
-          console.log('askfredservice getSingleTournamentEvents', response.data.tournament.events);
           return response.data.tournament.events;
       });
     };
@@ -42,8 +38,7 @@ app.service('askfredService', function ($http, $q, keys) {
           method: 'jsonp',
           url: 'https://api.askfred.net/v1/event/' + eventId + '?_api_key=' + this.apiKey + this.format
       }).then(function (response) {
-          console.log('askfredservice getPreRegisteredFencersInEvent', response.data.event.preregs);
-          return response.data.event.preregs
+          return response.data.event.preregs;
       });
     };
   
@@ -53,7 +48,6 @@ app.service('askfredService', function ($http, $q, keys) {
           method: 'jsonp',
           url: this.fencer + this.apiKey + '&usfa_id=' + usfaID + this.format
       }).then(function (response) {
-          console.log('askfredservice getAthleteByID', response.data.fencers[0]);
           return response.data.fencers[0];
       });
     };
@@ -63,12 +57,7 @@ app.service('askfredService', function ($http, $q, keys) {
           method: 'jsonp',
           url: this.fencer + this.apiKey + '&first_name_contains=' + firstName + '&last_name_contains=' + lastName + this.format
       }).then(function (response) {
-          console.log('askfredservice url', url);
           response.data.fencers[0];
       });
     };
-  
-  
-
-
 });

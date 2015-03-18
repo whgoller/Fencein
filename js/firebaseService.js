@@ -1,54 +1,113 @@
 var app = angular.module('fencin');
-        
-app.service('firebaseService', function ($firebaseArray, $firebaseObject) {
-  console.log('here')
-  
-  var fencersRef = new Firebase("https://fencein.firebaseio.com/fencers");
-  // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
-  this.setCompetitor = function(){
-      var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/clubs'));
 
-     list.$add({
-       clubName: 'bob',
-       clubId: 'this.clubId'
-               
-     }).then(function(ref){
-       var id = ref.key();
-       console.log("added record with id " + id);
-       list.$indexFor(id); // returns location in the array
-            
-     });
-  }
+app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
+    console.log('here');
+    var clubsUrl = 'https://fencein.firebaseio.com/clubs';
+    var tournamentsUrl = 'https://fencein.firebaseio.com/tournaments';
+    var fencersUrl = 'https://fencein.firebaseio.com/fencers';
+    var eventsUrl = 'https://fencein.firebaseio.com/events';
+
+    var fencersRef = new Firebase("https://fencein.firebaseio.com/fencers");
+    // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
+    this.setCompetitor = function () {
+        var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/clubs'));
+
+        list.$add({
+            clubName: 'bob',
+            clubId: 'this.clubId'
+
+        }).then(function (ref) {
+            var id = ref.key();
+            console.log("added record with id " + id);
+            list.$indexFor(id); // returns location in the array
+
+        });
+    };
 //  
 //  this.getCompetitor = function(competitorId){
 //
 //  }
 //  
-  
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+    this.getTournament = function (tournamentId) {
+        var deffered = $q.defer();
+
+        deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
+            for (i in data) {
+                if (data[i].tournamentId === tournamentId) {
+                    return data[i];
+                }
+            }
+        }));
+        return deffered.promise;
+    };
+
+    this.setTournament = function (tournament) {
+        this.getTournament(tournament.id).then(function (data) {
+            if (!data) {
+                var fbArray = $firebaseArray(new Firebase(tournamentsUrl));
+                fbArray.$add({
+                    tournamentId: tournament.id,
+                    tournamentName: tournament.name,
+                    tournamentEvents: tournament.events,
+                    tournamentClubId: tournament.clubId,
+                    tournamentClubName: tournament.clubName,
+                    tournamentStartDate: tournament.startDate
+                }).then(function (ref) {
+                    var id = ref.key();
+                    console.log("added record with id " + id);
+                    fbArray.$indexFor(id); // returns location in the array
+
+                });
+            }
+        });
+
+
+//        console.log('fbSourceArray', fbSourceArray);
+//        debugger
+//        console.log('fbSourceArray[0]', fbSourceArray[0]);
+//        fbSourceArray.on({tournamentId: 12313}, function(bob){
+//            console.log('bob', bob.val());
+//        });
+//        var returnVal = fbSourceArray[0].tou({tournamentId: 12313});
+//        console.log('returnVal', returnVal);
+//        for(i in fbSourceArray){
+//            if(fbSourceArray[i].)
+//        }
+
+
+
+
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //  var firebaseUrl = 'https://fencein.firebaseio.com/';
 //  
 //  var clubRef = new Firebase("https://fencein.firebaseio.com/clubs/");
@@ -96,5 +155,5 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject) {
 //    
 //  }
 //  
-  
+
 })
