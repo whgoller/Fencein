@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">    
+    {{participant.firstName}} {{participant.lastName}}
+  </div>
+  <div class="row" >
+    <div class="panel panel-success">
+      <div class="panel-heading">Select Equipment to Checkout</div>
+      <div class="panel-body">
+        <div class="checkbox" ng-repeat="equipment in equipmentList">
+          <label>
+            <input type="checkbox" checklist-model="equipmentCheckedOut" checklist-value="{{equipment}}"> {{equipment}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <button ng-click="checkoutComplete()">Done</button>
+    </div>
+  </div>
+</div>

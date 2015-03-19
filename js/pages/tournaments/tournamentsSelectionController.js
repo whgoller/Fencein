@@ -3,7 +3,7 @@ var app = angular.module('fencin');
 app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService) {
     $scope.clubInitials = 'USAFC';
     $scope.tournaments = [];
-    $scope.events = [];
+   // $scope.events = [];
 
 
     $scope.getClubInfo = function (clubInitials) {
