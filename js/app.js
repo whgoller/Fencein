@@ -15,6 +15,10 @@ app.config(function ($routeProvider, $httpProvider) {
         templateUrl: '/js/pages/backroom/backroom.html',
         controller: 'backroomController'
 
+    }).when('/equipment', {
+        templateUrl: '/js/pages/equipment/equipment.html',
+        controller: 'equipmentController'
+
     }).when('/checkinParticipant', {
         templateUrl: '/js/pages/checkin/checkinParticipant.html',
         controller: 'checkinParticipantController'

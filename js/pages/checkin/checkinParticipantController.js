@@ -28,5 +28,11 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         }
         window.location.hash = '/checkin';
     };
+  
+    $scope.equipmentCheckout = function(){
+      window.location.hash = '/equipment';
+    };
+  
+  
 });
 
