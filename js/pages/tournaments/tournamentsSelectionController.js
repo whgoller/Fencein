@@ -26,6 +26,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
     $scope.getTournamentEvents = function (selectedTournamentId) {
         askfredService.getSingleTournamentEvents(selectedTournamentId).then(function (events) {
             $scope.events = events;
+            console.log('$scope.getTournamentEvents', $scope.events);
             events.map(function (event) {
                 askfredService.getPreRegisteredFencersInEvent(event.id).then(function (preRegFencers) {
                     event.preRegisteredFencers = preRegFencers;
@@ -59,12 +60,12 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
       for (i in $scope.tournaments) {
         if ($scope.tournaments[i].id === $scope.selectedTournament) {
           tournament = {
-            id: $scope.tournaments[i].id,
-            name: $scope.tournaments[i].name,
-            events: $scope.tournaments[i].events,
-            clubId: $scope.clubName,
-            clubName: $scope.clubId,
-            startDate: $scope.tournaments[i].start_date
+            tournamentId: $scope.tournaments[i].id,
+            tournamentName: $scope.tournaments[i].name,
+            tournamentEvents: $scope.events,
+            tournamentClubId: $scope.clubName,
+            tournamentClubName: $scope.clubId,
+            tournamentStartDate: $scope.tournaments[i].start_date
           };
           break;
         }

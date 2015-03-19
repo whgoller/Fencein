@@ -12,7 +12,7 @@
         <link href="css/mainStyle.css" rel="stylesheet">
     </head>
 
-    <body ng-controller="mainController">
+    <body ng-controller="mainController" background="img/fencer.png" class="container">
 
         <!-- Fixed navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -30,6 +30,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="#" data-toggle="modal" data-target="#checkinModal">Check In</a></li>
                         <li><a href="#/backroom">Backroom</a></li>
+                        <li><p>Current Tournament: {{selectedTournament}}</p></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign In</a></li>
@@ -62,7 +63,7 @@
             </div>
             <div class="modal-body">
                 <form name="checkinForm">            
-                    <select ng-options='tournament as tournament for tournament in tournaments' ng-change='tournamentSelected()' ng-model="selectedTournament">Select Tournament</select>
+                    <select ng-options='tournament as tournament for tournament in tournamentNames' ng-change='tournamentSelected()' ng-model="selectedTournament">Select Tournament</select>
                 </form>
             </div>
         </div>

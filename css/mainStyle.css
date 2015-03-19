@@ -20,9 +20,14 @@
 
 #eventTable{
     max-width: 500px;
+    background-color: lightblue;
 }
 
 #participantTable{
     max-width: 500px;
+}
+
+.whiteBackground{
+    background-color: white
 }
 

@@ -1,37 +1,51 @@
-<h3>People that need to be added to bracket</h3>
-<table class='table table-striped table-bordered' id='backroomToAddTable'>
-    <thead>
-        <tr>
-            <th class='col-sm-4'>Last name</th>
-            <th class='col-sm-4'>First name</th>
-            <th class='col-sm-4'>Event</th>
-        </tr>
-    </thead>
+<!--<h3>People that need to be added to bracket</h3>-->
 
-    <tbody>
-        <tr ng-repeat='participant in addParticipants | orderBy:["lastName","firstName"]'>
-            <td data-ng-click="addParticipant(participant)">{{participant.lastName}}</td>
-            <td data-ng-click="addParticipant(participant)">{{participant.firstName}}</td>
-            <td data-ng-click="addParticipant(participant)">{{participant.event}}</td>
-        </tr>
-    </tbody>
-</table>
 
-<h3>People added to the bracket</h3>
-<table class='table table-striped table-bordered' id='backroomAddedTable'>
-    <thead>
-        <tr>
-            <th class='col-sm-4'>Last name</th>
-            <th class='col-sm-4'>First name</th>
-            <th class='col-sm-4'>Event</th>
-        </tr>
-    </thead>
+<div class="panel panel-success">
+  <div class="panel-heading"><h3>People that need to be added to bracket</h3></div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped table-success' id='backroomToAddTable'>
+        <thead>
+            <tr>
+                <th class='col-sm-4'>Last name</th>
+                <th class='col-sm-4'>First name</th>
+                <th class='col-sm-4'>Event</th>
+            </tr>
+        </thead>
 
-    <tbody>
-        <tr ng-repeat='participant in addedParticipants | orderBy:["lastName","firstName"]'>
-            <td data-ng-click="removeParticipant(participant)">{{participant.lastName}}</td>
-            <td data-ng-click="removeParticipant(participant)">{{participant.firstName}}</td>
-            <td data-ng-click="removeParticipant(participant)">{{participant.event}}</td>
-        </tr>
-    </tbody>
-</table>
+        <tbody>
+            <tr ng-repeat='participant in addParticipants | orderBy:["lastName","firstName"]'>
+                <td data-ng-click="addParticipant(participant)">{{participant.lastName}}</td>
+                <td data-ng-click="addParticipant(participant)">{{participant.firstName}}</td>
+                <td data-ng-click="addParticipant(participant)">{{participant.event}}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<!--<h3>People added to the bracket</h3>-->
+
+
+<div class="panel panel-success">
+  <div class="panel-heading"><h3>People added to the bracket</h3></div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped table-success' id='backroomAddedTable'>
+        <thead>
+            <tr>
+                <th class='col-sm-4'>Last name</th>
+                <th class='col-sm-4'>First name</th>
+                <th class='col-sm-4'>Event</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat='participant in addedParticipants | orderBy:["lastName","firstName"]'>
+                <td data-ng-click="removeParticipant(participant)">{{participant.lastName}}</td>
+                <td data-ng-click="removeParticipant(participant)">{{participant.firstName}}</td>
+                <td data-ng-click="removeParticipant(participant)">{{participant.event}}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>

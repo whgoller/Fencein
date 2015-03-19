@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.service('backroomService', function () {
+app.service('backroomService', function (firebaseService) {
     this.getAthletes = function(){
         this.needToAdd = [
             {firstName: 'bob',
