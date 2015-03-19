@@ -1,4 +1,4 @@
-var app = angular.module('fencin', ['ngRoute', 'firebase']);
+var app = angular.module('fencin', ['ngRoute', 'firebase', 'smart-table']);
 
 app.config(function ($routeProvider, $httpProvider) {
     //$httpProvider.interceptors.push('httpRequestInterceptor');
