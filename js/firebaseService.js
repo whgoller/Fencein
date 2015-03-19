@@ -1,18 +1,16 @@
 var app = angular.module('fencin');
 
 app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
-    console.log('here');
     var clubsUrl = 'https://fencein.firebaseio.com/clubs';
     var tournamentsUrl = 'https://fencein.firebaseio.com/tournaments';
-    var fencersUrl = 'https://fencein.firebaseio.com/fencers';
-    var eventsUrl = 'https://fencein.firebaseio.com/events';
+    //var fencersUrl = 'https://fencein.firebaseio.com/fencers';
+    //var eventsUrl = 'https://fencein.firebaseio.com/events';
     var fencersToAdd = [];
 
-    var fencersRef = new Firebase("https://fencein.firebaseio.com/fencers");
+    
     // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
-    this.setCompetitor = function () {
-        var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/clubs'));
-
+    this.setClub= function () {
+        var list = $firebaseArray(new Firebase(clubsUrl));
         list.$add({
             clubName: 'bob',
             clubId: 'this.clubId'
@@ -43,12 +41,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
         var deffered = $q.defer();
 
         deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
-//            var arr = [];
-//            console.log('getTournaments',data)
-//            for (i = 0; i < data.length; i++) {
-//                arr.push(data[i].tournamentName);
-//            }
-//            return arr;
             return data;
         }));
         return deffered.promise;
@@ -61,12 +53,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
                 var fbArray = $firebaseArray(new Firebase(tournamentsUrl));
                 fbArray.$add({
                   tournament: tournament
-//                    tournamentId: tournament.id,
-//                    tournamentName: tournament.name,
-//                    tournamentEvents: tournament.events,
-//                    tournamentClubId: tournament.clubId,
-//                    tournamentClubName: tournament.clubName,
-//                    tournamentStartDate: tournament.startDate
                 }).then(function (ref) {
                     var id = ref.key();
                     console.log("added record with id " + id);
