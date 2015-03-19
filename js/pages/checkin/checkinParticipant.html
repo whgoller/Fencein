@@ -12,7 +12,7 @@
     </thead>
 
     <tbody>
-        <tr ng-repeat='event in currentTournament.tournamentEvents'>
+        <tr ng-repeat='event in currentTournament.tournament.tournamentEvents'>
             <td>{{event.full_name}}</td>
             <td style="text-align: center; vertical-align: middle;"><input type="checkbox" ng-model='event.preRegistered' ng-change="eventSelected(event)"></td>
             <td>{{event.fee | currency}}</td>
