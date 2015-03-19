@@ -7,13 +7,15 @@
             <tr>
                 <th class='col-sm-4'>Last name</th>
                 <th class='col-sm-4'>First name</th>
+                <th class='col-sm-4'>US Fencing ID</th>
             </tr>
         </thead>
 
         <tbody>
             <tr ng-repeat='participant in participants'>
-                <td data-ng-click="getParticipant(participant)">{{participant.lastName}}</td>
-                <td data-ng-click="getParticipant(participant)">{{participant.firstName}}</td>
+                <td data-ng-click="getParticipant(participant)">{{participant.last_name}}</td>
+                <td data-ng-click="getParticipant(participant)">{{participant.first_name}}</td>
+                <td data-ng-click="getParticipant(participant)">{{participant.usfa_id}}</td>
             </tr>
         </tbody>
     </table>
