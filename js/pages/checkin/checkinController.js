@@ -14,8 +14,6 @@ app.controller('checkinController', function ($scope, checkinService) {
                         $scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers[j].competitor;
             }
         }
-
-        console.log('$scope.participants', temp);
         for (keyName in temp) {
             $scope.participants.push(temp[keyName]);
         }

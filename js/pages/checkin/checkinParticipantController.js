@@ -6,7 +6,6 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 
     $scope.getEvents = function () {
         $scope.currentTournament = checkinService.getCurrentTournament();
-        console.log('$scope.currentTournament', $scope.currentTournament);
     }();    //self call
 
 //Calculates the amount owed when they select/unselect events to participate in

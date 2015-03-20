@@ -1,13 +1,13 @@
 
-<h4 class="whiteBackground">{{currentParticipant.firstName}} {{currentParticipant.lastName}} </h4>
+<h4 class="whiteBackground">{{currentParticipant.first_name}} {{currentParticipant.last_name}} </h4>
 
 
-<table class='table table-striped table-bordered' id='eventTable'>
+<table class='table table-striped table-bordered' id='eventTable'  st-table="currentTournament.tournament.tournamentEvents">
     <thead>
         <tr>
-            <th class='col-sm-4'>Event</th>
-            <th class='col-sm-2'>Participating</th>
-            <th class='col-sm-1'>Cost</th>
+            <th class='col-sm-4' st-sort='full_name' st-skip-natural="true">Event</th>
+            <th class='col-sm-2' >Participating</th>
+            <th class='col-sm-1' st-sort='fee' st-skip-natural="true">Cost</th>
         </tr>
     </thead>
 

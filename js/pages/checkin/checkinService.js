@@ -1,12 +1,11 @@
 var app = angular.module('fencin');
-app.service('checkinService', function () {
+app.service('checkinService', function (firebaseService) {
     this.creditTotal = 0;
     this.cashTotal = 0;
     this.checkTotal = 0;
 
     this.setCurrentTournament = function (tournament) {
         this.currentTournament = tournament;
-        console.log('currentTournament', this);
     };
     
     this.getCurrentTournament = function(){
@@ -23,17 +22,21 @@ app.service('checkinService', function () {
 
     this.setPaidCredit = function (amount) {
         this.creditTotal += amount;
-        console.log('this.creditTotal', this.creditTotal);
+        this.checkedInFencer();
     };
 
     this.setPaidCash = function (amount) {
         this.cashTotal += amount;
-        console.log('this.cashTotal', this.cashTotal);
+        this.checkedInFencer();
     };
 
     this.setPaidCheck = function (amount) {
         this.checkTotal += amount;
-        console.log('this.checkTotal', this.checkTotal);
+        this.checkedInFencer();
+    };
+    
+    this.checkedInFencer = function(){
+        firebaseService.setFenncerCheckedIn(this.currentTournament , this.currentParticipant);
     };
 });
 

@@ -24,6 +24,13 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
 
       });
   };
+  
+  this.setFenncerCheckedIn = function (tournamentId, fencer){
+      var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId.$id + '/tournament/checkedInFencers'));
+      console.log('fencer', fencer);
+      console.log('fbArray', fbArray);
+      fbArray.$add(fencer);
+  };
 
 //Returns a specific tournament by its ID
   this.getTournament = function (tournamentId) {
@@ -79,16 +86,16 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     var list = $firebaseArray(new Firebase(equipmentURL));
     list.$add({ 
       equipmentType: equipment
-    })
-  }
+    });
+  };
   
   //Creates equipment checkout list in the database
   this.setEquipmentList = function(equipment){
     var list = $firebaseArray(new Firebase(equipmentURL + '/equipmentCheckedOut'));
     list.$add({ 
       fencerEquipment: equipment
-    })
-  }
+    });
+  };
   
   
   
