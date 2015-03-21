@@ -6,6 +6,7 @@ app.service('checkinService', function (firebaseService) {
 
     this.setCurrentTournament = function (tournament) {
         this.currentTournament = tournament;
+        firebaseService.setTournamentId(this.currentTournament.$id);
     };
     
     this.getCurrentTournament = function(){
@@ -36,7 +37,8 @@ app.service('checkinService', function (firebaseService) {
     };
     
     this.checkedInFencer = function(){
-        firebaseService.setFenncerCheckedIn(this.currentTournament , this.currentParticipant);
+        this.currentParticipant.inFencingTime = false;
+        firebaseService.setFenncerCheckedIn(this.currentParticipant);
     };
 });
 
