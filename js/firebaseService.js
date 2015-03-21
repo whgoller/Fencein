@@ -1,17 +1,20 @@
 var app = angular.module('fencin');
 
-app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
+app.service('firebaseService', function ($firebaseArray, $q) {
     var clubsUrl = 'https://fencein.firebaseio.com/clubs';
     var tournamentsUrl = 'https://fencein.firebaseio.com/tournaments';
+    var currentTournamentUrl = tournamentsUrl;
     var equipmentURL = 'https://fencein.firebaseio.com/equipment';
     //var equipmentListObj = $firebaseObject(new Firebase(equipmentURL));
     //var fencersUrl = 'https://fencein.firebaseio.com/fencers';
     //var eventsUrl = 'https://fencein.firebaseio.com/events';
     var fencersToAdd = [];
     var tournamentId;
+    var temp = [];
 
     //keeps track of current tournament id called when the tournament is selected
     this.setTournamentId = function (id) {
+        console.log('id', id)
         tournamentId = id;
     };
 
@@ -38,45 +41,42 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
         fbArray.$add(fencer);
     };
 
-//Returns a specific tournament by its ID
-    this.getTournament = function () {
-        var deffered = $q.defer();
-        deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
-            for (i in data) {
-                if (data[i].tournamentId === tournamentId) {
-                    return data[i];
-                }
+//Gets a tournament by its ID.
+    this.getTournamentByID = function (tournamentId) {
+        console.log('url', tournamentsUrl + '/' + tournamentId);
+        return $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId)).$loaded();
+    };
+
+//Sets a tournament in the database if it doesn't already exsist
+    this.setTournament = function (tournament) {
+        this.getTournamentByID(tournament.tournamentId).then(function (exsists) {
+             var fbArray = $firebaseArray(new Firebase(tournamentsUrl));
+            if (!exsists[0]) {  //If id doesn't exsist add new tournament               
+                fbArray.$add({tournament: tournament});
             }
-        }));
-        return deffered.promise;
+            else{   //Else update tournament already there.
+                fbArray.$save({tournament: tournament});
+            }
+        });
+    };
+
+
+
+    this.getCheckedIn = function () {
+        $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers')).$loaded();
     };
 
 
 //Returns all the tournaments
     this.getTournaments = function () {
         var deffered = $q.defer();
-
         deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
             return data;
         }));
         return deffered.promise;
     };
 
-//Sets a tournament in the database if it doesn't already exsist
-    this.setTournament = function (tournament) {
-        this.getTournament(tournamentId).then(function (data) {
-            if (!data) {
-                var fbArray = $firebaseArray(new Firebase(tournamentsUrl));
-                fbArray.$add({
-                    tournament: tournament
-                }).then(function (ref) {
-                    var id = ref.key();
-                    console.log("added record with id " + id);
-                    fbArray.$indexFor(id); // returns location in the array
-                });
-            }
-        });
-    };
+
 
 //Returns all equipmentTypes in the database
     this.getEquipmentList = function () {
@@ -167,9 +167,9 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
 //        fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
 //
 //    };
-    
-    this.fencingTime = function(fencer){
-        fencer.inFencingTime = ! fencer.inFencingTime;
+
+    this.fencingTime = function (fencer) {
+        fencer.inFencingTime = !fencer.inFencingTime;
         var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
         fbArray.$save(fencer);
     };

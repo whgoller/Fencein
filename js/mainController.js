@@ -3,8 +3,9 @@ app.controller("mainController", function ($scope, askfredService, firebaseServi
   //important until we get club registration built  
   $scope.tournamentName = 'Utah Swords Academy Fencing Club';
   
+  //Populates tournments in select tournament model
     $scope.getTournaments = function () {
-        firebaseService.getTournaments().then(function (data) {
+        firebaseService.getTournaments().then(function (data) {            
             $scope.tournaments = data;
             $scope.tournamentNames = [];
             for(i = 0; i < $scope.tournaments.length; i++){
