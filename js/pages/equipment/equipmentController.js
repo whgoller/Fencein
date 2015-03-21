@@ -1,9 +1,14 @@
 var app = angular.module('fencin');
 
 app.controller('equipmentController', function ($scope, firebaseService, checkinService) {
-  //$scope.fencer = checkinService.currentParticipant();
-  $scope.participant = {firstName: "Wendy", lastName: "Goller" };
+  
+  $scope.getParticipant = function(){
+    $scope.participant = checkinService.getParticipant();
+  }();
+  
+  
   //console.log($scope.fencer);
+  
   var equipmentListArray = ['Mask','Body Cord','Mask Cord','Electric Lame Saber','Electric Lame Foil','Saber','Foil','White Lame', 'Pants'];
   $scope.equipmentList = [];
   
@@ -38,6 +43,9 @@ app.controller('equipmentController', function ($scope, firebaseService, checkin
     
   }
   
-  
+  $scope.equipmentCheckoutComplete = function(){
+    window.location.hash = '/checkinParticipant';
+    
+  }
   
 });

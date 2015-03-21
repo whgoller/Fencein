@@ -42,3 +42,7 @@ background{
 .st-sort-descent:before{
     content: '\25BC';
 }
+
+.row{
+  margin-bottom: 1%;
+}

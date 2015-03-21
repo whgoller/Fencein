@@ -34,5 +34,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     };
   
   
+  
+  
 });
 
