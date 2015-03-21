@@ -5,7 +5,5 @@ app.controller('backroomController', function($scope, backroomService, checkinSe
     
     $scope.fencingTime = function(fencer){
         firebaseService.fencingTime(fencer);
-        console.log('fencer',fencer)
-        console.log('$scope.currentTournament', $scope.currentTournament)
     };   
 });
