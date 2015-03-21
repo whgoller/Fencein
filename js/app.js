@@ -21,7 +21,16 @@ app.config(function ($routeProvider, $httpProvider) {
 
     }).when('/checkinParticipant', {
         templateUrl: '/js/pages/checkin/checkinParticipant.html',
-        controller: 'checkinParticipantController'
+        controller: 'checkinParticipantController' //,
+//        resolve: {
+//          tournament: function(checkinService){
+//            if(haveSelectedTournament){
+//              return selectedTournament;
+//            } else {
+//              return false;
+//            }
+//          }
+        }
 
     }).otherwise({
         redirectTo: '/'

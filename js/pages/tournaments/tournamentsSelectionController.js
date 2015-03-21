@@ -23,14 +23,29 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
     };
 
 
-    $scope.getTournamentEvents = function (selectedTournamentId) {
+    $scope.getTournamentEvents = function (selectedTournamentId) {var fencerIds = [];
         askfredService.getSingleTournamentEvents(selectedTournamentId).then(function (events) {
             $scope.events = events;
             console.log('$scope.getTournamentEvents', $scope.events);
             events.map(function (event) {
+                var fencerIds = [];
                 askfredService.getPreRegisteredFencersInEvent(event.id).then(function (preRegFencers) {
+                  //console.log('preRegFencers', preRegFencers)
+                    
+                  
+                  for(var i=0; i<preRegFencers.length; i++){
+                    preRegFencers[i].competitor.rating = preRegFencers[i].rating;
+                    preRegFencers[i].competitor.competitor_id = preRegFencers[i].competitor_id;
+                    preRegFencers[i].competitor.club = preRegFencers[i].club;
+                    fencerIds.push(preRegFencers[i].competitor_id);
+                    
+                  //console.log('preRegFencers', preRegFencers[i])
+                  }
                     event.preRegisteredFencers = preRegFencers;
+                 // console.log('preRegFencers', preRegFencers)
                 });
+              
+                event.fencerIds = fencerIds;
             });
         });
     };

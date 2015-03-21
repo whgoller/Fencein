@@ -2,12 +2,16 @@ var app = angular.module('fencin');
 
 app.controller('checkinParticipantController', function ($scope, checkinService, firebaseService) {
     $scope.currentParticipant = checkinService.getParticipant();
+    $scope.currentTournament = checkinService.getCurrentTournament();
     $scope.totalAmountDue = 0;
 
     $scope.getEvents = function () {
-        $scope.currentTournament = checkinService.getCurrentTournament();
+//        $scope.currentTournament = checkinService.getCurrentTournament();
+      $scope.tournamentEvents = $scope.currentTournament.tournament.tournamentEvents;
     }();    //self call
 
+      console.log($scope.tournamentEvents);
+  
 //Calculates the amount owed when they select/unselect events to participate in
     $scope.eventSelected = function (selected) {
         if (selected.preRegistered) {
@@ -37,6 +41,14 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
       window.location.hash = '/checkin';
     };
   
+//currentTournament.tournament.tournamentEvents
+    $scope.checkEventsPreregistered = function(event){
+     // debugger
+      if(event.fencerIds.indexOf($scope.currentParticipant.id) !== -1){
+        return true;
+      }
+      return false;
+    }
   
 });
 

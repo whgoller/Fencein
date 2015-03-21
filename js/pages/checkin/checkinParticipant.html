@@ -11,30 +11,34 @@
       </div>
       <div class="form-group">
         <label for="usfaMembershipNumber">USFA Membership Number</label>
-        <input type="text" class="form-control" id="usfaMembershipNumber" placeholder="USFA Membership Number">
+        <input type="text" class="form-control" id="usfaMembershipNumber" placeholder="USFA Membership Number" ng-model="currentParticipant.usfa_id">
       </div>
       <div class="row">
         <div class="col-md-6">
           <label for="membershipCurrent">Membership Current</label>
-          <input type="text" class="form-control" id="membershipCurrent" placeholder="Is USFA Membership Current?" >
+          <input type="text" class="form-control" id="membershipCurrent" placeholder="Is USFA Membership Current?" ng-model="currentParticipant.last_name">
         </div>
         <div class="col-md-6">
           <label for="typeUSFAMembership">Membership Type</label>
-          <input type="text" class="form-control" id="typeUSFAMembership" placeholder="Type of USFA Membership">
+          <input type="text" class="form-control" id="typeUSFAMembership" placeholder="Type of USFA Membership" ng-model="currentParticipant.last_name">
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="birthYear">Birth year</label>
-          <input type="year" class="form-control" id="birthYear" placeholder="Birth year">
+          <input type="year" class="form-control" id="birthYear" placeholder="Birth year" ng-model="currentParticipant.birthyear">
         </div>
-        <div class="col-md-6">
-          <label for="age">Age</label>
-          <input type="age" class="form-control" id="age" placeholder="Age">
+        <div class="col-md-4">
+          <label for="rating">Gender</label>
+          <input type="gender" class="form-control" id="gender" placeholder="Gender" ng-model="currentParticipant.gender">
+        </div>
+        <div class="col-md-4">
+          <label for="rating">Rating</label>
+          <input type="rating" class="form-control" id="rating" placeholder="Rating" ng-model="currentParticipant.rating">
         </div>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" ng-click="submit()">Submit</button>
       </div>
     </div>
     <div class="container col-md-6">
@@ -51,9 +55,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat='event in currentTournament.tournament.tournamentEvents'>
+            <tr ng-repeat='event in currentTournament.tournament.tournamentEvents track by event.id'>
               <td>{{event.full_name}}</td>
-              <td style="text-align: center; vertical-align: middle;"><input type="checkbox" ng-model='event.preRegistered' ng-change="eventSelected(event)"></td>
+              <td style="text-align: center; vertical-align: middle;">
+                <input type="checkbox" ng-model='event.preRegistered' ng-checked="checkEventsPreregistered(event)" ng-change="eventSelected(event)">
+<!--                <input type="checkbox" ng-model='currentTournament.tournament.tournamentEvents[event.id]' ng-change="eventSelected(event)">-->
+              </td>
               <td>{{event.fee | currency}}</td>
             </tr>
           </tbody>
@@ -81,3 +88,12 @@
   </form>
 </div>
 
+<!--        <div col-md-6>-->
+<!--          <h4>Events Participating</h4>-->
+<!--          <div class="checkbox" ng-repeat="event in tournamentEvents track by event.id">-->
+<!--            <label>-->
+<!--              <input type="checkbox" ng-model='event.preRegistered' ng-change="eventSelected(event)">-->
+<!--              {{event.full_name}}-->
+<!--            </label>-->
+<!--          </div>-->
+<!--      </div>-->
