@@ -1,6 +1,4 @@
 <!--<h3>People that need to be added to bracket</h3>-->
-
-
 <div class="panel panel-success">
   <div class="panel-heading"><h3>People that need to be added to bracket</h3></div>
   <div class="panel-body">
@@ -14,10 +12,10 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat='participant in addParticipants'>
-                <td data-ng-click="addParticipant(participant)">{{participant.last_name}}</td>
-                <td data-ng-click="addParticipant(participant)">{{participant.first_name}}</td>
-                <td data-ng-click="addParticipant(participant)">{{participant.event}}</td>
+            <tr ng-repeat='participant in currentTournament.tournament.checkedInFencers'>
+                <td data-ng-click="fencingTime(participant)">{{participant.last_name}}</td>
+                <td data-ng-click="fencingTime(participant)">{{participant.first_name}}</td>
+                <td data-ng-click="fencingTime(participant)">{{participant.event}}</td>
             </tr>
         </tbody>
     </table>
@@ -40,10 +38,10 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat='participant in addedParticipants | orderBy:["lastName","firstName"]'>
-                <td data-ng-click="removeParticipant(participant)">{{participant.lastName}}</td>
-                <td data-ng-click="removeParticipant(participant)">{{participant.firstName}}</td>
-                <td data-ng-click="removeParticipant(participant)">{{participant.event}}</td>
+            <tr ng-repeat='participant in currentTournament.tournament.checkedInFencers'>
+                <td data-ng-click="fencingTime(participant)">{{participant.last_name}}</td>
+                <td data-ng-click="fencingTime(participant)">{{participant.first_name}}</td>
+                <td data-ng-click="fencingTime(participant)">{{participant.event}}</td>
             </tr>
         </tbody>
     </table>
