@@ -30,7 +30,7 @@ app.config(function ($routeProvider, $httpProvider) {
 //              return false;
 //            }
 //          }
-        }
+ //       }
 
     }).otherwise({
         redirectTo: '/'

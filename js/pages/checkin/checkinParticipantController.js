@@ -45,6 +45,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     $scope.checkEventsPreregistered = function(event){
      // debugger
       if(event.fencerIds.indexOf($scope.currentParticipant.id) !== -1){
+        $scope.eventSelected(event);
         return true;
       }
       return false;
