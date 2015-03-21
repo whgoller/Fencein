@@ -20,6 +20,7 @@ app.service('askfredService', function ($http, $q, keys) {
           method: 'jsonp',
           url: 'https://api.askfred.net/v1/tournament?_api_key=' + this.apiKey + this.format + '&location_contains=' + tournamentName
       }).then(function (response) {
+        console.log('response',response)
           return response.data.tournaments;
       });
     };
@@ -38,7 +39,11 @@ app.service('askfredService', function ($http, $q, keys) {
           method: 'jsonp',
           url: 'https://api.askfred.net/v1/event/' + eventId + '?_api_key=' + this.apiKey + this.format
       }).then(function (response) {
+        if(response.data.event.preregs){
           return response.data.event.preregs;
+        } else{
+          return [];
+        }
       });
     };
   

@@ -33,17 +33,19 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
 
     this.setFenncerCheckedIn = function (fencer) {
         var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
-        console.log('fencer', fencer);
-        console.log('fbArray', fbArray);
+        //console.log('fencer', fencer);
+        //console.log('fbArray', fbArray);
         fbArray.$add(fencer);
     };
 
 //Returns a specific tournament by its ID
-    this.getTournament = function () {
+    this.getTournament = function (tournamentId) {
         var deffered = $q.defer();
         deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
-            for (i in data) {
-                if (data[i].tournamentId === tournamentId) {
+            for (var i = 0; i < data.length; i++) {
+            console.log(data[i].tournament.tournamentId);
+            console.log(tournamentId);
+                if (data[i].tournament.tournamentId === tournamentId) {
                     return data[i];
                 }
             }
@@ -55,7 +57,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
 //Returns all the tournaments
     this.getTournaments = function () {
         var deffered = $q.defer();
-
         deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
             return data;
         }));
@@ -64,7 +65,8 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
 
 //Sets a tournament in the database if it doesn't already exsist
     this.setTournament = function (tournament) {
-        this.getTournament(tournamentId).then(function (data) {
+
+        this.getTournament(tournament.tournamentId).then(function (data){
             if (!data) {
                 var fbArray = $firebaseArray(new Firebase(tournamentsUrl));
                 fbArray.$add({

@@ -26,14 +26,16 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         } else if ($scope.paymentType === 'card') {
             checkinService.setPaidCredit($scope.totalAmountDue);
         }
-        window.location.hash = '/checkin';
     };
   
     $scope.equipmentCheckout = function(){
       window.location.hash = '/equipment';
     };
   
-  
+    
+    $scope.submit = function(){
+      window.location.hash = '/checkin';
+    };
   
   
 });
