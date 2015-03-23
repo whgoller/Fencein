@@ -6,11 +6,8 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     $scope.totalAmountDue = 0;
 
     $scope.getEvents = function () {
-//        $scope.currentTournament = checkinService.getCurrentTournament();
       $scope.tournamentEvents = $scope.currentTournament.tournament.tournamentEvents;
     }();    //self call
-
-      console.log($scope.tournamentEvents);
   
 //Calculates the amount owed when they select/unselect events to participate in
     $scope.eventSelected = function (selected) {
@@ -38,6 +35,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   
     
     $scope.submit = function(){
+        console.log('currentParticipant', $scope.currentTournament.tournament.tournamentEvents)
       window.location.hash = '/checkin';
     };
   
@@ -49,7 +47,6 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         return true;
       }
       return false;
-    }
-  
+    };  
 });
 
