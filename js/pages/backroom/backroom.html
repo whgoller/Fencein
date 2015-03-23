@@ -12,10 +12,10 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat='participant in currentTournament.tournament.checkedInFencers'>
-                <td data-ng-click="fencingTime(participant)">{{participant.last_name}}</td>
-                <td data-ng-click="fencingTime(participant)">{{participant.first_name}}</td>
-                <td data-ng-click="fencingTime(participant)">{{participant.event}}</td>
+            <tr ng-repeat='fencer in checkedInFencers | filter:inFencingTime'>
+                <td data-ng-click="fencingTime(fencer)">{{fencer.last_name}}</td>
+                <td data-ng-click="fencingTime(fencer)">{{fencer.first_name}}</td>
+                <td data-ng-click="fencingTime(fencer)">{{fencer.event}}</td>
             </tr>
         </tbody>
     </table>
@@ -38,10 +38,10 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat='participant in currentTournament.tournament.checkedInFencers'>
-                <td data-ng-click="fencingTime(participant)">{{participant.last_name}}</td>
-                <td data-ng-click="fencingTime(participant)">{{participant.first_name}}</td>
-                <td data-ng-click="fencingTime(participant)">{{participant.event}}</td>
+            <tr ng-repeat='fencer in checkedInFencers | filter:!inFencingTime'>
+                <td data-ng-click="fencingTime(fencer)">{{fencer.last_name}}</td>
+                <td data-ng-click="fencingTime(fencer)">{{fencer.first_name}}</td>
+                <td data-ng-click="fencingTime(fencer)">{{fencer.event}}</td>
             </tr>
         </tbody>
     </table>
