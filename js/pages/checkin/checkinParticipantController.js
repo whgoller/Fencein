@@ -11,22 +11,22 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   
 //Calculates the amount owed when they select/unselect events to participate in
     $scope.eventSelected = function (selected) {
-        if (selected.preRegistered) {
-            $scope.totalAmountDue += parseInt(selected.fee);
-        }
-        else {
-            $scope.totalAmountDue -= parseInt(selected.fee);
-        }
+      if (selected.preRegistered) {
+        $scope.totalAmountDue += parseInt(selected.fee);
+      }
+      else {
+        $scope.totalAmountDue -= parseInt(selected.fee);
+      }
     };
 
     $scope.paidBy = function () {
-        if ($scope.paymentType === 'cash') {
-            checkinService.setPaidCash($scope.totalAmountDue);
-        } else if ($scope.paymentType === 'check') {
-            checkinService.setPaidCheck($scope.totalAmountDue);
-        } else if ($scope.paymentType === 'card') {
-            checkinService.setPaidCredit($scope.totalAmountDue);
-        }
+      if ($scope.paymentType === 'cash') {
+        checkinService.setPaidCash($scope.totalAmountDue);
+      } else if ($scope.paymentType === 'check') {
+        checkinService.setPaidCheck($scope.totalAmountDue);
+      } else if ($scope.paymentType === 'card') {
+        checkinService.setPaidCredit($scope.totalAmountDue);
+      }
     };
   
     $scope.equipmentCheckout = function(){
@@ -35,7 +35,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   
     
     $scope.submit = function(){
-        console.log('currentParticipant', $scope.currentTournament.tournament.tournamentEvents)
+      console.log('currentParticipant', $scope.currentTournament.tournament.tournamentEvents)
       window.location.hash = '/checkin';
     };
   

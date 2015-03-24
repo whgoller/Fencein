@@ -40,5 +40,6 @@ app.service('checkinService', function (firebaseService) {
         this.currentParticipant.inFencingTime = false;
         firebaseService.setFenncerCheckedIn(this.currentParticipant);
     };
+  
 });
 
