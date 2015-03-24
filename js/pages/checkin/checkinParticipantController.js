@@ -2,6 +2,12 @@ var app = angular.module('fencin');
 
 app.controller('checkinParticipantController', function ($scope, checkinService, firebaseService) {
     $scope.currentParticipant = checkinService.getParticipant();
+  
+    $scope.currentParticipantDetails = firebaseService.getUSFAFencer($scope.currentParticipant.usfa_id);
+    
+    console.log('currentParticipantDetails', $scope.currentParticipantDetails);
+  
+  
     $scope.currentTournament = checkinService.getCurrentTournament();
     $scope.totalAmountDue = 0;
 
@@ -35,13 +41,16 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   
     
     $scope.submit = function(){
-      console.log('currentParticipant', $scope.currentTournament.tournament.tournamentEvents)
+      console.log('currentParticipant', $scope.currentTournament.tournament.tournamentEvents);
+      //Need to remove fencer from checkin list and add to a checked-in list.
+      console.log($scope.currentParticipant)
+      
+      //firebaseService.setFenncerCheckedIn();
       window.location.hash = '/checkin';
     };
   
-//currentTournament.tournament.tournamentEvents
+//Will select preregistered events for the fencer.
     $scope.checkEventsPreregistered = function(event){
-     // debugger
       if(event.fencerIds.indexOf($scope.currentParticipant.id) !== -1){
         $scope.eventSelected(event);
         return true;

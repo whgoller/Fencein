@@ -16,6 +16,8 @@ app.config(function ($routeProvider, $httpProvider) {
     }).when('/checkinModal', {
         templateUrl: '/js/pages/checkin/checkinModal.html',
         controller: 'checkinModalController'
+      
+      
     }).when('/backroom', {
         templateUrl: '/js/pages/backroom/backroom.html',
         controller: 'backroomController'
@@ -26,17 +28,17 @@ app.config(function ($routeProvider, $httpProvider) {
 
     }).when('/checkinParticipant', {
         templateUrl: '/js/pages/checkin/checkinParticipant.html',
-        controller: 'checkinParticipantController' ,
-        resolve: {
-          tournament: function(checkinService){
-            var selectedTournament = checkinService.getCurrentTournament();
-            if(selectedTournament){
-              return selectedTournament;
-            } else {
-              return false;
-            }
-          }
-        }
+        controller: 'checkinParticipantController' //,
+//        resolve: {
+//          tournament: function(checkinService){
+//            var selectedTournament = checkinService.getCurrentTournament();
+//            if(selectedTournament){
+//              return selectedTournament;
+//            } else {
+//              return false;
+//            }
+//          }
+//        }
 
     }).otherwise({
         redirectTo: '/'

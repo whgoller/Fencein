@@ -6,8 +6,9 @@ app.controller('checkinController', function ($scope, checkinService) {
 
 
     $scope.getParticipants = function () {
-        var temp = {};
-        $scope.currentTournament = checkinService.getCurrentTournament();
+      var temp = {};
+      $scope.currentTournament = checkinService.getCurrentTournament();
+      if($scope.currentTournament && $scope.currentTournament.tournament.tournamentEvents.length){  
         for (i = 0; i < $scope.currentTournament.tournament.tournamentEvents.length; i++) {
             for (j = 0; j < $scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers.length; j++) {
                 temp[$scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers[j].competitor_id] =
@@ -17,6 +18,7 @@ app.controller('checkinController', function ($scope, checkinService) {
         for (keyName in temp) {
             $scope.participants.push(temp[keyName]);
         }
+      }
     }(); //self calling function
 
     $scope.getParticipant = function (participant) {

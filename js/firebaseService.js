@@ -28,11 +28,15 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
         list.$indexFor(id); // returns location in the array
     });
   };
+  
+  
 
   this.setFenncerCheckedIn = function (fencer) {
     var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
     fbArray.$add(fencer);
   };
+  
+  
 
 //Returns a specific tournament by its ID
   this.getTournament = function (tournamentId) {
@@ -75,14 +79,31 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     });
   };
 
-  //Get the usfencing.org fencer information
+  
+  
+      //Get the usfencing.org fencer information
   this.getUSFAFencer = function (usfs_competitor_Id) {
-    var deffered = $q.defer();
-    deffered.resolve($firebaseObject(new Firebase(membersUrl + usfs_competitor_Id)).$loaded().then(function (data) {
-      console.log('data', data);
-    }));
-    return deffered.promise;
+    var ref = new Firebase(membersUrl + usfs_competitor_Id);
+    ref.on("value", function(snapshot){
+      return snapshot.val();
+    }, function (errorObject){
+      console.log("The read failed: " + errorObject.code);
+    });
+    
   };
+  
+  
+  
+//  
+//    //Get the usfencing.org fencer information
+//  this.getUSFAFencer = function (usfs_competitor_Id) {
+//    var deffered = $q.defer();
+//    deffered.resolve($firebaseObject(new Firebase(membersUrl + usfs_competitor_Id)).$loaded().then(function (data) {
+//      //console.log('data', data);
+//    }));
+//    return deffered.promise;
+//  };
+  
   
 //Returns all equipmentTypes in the database
   this.getEquipmentList = function () {
@@ -102,11 +123,10 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
   };
 
   //Creates equipment checkout list in the database
-  this.setEquipmentCheckoutList = function (fencer, equipmentArray) {
+  this.setEquipmentCheckoutList = function (fencerEquipmentObject) {
     var list = $firebaseArray(new Firebase(equipmentURL + '/equipmentCheckedOut'));
     list.$add({
-      fencer: fencer,
-      fencerEquipment: equipmentArray
+      fencerEquipmentObject: fencerEquipmentObject
     });
   };
   
@@ -154,9 +174,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     fbArray.$save(1).then(function(data){
       console.log('done');
     });
-//    .error(function(error){
-//      console.log('error', error);
-//    });
   };
 
 //Gets the array of checked in fencers for the current tournament

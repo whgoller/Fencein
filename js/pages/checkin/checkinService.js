@@ -41,5 +41,10 @@ app.service('checkinService', function (firebaseService) {
         firebaseService.setFenncerCheckedIn(this.currentParticipant);
     };
   
+    this.getParticipantDetails = function(participant){
+      console.log(participant);
+      
+    }
+  
 });
 

@@ -14,12 +14,7 @@ app.controller("checkinModalController", function ($scope, askfredService, fireb
         });
     }();
 
-    $scope.tournamentlogin = function () {
-        href = "welcome.html";
-    };
-    $scope.checkIn = function () {
-        console.log('checkIn');
-    };
+
     $scope.tournamentSelected = function () {
          for(i = 0; i < $scope.tournaments.length; i++){
              if($scope.tournaments[i].tournament.tournamentName === $scope.selectedTournament){ 
