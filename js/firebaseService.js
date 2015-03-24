@@ -43,8 +43,8 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
         var deffered = $q.defer();
         deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
             for (var i = 0; i < data.length; i++) {
-            console.log(data[i].tournament.tournamentId);
-            console.log(tournamentId);
+                console.log(data[i].tournament.tournamentId);
+                console.log(tournamentId);
                 if (data[i].tournament.tournamentId === tournamentId) {
                     return data[i];
                 }
@@ -66,7 +66,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
 //Sets a tournament in the database if it doesn't already exsist
     this.setTournament = function (tournament) {
 
-        this.getTournament(tournament.tournamentId).then(function (data){
+        this.getTournament(tournament.tournamentId).then(function (data) {
             if (!data) {
                 var fbArray = $firebaseArray(new Firebase(tournamentsUrl));
                 fbArray.$add({
@@ -105,17 +105,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
         });
     };
 
-
-
-//  this.getFencers = function () {
-//      var deffered = $q.defer();
-//      deffered.resolve($firebaseArray(new Firebase(fencersUrl)).$loaded().then(function (data) {
-//          return data;
-//      }
-//      ));
-//      return deffered.promise;
-//  };
-
     this.getFencer = function (competitor_Id) {
         if (!(competitor_Id in this.fencers)) {
             console.log('this.fencers.competitor_Id', this.fencers.competitor_Id);
@@ -143,37 +132,28 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
         return deffered.promise;
     };
 
-//    //Adds new fencer to fencingtimeArray
-//    this.addToFencingTime = function (fencer) {
-//        var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/fencingTimeFencers'));
-//        fencer.inFencingTime = false;
-//        fbArray.$update(fencer);
-//    };
-//    
-//    this
-    //Moves the fencer to the fencingTime array
-//    this.moveFencerToFencingTime = function (fencer) {
-//        var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/fencingTimeFencers'));
-//        fencer.inFencingTime = false;
-//        console.log('fencer', fencer);
-////        fbArray.$update(fencer);
-////        fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
-////        fbArray.$remove(fencer);
-//    };
-//
-//    //Moves fencer back to the checkedInFencers array
-//    this.moveFromFencingTime = function (fencer) {
-//        console.log('moveFromFencingTime', fencer)
-//        var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/fencingTimeFencers'));
-//        fbArray.$add(fencer);
-//        fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
-//
-//    };
-    
-    this.fencingTime = function(fencer){
-        fencer.inFencingTime = ! fencer.inFencingTime;
+//Updates the fencer in the array checkedInFencers swaping inFencingTime boolean
+    this.fencingTime = function (fencer) {
+        fencer.inFencingTime = !fencer.inFencingTime;
         var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
-        fbArray.$save(fencer);
+        console.log("fbArray", fbArray);
+        console.log("fencer", fencer);
+        fbArray.$save(1).then(function(data){
+            console.log('done');
+        });
+//                .error(function(error){
+//            console.log('error', error);
+//        });
     };
 
+//Gets the array of checked in fencers for the current tournament
+    this.getCheckedInFencers = function () {
+        var deffered = $q.defer();
+        console.log('getCheckedInFencers');
+        deffered.resolve($firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers')).$loaded().then(function (data) {
+            console.log('data', data);
+            return data;
+        }));
+        return deffered.promise;
+    };
 });

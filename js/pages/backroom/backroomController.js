@@ -1,9 +1,17 @@
 var app = angular.module('fencin');
 
-app.controller('backroomController', function($scope, backroomService, checkinService, firebaseService) {
+app.controller('backroomController', function ($scope, checkinService, firebaseService) {
     $scope.currentTournament = checkinService.getCurrentTournament();
-    
-    $scope.fencingTime = function(fencer){
+
+//gets the checked in fencers from firebase and binds them to scope for display
+    $scope.checkedInFencers = function () {
+        firebaseService.getCheckedInFencers().then(function (data) {
+            $scope.checkedInFencers = data;
+        });
+    }();
+
+
+    $scope.fencingTime = function (fencer) {
         firebaseService.fencingTime(fencer);
-    };   
+    };
 });
