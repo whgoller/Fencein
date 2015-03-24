@@ -19,16 +19,16 @@ app.controller("mainController", function ($scope, askfredService, firebaseServi
     $scope.checkIn = function () {
         console.log('checkIn');
     };
-    $scope.tournamentSelected = function () {
-         for(i = 0; i < $scope.tournaments.length; i++){
-             if($scope.tournaments[i].tournament.tournamentName === $scope.selectedTournament){ 
-                 checkinService.setCurrentTournament($scope.tournaments[i]);
-                 break;
-             }
-         }
-        window.location.hash = '/checkin';
-        $('#checkinModal').modal('hide'); //hides the model
-    };
+//    $scope.tournamentSelected = function () {
+//         for(i = 0; i < $scope.tournaments.length; i++){
+//             if($scope.tournaments[i].tournament.tournamentName === $scope.selectedTournament){ 
+//                 checkinService.setCurrentTournament($scope.tournaments[i]);
+//                 break;
+//             }
+//         }
+//        window.location.hash = '/checkin';
+//        $('#checkinModal').modal('hide'); //hides the model
+//    };
 
 
 });

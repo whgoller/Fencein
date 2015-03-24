@@ -28,7 +28,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#" data-toggle="modal" data-target="#checkinModal">Check In</a></li>
+            <li><a href="#/checkinModal" data-toggle="modal" data-target="#checkinModal">Check In</a></li>
             <li><a href="#/backroom">Backroom</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -55,25 +55,25 @@
     </div>
 
     <!-- Check in Modal -->
-    <div class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true" id="checkinModal" ng-submit="checkIn()">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="selectTournamentTitle">Select Tournament</h4>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row">
-                <form name="checkinForm">            
-                  <select ng-options='tournament as tournament for tournament in tournamentNames' ng-change='tournamentSelected()' ng-model="selectedTournament">Select Tournament</select>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+<!--    <div class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true" id="checkinModal" ng-submit="checkIn()">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+<!--            <h4 class="modal-title" id="selectTournamentTitle">Select Tournament</h4>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <div class="container-fluid">-->
+<!--              <div class="row">-->
+<!--                <form name="checkinForm">            -->
+<!--                  <select ng-options='tournament as tournament for tournament in tournamentNames' ng-change='tournamentSelected()' ng-model="selectedTournament">Select Tournament</select>-->
+<!--                </form>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div> <!--/.modal-content -->
+<!--      </div><!-- /.modal-dialog -->
+<!--    </div><!-- /.modal -->
 
     <!-- routed contend -->
     <div class="container">
@@ -109,6 +109,7 @@
     <script src="js/pages/login/loginService.js"></script>
     <script src="js/pages/equipment/equipmentController.js"></script>
     <script src="js/firebaseService.js"></script>
+    <script src="js/pages/checkin/checkinModalController.js"></script>
   </body>
 </html>
 

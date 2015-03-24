@@ -1,0 +1,14 @@
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal" ng-submit="logIn()">
+      <div class="modal-header">
+        <a href="#" class="btn btn-success pull-right" data-dismiss="modal">x</a>
+        <h4>Login to Fencein</h4>
+      </div>
+      <div class="modal-body">
+        <form name="loginForm">
+          <p><input type="email" class="span3" name="email" id="email" placeholder="Enter Email" value="" ng-model="user.email"></p>
+          <p><input type="password" class="span3" name="loginPassword" id="loginPassword" placeholder="Enter Password" ng-model="user.password"></p>
+          <p><button type="submit" class="btn btn-success">Sign in</button> <a href="<? base_url();?>/forgotpassword">Forgot Password</a></p>
+        </form>
+      </div>
+    </div>
