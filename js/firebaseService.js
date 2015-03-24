@@ -92,6 +92,14 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     
   };
   
+    this.getUSFAFencer = function (usfs_competitor_Id) {
+    var deffered = $q.defer();
+    deffered.resolve($firebaseArray(new Firebase(membersUrl + usfs_competitor_Id)).$loaded().then(function (data) {
+      return data;
+    }));
+    return deffered.promise;
+  };
+  
   
   
 //  
