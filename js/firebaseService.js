@@ -161,9 +161,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
 //Gets the array of checked in fencers for the current tournament
   this.getCheckedInFencers = function () {
     var deffered = $q.defer();
-    console.log('getCheckedInFencers');
     deffered.resolve($firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers')).$loaded().then(function (data) {
-      console.log('data', data);
       return data;
     }));
     return deffered.promise;
