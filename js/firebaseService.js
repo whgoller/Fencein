@@ -3,7 +3,7 @@ var app = angular.module('fencin');
 app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
   var clubsUrl = 'https://fencein.firebaseio.com/clubs';
   var tournamentsUrl = 'https://fencein.firebaseio.com/tournaments';
-  var equipmentURL = 'https://fencein.firebaseio.com/equipment';
+  var equipmentURL = 'https://fencein.firebaseio.com/equipment/equipmentType';
   //var equipmentListObj = $firebaseObject(new Firebase(equipmentURL));
   var membersUrl = 'https://fencein.firebaseio.com/members/';
   //var eventsUrl = 'https://fencein.firebaseio.com/events';
@@ -94,6 +94,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     var deffered = $q.defer();
     deffered.resolve($firebaseArray(new Firebase(equipmentURL)).$loaded().then(function (data) {
       console.log('equipment', data)
+      return data;
     }));
     return deffered.promise;
   };
