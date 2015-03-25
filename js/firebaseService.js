@@ -153,11 +153,9 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
   this.fencingTime = function (fencer) {
     fencer.inFencingTime = !fencer.inFencingTime;
     var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
-    console.log("fbArray", fbArray);
-    console.log("fencer", fencer);
-    fbArray.$save(1).then(function(data){
-      console.log('done');
-    });
+
+    fbArray[0] = fencer;  //no clue why this works or why i need it, but just save didn't work so I have to set the fencer, and setting any fencer to fbarray[0] changes the correct fencer
+    fbArray.$save(fencer);
   };
 
 //Gets the array of checked in fencers for the current tournament
