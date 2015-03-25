@@ -78,19 +78,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
       }
     });
   };
-
-  
-  
-      //Get the usfencing.org fencer information
-  this.getUSFAFencer = function (usfs_competitor_Id) {
-    var ref = new Firebase(membersUrl + usfs_competitor_Id);
-    ref.on("value", function(snapshot){
-      return snapshot.val();
-    }, function (errorObject){
-      console.log("The read failed: " + errorObject.code);
-    });
-    
-  };
   
     this.getUSFAFencer = function (usfs_competitor_Id) {
     var deffered = $q.defer();
@@ -99,19 +86,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     }));
     return deffered.promise;
   };
-  
-  
-  
-//  
-//    //Get the usfencing.org fencer information
-//  this.getUSFAFencer = function (usfs_competitor_Id) {
-//    var deffered = $q.defer();
-//    deffered.resolve($firebaseObject(new Firebase(membersUrl + usfs_competitor_Id)).$loaded().then(function (data) {
-//      //console.log('data', data);
-//    }));
-//    return deffered.promise;
-//  };
-  
   
 //Returns all equipmentTypes in the database
   this.getEquipmentList = function () {

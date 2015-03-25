@@ -3,8 +3,6 @@ var app = angular.module('fencin');
 app.controller('checkinParticipantController', function ($scope, checkinService, firebaseService) {
     $scope.currentParticipant = checkinService.getParticipant();
 
-//    $scope.currentParticipantDetails = firebaseService.getUSFAFencer($scope.currentParticipant.usfa_id);
-
     $scope.currentParticipantDetails = function (id) {
         firebaseService.getUSFAFencer(id).then(function (data) {
             
@@ -13,7 +11,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         });
     }($scope.currentParticipant.usfa_id);
 
-    console.log('currentParticipantDetails', $scope.currentParticipantDetails);
+//    console.log('currentParticipantDetails', $scope.currentParticipantDetails);
 
 
     $scope.currentTournament = checkinService.getCurrentTournament();
