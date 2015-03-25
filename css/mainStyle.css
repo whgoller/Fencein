@@ -48,3 +48,7 @@ background{
 .row{
   margin-bottom: 1%;
 }
+
+.modal-open{
+  overflow: auto;
+}
