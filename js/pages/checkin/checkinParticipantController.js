@@ -4,6 +4,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     $scope.currentParticipant = checkinService.getParticipant();    
     $scope.currentTournament = checkinService.getCurrentTournament();
     $scope.totalAmountDue = 0;
+    $scope.eventsParticipatingIn = [];
 
   //Pulls the usfencing.org fencer information 
     $scope.currentParticipantDetails = function (id) {
@@ -20,10 +21,13 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 
 //Calculates the amount owed when they select/unselect events to participate in
     $scope.eventSelected = function (selected) {
+        console.log('selected', selected)
         if (selected.preRegistered) {
+//            $scope.eventsParticipatingIn.push(selected);
             $scope.totalAmountDue += parseInt(selected.fee);
         }
         else {
+//            $scope.eventsParticipatingIn.push(selected);    //remove it.
             $scope.totalAmountDue -= parseInt(selected.fee);
         }
     };
@@ -64,6 +68,8 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     $scope.checkEventsPreregistered = function (event) {
         if (event.fencerIds.indexOf($scope.currentParticipant.id) !== -1) {
             $scope.eventSelected(event);
+            console.log('event', event)
+//            $scope.eventsParticipatingIn.push(event);
             return true;
         }
         return false;
