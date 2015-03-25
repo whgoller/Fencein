@@ -10,7 +10,6 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     $scope.currentParticipantDetails = function (id) {
         firebaseService.getUSFAFencer(id).then(function (data) {
             $scope.fencerDetails = data
-            console.log(' $scope.fencerDetails',  $scope.fencerDetails);
         });
     }($scope.currentParticipant.usfa_id);
 
@@ -23,11 +22,11 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     $scope.eventSelected = function (selected) {
         console.log('selected', selected)
         if (selected.preRegistered) {
-//            $scope.eventsParticipatingIn.push(selected);
+            $scope.eventsParticipatingIn.push(selected.full_name);
             $scope.totalAmountDue += parseInt(selected.fee);
         }
         else {
-//            $scope.eventsParticipatingIn.push(selected);    //remove it.
+            $scope.eventsParticipatingIn.splice($scope.eventsParticipatingIn.indexOf(selected.full_name), 1);    //remove it.
             $scope.totalAmountDue -= parseInt(selected.fee);
         }
     };
@@ -67,9 +66,9 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 //Will select preregistered events for the fencer.
     $scope.checkEventsPreregistered = function (event) {
         if (event.fencerIds.indexOf($scope.currentParticipant.id) !== -1) {
-            $scope.eventSelected(event);
-            console.log('event', event)
-//            $scope.eventsParticipatingIn.push(event);
+            if($scope.eventsParticipatingIn.indexOf(event.full_name) === -1){
+                $scope.eventsParticipatingIn.push(event.full_name);
+            }
             return true;
         }
         return false;
