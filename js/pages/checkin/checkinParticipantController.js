@@ -55,6 +55,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         console.log('currentParticipant', $scope.currentTournament.tournament.tournamentEvents);
         //Need to remove fencer from checkin list and add to a checked-in list.
         $scope.currentParticipant.details = $scope.fencerDetails;
+        $scope.currentParticipant.inFencingTime = false;
         console.log($scope.currentParticipant);
         if($scope.eventsParticipatingIn.length > 0){
           for(var i = 0; i < $scope.eventsParticipatingIn.length; i++){

@@ -20,8 +20,8 @@ app.controller('equipmentController', function ($scope, firebaseService, checkin
   $scope.getEqupmentList = function(){
     firebaseService.getEquipmentList().then(function(equipment){
       console.log(equipment);
-      //$scope.equipmentList = equipment;
-      $scope.equipmentList = equipment[0].equipmentType
+      $scope.equipmentList = equipment[];
+      //$scope.equipmentList = equipment[0].equipmentType
       console.log($scope.equipmentList);
     })
   }();

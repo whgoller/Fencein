@@ -93,7 +93,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
   this.getEquipmentList = function () {
     var deffered = $q.defer();
     deffered.resolve($firebaseArray(new Firebase(equipmentURL)).$loaded().then(function (data) {
-      
+      console.log('equipment', data)
     }));
     return deffered.promise;
   };
