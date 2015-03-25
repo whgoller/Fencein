@@ -5,8 +5,8 @@ app.controller('backroomController', function ($scope, checkinService, firebaseS
 
 //gets the checked in fencers from firebase and binds them to scope for display
     $scope.checkedInFencers = function () {
-        firebaseService.getCheckedInFencers().then(function (data) {
-            $scope.checkedInFencers = data;
+        firebaseService.getCheckedInFencers().then(function (data) { 
+            $scope.fencers = data;
         });
     }();
 
