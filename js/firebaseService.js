@@ -79,18 +79,16 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     });
   };
 
-    
   //Get the usfencing.org fencer information
   this.getUSFAFencer = function (usfs_competitor_Id) {
     var deffered = $q.defer();
     deffered.resolve($firebaseObject(new Firebase(membersUrl + usfs_competitor_Id)).$loaded().then(function (data) {
-      //console.log('data', data);
         return data;
     }));
     return deffered.promise;
   };
   
-  
+
 //Returns all equipmentTypes in the database
   this.getEquipmentList = function () {
     var deffered = $q.defer();
