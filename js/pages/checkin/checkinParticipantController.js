@@ -56,11 +56,13 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         //Need to remove fencer from checkin list and add to a checked-in list.
         $scope.currentParticipant.details = $scope.fencerDetails;
         console.log($scope.currentParticipant);
-      
-      
-      
-        
-        //firebaseService.setFenncerCheckedIn();
+        if($scope.eventsParticipatingIn.length > 0){
+          for(var i = 0; i < $scope.eventsParticipatingIn.length; i++){
+            $scope.currentParticipant.eventName = $scope.eventsParticipatingIn[i];
+            firebaseService.setFenncerCheckedIn($scope.currentParticipant);
+          }
+        }
+      //firebaseService.setFenncerCheckedIn();
         window.location.hash = '/checkin';
     };
 
