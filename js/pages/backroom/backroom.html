@@ -1,19 +1,18 @@
-<!--<h3>People that need to be added to bracket</h3>-->
+
 <div class="panel panel-success">
   <div class="panel-heading"><h3>People that need to be added to bracket</h3></div>
   <div class="panel-body">
-    <table class='table table-hover table-striped table-success' id='backroomToAddTable' st-table="addParticipants">
+    <table class='table table-hover table-striped table-success' id='backroomToAddTable' st-table="fencers2" st-safe-src="fencers">
         <thead>
             <tr>
                 <th class='col-sm-4' st-sort='last_name' st-skip-natural="true">Last name</th>
                 <th class='col-sm-4' st-sort='first_name' st-skip-natural="true">First name</th>
-                <th class='col-sm-4' st-sort='event' st-skip-natural="true">Event</th>
+                <th class='col-sm-4' st-sort='eventName' st-skip-natural="true">Event</th>
             </tr>
         </thead>
 
-        <tbody>
-            
-            <tr ng-repeat='fencer in fencers | filter:{inFencingTime:false}'>
+        <tbody>            
+            <tr ng-repeat='fencer in fencers2 | filter:{inFencingTime:false}'>
                 <td data-ng-click="fencingTime(fencer)">{{fencer.last_name}}</td>
                 <td data-ng-click="fencingTime(fencer)">{{fencer.first_name}}</td>
                 <td data-ng-click="fencingTime(fencer)">{{fencer.eventName}}</td>
@@ -29,17 +28,17 @@
 <div class="panel panel-success">
   <div class="panel-heading"><h3>People added to the bracket</h3></div>
   <div class="panel-body">
-    <table class='table table-hover table-striped table-success' id='backroomAddedTable'>
+    <table class='table table-hover table-striped table-success' id='backroomAddedTable' st-table="fencers2" st-safe-src="fencers">
         <thead>
             <tr>
-                <th class='col-sm-4'>Last name</th>
-                <th class='col-sm-4'>First name</th>
-                <th class='col-sm-4'>Event</th>
+                <th class='col-sm-4' st-sort='last_name' st-skip-natural="true"'>Last name</th>
+                <th class='col-sm-4' st-sort='first_name' st-skip-natural="true">First name</th>
+                <th class='col-sm-4' st-sort='eventName' st-skip-natural="true">Event</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr ng-repeat='fencer in fencers | filter:{inFencingTime:true}'>
+            <tr ng-repeat='fencer in fencers2 | filter:{inFencingTime:true}'>
                 <td data-ng-click="fencingTime(fencer)">{{fencer.last_name}}</td>
                 <td data-ng-click="fencingTime(fencer)">{{fencer.first_name}}</td>
                 <td data-ng-click="fencingTime(fencer)">{{fencer.eventName}}</td>
