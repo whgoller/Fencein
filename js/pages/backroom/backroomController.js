@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.controller('backroomController', function ($scope, checkinService, firebaseService) {
+app.controller('backroomController', function ($scope, checkinService, firebaseService, $modal) {
     $scope.currentTournament = checkinService.getCurrentTournament();
 
 //gets the checked in fencers from firebase and binds them to scope for display
@@ -8,10 +8,51 @@ app.controller('backroomController', function ($scope, checkinService, firebaseS
         firebaseService.getCheckedInFencers().then(function (data) { 
             $scope.fencers = data;
         });
-    }();
+    };
 
 
     $scope.fencingTime = function (fencer) {
         firebaseService.fencingTime(fencer);
     };
+  
+  
+  
+    $scope.getTournaments = function () {
+        firebaseService.getTournaments().then(function (data) {
+            $scope.tournaments = data;
+            $scope.tournamentNames = [];
+            for(i = 0; i < $scope.tournaments.length; i++){
+                $scope.tournamentNames.push($scope.tournaments[i].tournament.tournamentName);
+            }           
+        });    
+    }()
+  
+    if(!$scope.currentTournament){
+      $scope.open = function () {      
+        console.log('opened')
+        var modalInstance = $modal.open({
+          templateUrl: '/js/pages/checkin/checkinModal.html',
+          controller: 'checkinModalController',
+          size: 'sm',
+          resolve: {
+            tournaments: function () {
+              return $scope.tournaments;
+            },
+            tournamentNames: function () {
+              return $scope.tournamentNames;
+            }
+          }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          $scope.currentTournament = selectedItem;
+          $scope.checkedInFencers();
+        }, function () {
+          console.log('Modal instance');
+        });
+      }();
+    } else {
+      $scope.checkedInFencers();
+    }
+  
 });
