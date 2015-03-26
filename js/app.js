@@ -1,4 +1,4 @@
-var app = angular.module('fencin', ['ngRoute', 'firebase', 'smart-table']);
+var app = angular.module('fencin', ['ngRoute', 'firebase', 'smart-table', 'ui.bootstrap']);
 
 app.config(function ($routeProvider, $httpProvider) {
     //$httpProvider.interceptors.push('httpRequestInterceptor');
@@ -16,11 +16,21 @@ app.config(function ($routeProvider, $httpProvider) {
     }).when('/login', {
         templateUrl: '/js/pages/login/login.html',
         controller: 'loginController'
-    }).when('/checkinModal', {
-        templateUrl: '/js/pages/checkin/checkinModal.html',
-        controller: 'checkinModalController'
-      
-      
+//    }).when('/checkinModal', {
+//        templateUrl: '/js/pages/checkin/checkinModal.html',
+//        controller: 'checkinModalController'//,
+//        resolve: {
+//          tournamentNames: function(firebaseService){
+//            firebaseService.getTournaments().then(function (data) {
+//              var tournaments = data;
+//              var tournamentNames = [];
+//              for(i = 0; i < tournaments.length; i++){
+//                tournamentNames.push(tournaments[i].tournament.tournamentName);
+//              }  
+//              return tournamentNames;
+//            })         
+//          }
+//        }
     }).when('/backroom', {
         templateUrl: '/js/pages/backroom/backroom.html',
         controller: 'backroomController'
