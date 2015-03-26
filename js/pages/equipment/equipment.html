@@ -8,7 +8,7 @@
       <div class="panel-body">
         <div class="checkbox" ng-repeat="equipment in equipmentList">
           <label>
-            <input type="checkbox" checklist-model="equipmentCheckedOut" checklist-value="{{equipment}}"> {{equipment}}
+            <input type="checkbox" ng-change="addRemoveItem(equipment)" ng-model='equipment.value'> {{equipment.$value}}
           </label>
         </div>
       </div>

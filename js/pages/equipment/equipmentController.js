@@ -2,20 +2,20 @@ var app = angular.module('fencin');
 
 app.controller('equipmentController', function ($scope, firebaseService, checkinService) {
   
+  $scope.equipmentCheckedOut = [];
+  var equipmentListArray = ['Mask','Body Cord','Mask Cord','Electric Lame Saber','Electric Lame Foil','Saber','Foil','White Lame', 'Pants'];
+  $scope.equipmentList = [];
+  
+  
   $scope.getParticipant = function(){
     $scope.participant = checkinService.getParticipant();
   }();
   
   
-  //console.log($scope.fencer);
-  
-  var equipmentListArray = ['Mask','Body Cord','Mask Cord','Electric Lame Saber','Electric Lame Foil','Saber','Foil','White Lame', 'Pants'];
-  $scope.equipmentList = [];
-  
-  
   $scope.setEquipmentList = function(){
     firebaseService.setEquipmentList(equipmentListArray);
   };
+  
   
   $scope.getEqupmentList = function(){
     firebaseService.getEquipmentList().then(function(equipment){
@@ -31,19 +31,28 @@ app.controller('equipmentController', function ($scope, firebaseService, checkin
   };
   
   
-  
+  $scope.addRemoveItem = function (item) {
+    console.log(item.$value);
+    if(item.$value){
+      $scope.equipmentCheckedOut.push(item.$value);
+    } else {      
+      $scope.equipmentCheckedOut.splice($scope.equipmentCheckedOut.indexOf(item.$value), 1);    //remove it.
+    }
+  }
+
   //finish getting the array
   $scope.setEquipmentCheckedOutList = function(){
     var fencerEquipmentCheckedOut = {
-      firstName: $scope.participant.firstName,
-      lastName: $scope.participant.lastName,
-      equipmentList: []
+      fencer: $scope.participant,
+      equipmentList: $scope.equipmentCheckedOut
     };
-    firebaseService.setEquipmentCheckedOutListList(fencerEquipmentCheckedOut);
+    console.log(fencerEquipmentCheckedOut);
+    firebaseService.setEquipmentCheckoutList(fencerEquipmentCheckedOut);
     
   }
   
   $scope.equipmentCheckoutComplete = function(){
+    $scope.setEquipmentCheckedOutList();
     window.location.hash = '/checkinParticipant';
     
   }

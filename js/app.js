@@ -4,7 +4,10 @@ app.config(function ($routeProvider, $httpProvider) {
     //$httpProvider.interceptors.push('httpRequestInterceptor');
 
     $routeProvider
-    .when('/tournamentSelection', {
+    .when('/', {
+        templateUrl: '/js/pages/welcome/welcome.html',
+        controller: 'welcomeController'
+    }).when('/tournamentSelection', {
         templateUrl: '/js/pages/tournaments/tournamentSelection.html',
         controller: 'tournamentSelectionController'
     }).when('/checkin', {
