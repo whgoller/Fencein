@@ -99,8 +99,17 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
                     }
                 }
                 if (add) {
-                    events[i].preRegisteredFencers[j].checkedIn = false;
-                    fencers.push(events[i].preRegisteredFencers[j]);
+                    var fencer = {};
+                    fencer.checkedIn = false;
+                    fencer.birthyear = events[i].preRegisteredFencers[j].competitor.birthyear;
+                    fencer.club = events[i].preRegisteredFencers[j].club;
+                    fencer.first_name = events[i].preRegisteredFencers[j].competitor.first_name;
+                    fencer.gender = events[i].preRegisteredFencers[j].competitor.gender;
+                    fencer.last_name = events[i].preRegisteredFencers[j].competitor.last_name;
+                    fencer.usfa_id = events[i].preRegisteredFencers[j].competitor.usfa_id;
+                    fencer.rating = events[i].preRegisteredFencers[j].rating;
+                    fencer.competitor_id = events[i].preRegisteredFencers[j].competitor_id;
+                    fencers.push(fencer);
                 }
             }
         }

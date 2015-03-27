@@ -5,30 +5,38 @@ app.controller('checkinController', function ($scope, checkinService, firebaseSe
     $scope.reverseSort = false;
     $scope.currentTournament = checkinService.getCurrentTournament();
 
+//    $scope.getParticipants = function () {
+//        var temp = {};
+//        //$scope.currentTournament = checkinService.getCurrentTournament();
+//        if ($scope.currentTournament && $scope.currentTournament.tournament.tournamentEvents.length) {
+//            for (i = 0; i < $scope.currentTournament.tournament.tournamentEvents.length; i++) {
+//                for (j = 0; j < $scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers.length; j++) {
+//                    temp[$scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers[j].competitor_id] =
+//                            $scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers[j].competitor;
+//                }
+//            }
+//            for (keyName in temp) {
+//                if (!temp[keyName].checkedIn) {
+//                    temp[keyName].checkedIn = false;
+//                }
+//                $scope.participants.push(temp[keyName]);
+//            }
+//        }
+//    };
+
     $scope.getParticipants = function () {
-        var temp = {};
-        //$scope.currentTournament = checkinService.getCurrentTournament();
-        if ($scope.currentTournament && $scope.currentTournament.tournament.tournamentEvents.length) {
-            for (i = 0; i < $scope.currentTournament.tournament.tournamentEvents.length; i++) {
-                for (j = 0; j < $scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers.length; j++) {
-                    temp[$scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers[j].competitor_id] =
-                            $scope.currentTournament.tournament.tournamentEvents[i].preRegisteredFencers[j].competitor;
-                }
-            }
-            for (keyName in temp) {
-                if (!temp[keyName].checkedIn) {
-                    temp[keyName].checkedIn = false;
-                }
-                $scope.participants.push(temp[keyName]);
-            }
-        }
+         firebaseService.getTournamentFencers().then(function (data) {
+            $scope.participants = data;
+            console.log('$scope.participants', $scope.participants)
+        });
     };
 
-    $scope.getParticipant = function (participant) {
-        participant.checkedIn = !participant.checkedIn;
-        checkinService.setParticipant(participant);
-        window.location.hash = '/checkinParticipant';
-    };
+        $scope.getParticipant = function (participant) {
+            participant.checkedIn = !participant.checkedIn;
+            checkinService.setParticipant(participant);
+            window.location.hash = '/checkinParticipant';
+    }
+    ;
 
     $scope.tournamentName = 'Utah Swords Academy Fencing Club';
 
