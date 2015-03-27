@@ -179,7 +179,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     //Updates the fencer in the array tournamentFencers swaping checkedIn boolean
     this.checkedIn = function (fencer) {
         fencer.checkedIn = true;
-        console.log('fencer', fencer)
         var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/tournamentFencers'));
 
         fbArray[0] = fencer;  //no clue why this works or why i need it, but just save didn't work so I have to set the fencer, and setting any fencer to fbarray[0] changes the correct fencer
