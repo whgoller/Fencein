@@ -14,7 +14,6 @@ app.service('checkinService', function (firebaseService) {
     };
 
     this.setParticipant = function (participant) {
-        console.log('participant', participant)
         this.currentParticipant = participant;
     };
 

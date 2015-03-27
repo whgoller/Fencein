@@ -100,6 +100,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
                 }
                 if (add) {
                     var fencer = {};
+//                    console.log('events[i].preRegisteredFencers[j]', events[i].preRegisteredFencers[j])
                     fencer.checkedIn = false;
                     fencer.birthyear = events[i].preRegisteredFencers[j].competitor.birthyear;
                     fencer.club = events[i].preRegisteredFencers[j].club;
@@ -109,6 +110,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
                     fencer.usfa_id = events[i].preRegisteredFencers[j].competitor.usfa_id;
                     fencer.rating = events[i].preRegisteredFencers[j].rating;
                     fencer.competitor_id = events[i].preRegisteredFencers[j].competitor_id;
+                    fencer.id = events[i].preRegisteredFencers[j].id;
                     fencers.push(fencer);
                 }
             }

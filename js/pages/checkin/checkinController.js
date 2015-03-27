@@ -25,18 +25,15 @@ app.controller('checkinController', function ($scope, checkinService, firebaseSe
 //    };
 
     $scope.getParticipants = function () {
-         firebaseService.getTournamentFencers().then(function (data) {
+        firebaseService.getTournamentFencers().then(function (data) {
             $scope.participants = data;
-            console.log('$scope.participants', $scope.participants)
         });
     };
 
-        $scope.getParticipant = function (participant) {
-            participant.checkedIn = !participant.checkedIn;
-            checkinService.setParticipant(participant);
-            window.location.hash = '/checkinParticipant';
-    }
-    ;
+    $scope.getParticipant = function (participant) {
+        checkinService.setParticipant(participant);
+        window.location.hash = '/checkinParticipant';
+    };
 
     $scope.tournamentName = 'Utah Swords Academy Fencing Club';
 

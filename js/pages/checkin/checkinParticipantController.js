@@ -5,7 +5,6 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   $scope.currentTournament = checkinService.getCurrentTournament();
   $scope.totalAmountDue = 0;
   $scope.eventsParticipatingIn = [];
-  console.log('$scope.currentParticipant', $scope.currentParticipant)
 
   //Pulls the usfencing.org fencer information 
   $scope.currentParticipantDetails = function (id) {
@@ -53,14 +52,14 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   //will need the fencer duplicated per event registered
   $scope.submit = function () {
     //Need to remove fencer from checkin list and add to a checked-in list.
+    firebaseService.checkedIn($scope.currentParticipant);
     $scope.currentParticipant.details = $scope.fencerDetails;
     $scope.currentParticipant.inFencingTime = false;
-   // console.log($scope.currentParticipant);
+
     if($scope.eventsParticipatingIn.length > 0){
       for(var i = 0; i < $scope.eventsParticipatingIn.length; i++){
         $scope.currentParticipant.eventName = $scope.eventsParticipatingIn[i];
         firebaseService.setFenncerCheckedIn($scope.currentParticipant);
-        //console.log($scope.currentParticipant)
       }
     }
     window.location.hash = '/checkin';
@@ -68,7 +67,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 
 //Will select preregistered events for the fencer.
   $scope.checkEventsPreregistered = function (event) {
-    if (event.fencerIds.indexOf($scope.currentParticipant.id) !== -1) {
+    if (event.fencerIds.indexOf($scope.currentParticipant.competitor_id) !== -1) {
       if($scope.eventsParticipatingIn.indexOf(event.full_name) === -1){
         $scope.eventsParticipatingIn.push(event.full_name);
       }
