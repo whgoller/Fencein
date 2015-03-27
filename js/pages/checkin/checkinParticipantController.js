@@ -5,11 +5,12 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   $scope.currentTournament = checkinService.getCurrentTournament();
   $scope.totalAmountDue = 0;
   $scope.eventsParticipatingIn = [];
+  console.log('$scope.currentParticipant', $scope.currentParticipant)
 
   //Pulls the usfencing.org fencer information 
   $scope.currentParticipantDetails = function (id) {
     firebaseService.getUSFAFencer(id).then(function (data) {
-      $scope.fencerDetails = data
+      $scope.fencerDetails = data;
     });
   }($scope.currentParticipant.usfa_id);
 
@@ -20,7 +21,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 
   //Calculates the amount owed when they select/unselect events to participate in
   $scope.eventSelected = function (selected) {
-    console.log('selected', selected)
+    console.log('selected', selected);
     if (selected.preRegistered) {
       $scope.eventsParticipatingIn.push(selected.full_name);
       $scope.totalAmountDue += parseInt(selected.fee);
