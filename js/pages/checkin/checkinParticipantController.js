@@ -9,7 +9,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   //Pulls the usfencing.org fencer information 
   $scope.currentParticipantDetails = function (id) {
     firebaseService.getUSFAFencer(id).then(function (data) {
-      $scope.fencerDetails = data
+      $scope.fencerDetails = data;
     });
   }($scope.currentParticipant.usfa_id);
 
@@ -20,7 +20,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 
   //Calculates the amount owed when they select/unselect events to participate in
   $scope.eventSelected = function (selected) {
-    console.log('selected', selected)
+    console.log('selected', selected);
     if (selected.preRegistered) {
       $scope.eventsParticipatingIn.push(selected.full_name);
       $scope.totalAmountDue += parseInt(selected.fee);
@@ -52,10 +52,12 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
   //will need the fencer duplicated per event registered
   $scope.submit = function () {
     //Need to remove fencer from checkin list and add to a checked-in list.
+    firebaseService.checkedIn($scope.currentParticipant);
     $scope.currentParticipant.details = $scope.fencerDetails;
     $scope.currentParticipant.inFencingTime = false;
     $scope.checkInComplete = true;
    // console.log($scope.currentParticipant);
+
     if($scope.eventsParticipatingIn.length > 0){
       for(var i = 0; i < $scope.eventsParticipatingIn.length; i++){
         console.log('$scope.eventsParticipatingIn.length', $scope.eventsParticipatingIn.length)
@@ -69,7 +71,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 
 //Will select preregistered events for the fencer.
   $scope.checkEventsPreregistered = function (event) {
-    if (event.fencerIds.indexOf($scope.currentParticipant.id) !== -1) {
+    if (event.fencerIds.indexOf($scope.currentParticipant.competitor_id) !== -1) {
       if($scope.eventsParticipatingIn.indexOf(event.full_name) === -1){
         $scope.eventsParticipatingIn.push(event.full_name);
         console.log('$scope.eventsParticipatingIn',$scope.eventsParticipatingIn)

@@ -25,13 +25,12 @@ app.controller('backroomController', function ($scope, checkinService, firebaseS
                 $scope.tournamentNames.push($scope.tournaments[i].tournament.tournamentName);
             }           
         });    
-    }()
+    }();
   
     
     
     if(!$scope.currentTournament){
       $scope.open = function () {      
-        console.log('opened')
         var modalInstance = $modal.open({
           templateUrl: '/js/pages/checkin/checkinModal.html',
           controller: 'checkinModalController',

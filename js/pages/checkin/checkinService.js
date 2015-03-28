@@ -42,9 +42,8 @@ app.service('checkinService', function (firebaseService) {
     };
   
     this.getParticipantDetails = function(participant){
-      console.log(participant);
-      
-    }
+      console.log(participant);      
+    };
   
 });
 
