@@ -22,16 +22,15 @@
 
 #eventTable{
     max-width: 500px;
-    background-color: lightblue;
 }
 
 #participantTable{
     max-width: 500px;
 }
 
-.table-striped>tbody>tr:nth-child(odd)>td {
-   background-color: lightblue;
- }
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: lightblue;
+}
 
 .whiteBackground{
     background-color: white
@@ -55,4 +54,41 @@ background{
 
 .modal-open{
   overflow: auto;
+}
+
+.panel-success {
+/*  border-color: #d6e9c6;*/
+  border-color: lightblue;
+}
+.panel-success > .panel-heading {
+  color: black;
+  background-color: lightblue;
+  border-color: lightblue;
+/*
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+*/
+}
+.panel-success > .panel-heading + .panel-collapse > .panel-body {
+/*  border-top-color: #d6e9c6;*/
+  border-top-color: lightblue;
+}
+.panel-success > .panel-heading .badge {
+  color: #dff0d8;
+/*  background-color: #3c763d;*/
+  background-color: lightblue;
+}
+.panel-success > .panel-footer + .panel-collapse > .panel-body {
+/*  border-bottom-color: #d6e9c6;*/
+  border-bottom-color: lightblue;
+}
+
+.checkinTables {
+  width: 50%;
+}
+
+#equipmentButton, #submitBtn{
+  margin: 15px;
+  float: right;
 }
