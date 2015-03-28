@@ -9,7 +9,13 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     //Pulls the usfencing.org fencer information 
     $scope.currentParticipantDetails = function (id) {
         firebaseService.getUSFAFencer(id).then(function (data) {
+            if(data.competitive){
+              data.competitive = "Yes";
+            } else {
+              data.competitive = "No";
+            }
             $scope.fencerDetails = data;
+            console.log(data);
         });
     }($scope.currentParticipant.usfa_id);
 
