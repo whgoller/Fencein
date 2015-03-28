@@ -85,6 +85,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         }
         console.log('tournament', tournament);
         firebaseService.setTournament(tournament);
+        window.location.hash = '/';
     };
 
 //returns the unique fencers that are registered for the tournament
