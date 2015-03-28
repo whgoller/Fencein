@@ -29,6 +29,10 @@
     max-width: 500px;
 }
 
+.table-striped>tbody>tr:nth-child(odd)>td {
+   background-color: lightblue;
+ }
+
 .whiteBackground{
     background-color: white
 }
