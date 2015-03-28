@@ -32,9 +32,18 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
   
 
   this.setFenncerCheckedIn = function (fencer) {
+    console.log('setFenncerCheckedIn', fencer)
     var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
     fbArray.$add(fencer);
   };
+  
+  this.updateFencerCheckedIn = function(fencer) {
+    fencer.checkInComplete = !fencer.checkInComplete;
+    var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
+    fbArray[0] = fencer;  //no clue why this works or why i need it, but just save didn't work so I have to set the fencer, and setting any fencer to fbarray[0] changes the correct fencer
+    fbArray.$save(fencer);
+  }
+  
   
   
 
@@ -44,7 +53,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
       for (var i = 0; i < data.length; i++) {
         console.log(data[i].tournament.tournamentId);
-        console.log(tournamentId);
         if (data[i].tournament.tournamentId === tournamentId) {
           return data[i];
         }

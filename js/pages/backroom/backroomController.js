@@ -27,6 +27,8 @@ app.controller('backroomController', function ($scope, checkinService, firebaseS
         });    
     }()
   
+    
+    
     if(!$scope.currentTournament){
       $scope.open = function () {      
         console.log('opened')

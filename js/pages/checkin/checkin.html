@@ -1,5 +1,7 @@
 
 
+
+
 <div class="panel panel-success">
   <div class="panel-heading"><h3>People that need to check-in</h3></div>
     <div class="panel-body table-responsive">
@@ -17,6 +19,28 @@
             <td data-ng-click="getParticipant(participant)">{{participant.last_name}}</td>
             <td data-ng-click="getParticipant(participant)">{{participant.first_name}}</td>
             <td data-ng-click="getParticipant(participant)">{{participant.usfa_id}}</td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+<div class="panel panel-success">
+  <div class="panel-heading"><h3>People checked-in</h3></div>
+    <div class="panel-body table-responsive">
+      <table class='table table-striped table-bordered' id='participantTable' st-table="participants">
+        <thead>
+          <tr>
+            <th class='col-sm-4' st-sort='last_name' st-skip-natural="true">Last name</th>
+            <th class='col-sm-4' st-sort='first_name' st-skip-natural="true">First name</th>
+            <th class='col-sm-4' st-sort='usfa_id' st-skip-natural="true">US Fencing ID</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="participant in participants | filter:{checkInComplete:true} ">
+            <td data-ng-click="resetParticipant(participant)">{{participant.last_name}}</td>
+            <td data-ng-click="resetParticipant(participant)">{{participant.first_name}}</td>
+            <td data-ng-click="resetParticipant(participant)">{{participant.usfa_id}}</td>
           </tr>
         </tbody>
     </table>

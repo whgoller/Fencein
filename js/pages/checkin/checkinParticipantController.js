@@ -54,12 +54,14 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     //Need to remove fencer from checkin list and add to a checked-in list.
     $scope.currentParticipant.details = $scope.fencerDetails;
     $scope.currentParticipant.inFencingTime = false;
+    $scope.checkInComplete = true;
    // console.log($scope.currentParticipant);
     if($scope.eventsParticipatingIn.length > 0){
       for(var i = 0; i < $scope.eventsParticipatingIn.length; i++){
+        console.log('$scope.eventsParticipatingIn.length', $scope.eventsParticipatingIn.length)
         $scope.currentParticipant.eventName = $scope.eventsParticipatingIn[i];
         firebaseService.setFenncerCheckedIn($scope.currentParticipant);
-        //console.log($scope.currentParticipant)
+        console.log($scope.currentParticipant)
       }
     }
     window.location.hash = '/checkin';
@@ -70,6 +72,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     if (event.fencerIds.indexOf($scope.currentParticipant.id) !== -1) {
       if($scope.eventsParticipatingIn.indexOf(event.full_name) === -1){
         $scope.eventsParticipatingIn.push(event.full_name);
+        console.log('$scope.eventsParticipatingIn',$scope.eventsParticipatingIn)
       }
       return true;
     }

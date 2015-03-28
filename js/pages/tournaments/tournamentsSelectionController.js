@@ -3,9 +3,11 @@ var app = angular.module('fencin');
 app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService) {
     $scope.clubInitials = 'USAFC';
     $scope.tournaments = [];
+    $scope.fencersInAllEvents = [];
    // $scope.events = [];
 
 
+    //will pull the club information based off of the clubInitials from the askfredService.
     $scope.getClubInfo = function (clubInitials) {
       askfredService.getClub($scope.clubInitials).then(function (response) {
         var club = response[0];
@@ -36,6 +38,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
               //preRegFencers[i].competitor.competitor_id = preRegFencers[i].competitor_id;
               preRegFencers[i].competitor.club = preRegFencers[i].club;
               fencerIds.push(preRegFencers[i].competitor_id);
+              $scope.fencersInAllEvents.push(preRegFencers[i]);
             //console.log('preRegFencers', preRegFencers[i])
             }
               event.preRegisteredFencers = preRegFencers;
@@ -44,7 +47,6 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
           event.fencerIds = fencerIds;
         });
       });
-      
     };
   
 
@@ -66,6 +68,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
 
 
     $scope.importIntoFirebase = function () {
+      //console.log('$scope.fencersInAllEvents', $scope.fencersInAllEvents)
       var tournament = {};
       for (i in $scope.tournaments) {
         if ($scope.tournaments[i].id === $scope.selectedTournament) {
