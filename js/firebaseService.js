@@ -1,7 +1,7 @@
 var app = angular.module('fencin');
 
 app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
-<<<<<<< HEAD
+  
   var clubsUrl = 'https://fencein.firebaseio.com/clubs';
   var tournamentsUrl = 'https://fencein.firebaseio.com/tournaments';
   var equipmentTypeURL = 'https://fencein.firebaseio.com/equipment/equipmentType';
@@ -30,10 +30,9 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     });
   };
   
-  
 
   this.setFenncerCheckedIn = function (fencer) {
-    console.log('setFenncerCheckedIn', fencer)
+    //console.log('setFenncerCheckedIn', fencer)
     var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
     fbArray.$add(fencer);
   };
@@ -46,8 +45,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
   }
   
   
-  
-
 //Returns a specific tournament by its ID
   this.getTournament = function (tournamentId) {
     var deffered = $q.defer();
@@ -61,59 +58,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     }));
     return deffered.promise;
   };
-=======
-    var clubsUrl = 'https://fencein.firebaseio.com/clubs';
-    var tournamentsUrl = 'https://fencein.firebaseio.com/tournaments';
-    var equipmentTypeURL = 'https://fencein.firebaseio.com/equipment/equipmentType';
-    var equipmentURL = 'https://fencein.firebaseio.com/equipment';
-    var membersUrl = 'https://fencein.firebaseio.com/members/';
-    //var eventsUrl = 'https://fencein.firebaseio.com/events';
-    var fencersToAdd = [];
-    var tournamentId;
 
-    //keeps track of current tournament id called when the tournament is selected
-    this.setTournamentId = function (id) {
-        tournamentId = id;
-    };
-
-
-    // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
-    this.setClub = function () {
-        var list = $firebaseArray(new Firebase(clubsUrl));
-        list.$add({
-            clubName: 'bob',
-            clubId: 'this.clubId'
-        }).then(function (ref) {
-            var id = ref.key();
-            console.log("added record with id " + id);
-            list.$indexFor(id); // returns location in the array
-        });
-    };
-
-
-
-    this.setFenncerCheckedIn = function (fencer) {
-        var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
-        fbArray.$add(fencer);
-    };
-
-
-
-//Returns a specific tournament by its ID
-    this.getTournament = function (tournamentId) {
-        var deffered = $q.defer();
-        deffered.resolve($firebaseArray(new Firebase(tournamentsUrl)).$loaded().then(function (data) {
-            for (var i = 0; i < data.length; i++) {
-                console.log(data[i].tournament.tournamentId);
-                console.log(tournamentId);
-                if (data[i].tournament.tournamentId === tournamentId) {
-                    return data[i];
-                }
-            }
-        }));
-        return deffered.promise;
-    };
->>>>>>> 1632e752a6e91d057c3f7e898556ee727395bcf4
 
 
 //Returns all the tournaments

@@ -3,13 +3,8 @@ var app = angular.module('fencin');
 app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService) {
     $scope.clubInitials = 'USAFC';
     $scope.tournaments = [];
-<<<<<<< HEAD
     $scope.fencersInAllEvents = [];
    // $scope.events = [];
-=======
-    // $scope.events = [];
->>>>>>> 1632e752a6e91d057c3f7e898556ee727395bcf4
-
 
     //will pull the club information based off of the clubInitials from the askfredService.
     $scope.getClubInfo = function (clubInitials) {
@@ -30,7 +25,6 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
 
 
     $scope.getTournamentEvents = function (selectedTournamentId) {
-<<<<<<< HEAD
       //var fencerIds = [];
       askfredService.getSingleTournamentEvents(selectedTournamentId).then(function (events) {
         $scope.events = events;
@@ -52,29 +46,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
           event.fencerIds = fencerIds;
         });
       });
-=======
-        //var fencerIds = [];
-        askfredService.getSingleTournamentEvents(selectedTournamentId).then(function (events) {
-            $scope.events = events;
-            console.log('$scope.getTournamentEvents', $scope.events);
-            events.map(function (event) {
-                var fencerIds = [];
-                askfredService.getPreRegisteredFencersInEvent(event.id).then(function (preRegFencers) {
-                    for (var i = 0; i < preRegFencers.length; i++) {
-                        //preRegFencers[i].competitor.rating = preRegFencers[i].rating;
-                        //preRegFencers[i].competitor.competitor_id = preRegFencers[i].competitor_id;
-                        preRegFencers[i].competitor.club = preRegFencers[i].club;
-                        fencerIds.push(preRegFencers[i].competitor_id);
-                        //console.log('preRegFencers', preRegFencers[i])
-                    }
-                    event.preRegisteredFencers = preRegFencers;
-                    // console.log('preRegFencers', preRegFencers)
-                });
-                event.fencerIds = fencerIds;
-            });
-        });
 
->>>>>>> 1632e752a6e91d057c3f7e898556ee727395bcf4
     };
 
 
