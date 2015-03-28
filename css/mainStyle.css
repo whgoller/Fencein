@@ -22,16 +22,15 @@
 
 #eventTable{
     max-width: 500px;
-    background-color: lightblue;
 }
 
 #participantTable{
     max-width: 500px;
 }
 
-.table-striped>tbody>tr:nth-child(odd)>td {
-   background-color: lightblue;
- }
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: lightblue;
+}
 
 .whiteBackground{
     background-color: white
