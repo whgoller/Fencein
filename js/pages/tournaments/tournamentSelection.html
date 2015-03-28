@@ -9,6 +9,7 @@
     <label for="selectTournamnt" >Select a tournament</label>
 <!--    <button ng-click="importIntoFirebase()">Import Data</button>-->
     <select id="selectTournamnt" ng-change="selectAction()" ng-options="t.id as t.start_date + '  ' + t.name  group by t.group for t in tournaments" ng-model="selectedTournament"></select>
+    <button class="btn btn-primary" ng-click="importIntoFirebase()">Import Data</button>
   </div>
   <div class="row"></div>  
   <div class="row" ng-repeat="event in events">
@@ -44,7 +45,7 @@
       </table>
     </div>
   </div>
-  <div>
-    <button ng-click="importIntoFirebase()">Import Data</button>
-  </div>
+<!--  <div>-->
+<!--    <button ng-click="importIntoFirebase()">Import Data</button>-->
+<!--  </div>-->
 </div>

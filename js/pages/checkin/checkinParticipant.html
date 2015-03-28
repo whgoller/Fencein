@@ -37,14 +37,14 @@
           <input type="rating" class="form-control" id="rating" placeholder="Rating" ng-model="currentParticipant.rating">
         </div>
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-default" ng-click="submit()">Submit</button>
-      </div>
+<!--      <div class="form-group">-->
+<!--        <button type="submit" class="btn  btn-primary" ng-click="submit()">Submit</button>-->
+<!--      </div>-->
     </div>
     <div class="container col-md-6">
-      <div class="row">
-        <button type="button" class="btn btn-default" ng-click="equipmentCheckout()">Equipment checkout</button>  
-      </div>
+<!--      <div class="row">-->
+<!--        <button id="equipmentButton" type="button" class="btn btn-primary" ng-click="equipmentCheckout()">Equipment checkout</button>  -->
+<!--      </div>-->
       <div class="row">
         <table class='table table-striped table-bordered' id='eventTable'  st-table="currentTournament.tournament.tournamentEvents">
           <thead>
@@ -83,6 +83,10 @@
             <option value="card">Card</option>
           </select>
         </div>
+      </div>
+      <div class="form-group">
+        <button id="submitBtn" type="submit" class="btn btn-primary" ng-click="submit()">Submit</button>
+        <button id="equipmentButton" type="button" class="btn btn-primary" ng-click="equipmentCheckout()">Equipment checkout</button>
       </div>
     </div>    
   </form>

@@ -88,3 +88,8 @@ background{
 .checkinTables {
   width: 50%;
 }
+
+#equipmentButton, #submitBtn{
+  margin: 15px;
+  float: right;
+}
