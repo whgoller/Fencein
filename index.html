@@ -28,33 +28,18 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#/checkin">Check In</a></li>
+            <li><a href="#/checkinSelection">Check In</a></li>
 <!--            <li><a href="#/checkinModal" data-toggle="modal" data-target="#checkinModal">Check In</a></li>-->
             <li><a href="#/backroom">Backroom</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign In</a></li>
+            <li><a href="#/login">Sign In</a></li>
             <li><a href="#/tournamentSelection">Tournaments</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal" ng-submit="logIn()">
-      <div class="modal-header">
-        <a href="#" class="btn btn-success pull-right" data-dismiss="modal">x</a>
-        <h4>Login to Fencein</h4>
-      </div>
-      <div class="modal-body">
-        <form name="loginForm">
-          <p><input type="email" class="span3" name="email" id="email" placeholder="Enter Email" value="" ng-model="user.email"></p>
-          <p><input type="password" class="span3" name="loginPassword" id="loginPassword" placeholder="Enter Password" ng-model="user.password"></p>
-          <p><button type="submit" class="btn btn-success">Sign in</button> <a href="<? base_url();?>/forgotpassword">Forgot Password</a></p>
-        </form>
-      </div>
-    </div>
-    
     <!-- routed content -->
     <div class="container">
       <ng-view></ng-view>
@@ -87,11 +72,18 @@
     <script src="js/pages/backroom/backroomController.js"></script>
     <script src="js/pages/backroom/backroomService.js"></script>
     <script src="js/pages/login/loginControler.js"></script>
-    <script src="js/pages/login/loginService.js"></script>
+    <script src="js/authService.js"></script>
     <script src="js/pages/equipment/equipmentController.js"></script>
     <script src="js/firebaseService.js"></script>
-    <script src="js/pages/checkin/checkinModalController.js"></script>
-    <script src="js/pages/welcome/welcomeController.js"></script>
+    <script src="js/pages/checkin/checkinSelectionController.js"></script>
+    <script src="js/pages/dashboard/dashboardController.js"></script>
+    <script src="js/environmentService.js"></script>
+    
+    
+    
+    
+    
+<!--    <script src="js/pages/checkin/checkinModalController.js"></script>-->
   </body>
 </html>
 

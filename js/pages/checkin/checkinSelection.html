@@ -1,0 +1,10 @@
+    <div class="container">
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please select a Tournament</h2>
+        <select ng-options='tournament as tournament for tournament in tournamentNames' ng-change='tournamentSelected()' ng-model="selectedTournament">Select Tournament</select>
+      </form>
+    </div> <!-- /container -->
+
+
+
+

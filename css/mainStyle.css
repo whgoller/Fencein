@@ -3,12 +3,14 @@
     Author     : whgol_000
 */
 
+/*
 #loginModal {
     width: 250px;
     height: 250px;
     margin: 0 auto;
     top: 5%;
 }
+*/
 
 /*
 #checkinModal {
@@ -24,9 +26,11 @@
     max-width: 500px;
 }
 
+/*
 #participantTable{
     max-width: 500px;
 }
+*/
 
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: lightblue;
@@ -72,9 +76,11 @@
   border-bottom-color: lightblue;
 }
 
+/*
 .checkinTables {
   width: 50%;
 }
+*/
 
 #equipmentButton, #submitBtn{
   margin: 15px;

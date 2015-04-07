@@ -4,33 +4,18 @@ app.config(function ($routeProvider, $httpProvider) {
     //$httpProvider.interceptors.push('httpRequestInterceptor');
 
     $routeProvider
-    .when('/', {
-        templateUrl: '/js/pages/welcome/welcome.html',
-        controller: 'welcomeController'
-    }).when('/tournamentSelection', {
+    .when('/tournamentSelection', {
         templateUrl: '/js/pages/tournaments/tournamentSelection.html',
         controller: 'tournamentSelectionController'
+    }).when('/checkinSelection', {
+        templateUrl: '/js/pages/checkin/checkinSelection.html',
+        controller: 'checkinSelectionController'
     }).when('/checkin', {
         templateUrl: '/js/pages/checkin/checkin.html',
         controller: 'checkinController'
     }).when('/login', {
         templateUrl: '/js/pages/login/login.html',
         controller: 'loginController'
-//    }).when('/checkinModal', {
-//        templateUrl: '/js/pages/checkin/checkinModal.html',
-//        controller: 'checkinModalController'//,
-//        resolve: {
-//          tournamentNames: function(firebaseService){
-//            firebaseService.getTournaments().then(function (data) {
-//              var tournaments = data;
-//              var tournamentNames = [];
-//              for(i = 0; i < tournaments.length; i++){
-//                tournamentNames.push(tournaments[i].tournament.tournamentName);
-//              }  
-//              return tournamentNames;
-//            })         
-//          }
-//        }
     }).when('/backroom', {
         templateUrl: '/js/pages/backroom/backroom.html',
         controller: 'backroomController'
@@ -53,7 +38,25 @@ app.config(function ($routeProvider, $httpProvider) {
 //          }
 //        }
 
-    }).otherwise({
-        redirectTo: '/'
+    }).when('/dashboard/:userId', {
+      templateUrl: '/js/pages/dashboard/dashboard.html',
+      controller: 'dashboardController',
+      resolve: {
+        userReference: function(firebaseService, $route){
+          return firebaseService.getUser($route.current.params.userId);
+        },
+        clubReference: function(environmentService, $route){
+          return environmentService.getClubName();// .getClub($route.current.params.userId);
+        }
+//        userReference: function(firebaseService, $route){
+//          return firebaseService.getUser($route.current.params.userId);
+//        },
+//        clubReference: function(firebaseService, $route){
+//          return firebaseService.getClub($route.current.params.userId);
+//        }
+      }
+    })
+    .otherwise({
+      redirectTo: '/login'
     });
 });

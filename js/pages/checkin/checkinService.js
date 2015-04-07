@@ -23,17 +23,17 @@ app.service('checkinService', function (firebaseService) {
 
     this.setPaidCredit = function (amount) {
         this.creditTotal += amount;
-        this.checkedInFencer();
+//        this.checkedInFencer();
     };
 
     this.setPaidCash = function (amount) {
         this.cashTotal += amount;
-        this.checkedInFencer();
+//        this.checkedInFencer();
     };
 
     this.setPaidCheck = function (amount) {
         this.checkTotal += amount;
-        this.checkedInFencer();
+//        this.checkedInFencer();
     };
     
     this.checkedInFencer = function(){

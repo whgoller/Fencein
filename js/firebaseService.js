@@ -1,28 +1,32 @@
 var app = angular.module('fencin');
 
 app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
-  
+  var firebaseUrl = 'https://fencein.firebaseio.com/';
+  var clubUsersUrl = 'https://fencein.firebaseio.com/clubUsers/';
   var clubsUrl = 'https://fencein.firebaseio.com/clubs';
-  var tournamentsUrl = 'https://fencein.firebaseio.com/tournaments';
-  var equipmentTypeURL = 'https://fencein.firebaseio.com/equipment/equipmentType';
-  var equipmentURL = 'https://fencein.firebaseio.com/equipment';
+  var tournamentsUrl = 'https://fencein.firebaseio.com/clubs/tournaments';
+  var equipmentTypeURL = 'https://fencein.firebaseio.com/clubs/equipment/equipmentType';
+  var equipmentURL = 'https://fencein.firebaseio.com/clubs/equipment';
   var membersUrl = 'https://fencein.firebaseio.com/members/';
-  //var eventsUrl = 'https://fencein.firebaseio.com/events';
   var fencersToAdd = [];
-  var tournamentId;
-
-  //keeps track of current tournament id called when the tournament is selected
-  this.setTournamentId = function (id) {
-    tournamentId = id;
-  };
-
-
+//  var tournamentId;
+//  var clubInitials;
+//
+//  //keeps track of current tournament id called when the tournament is selected
+//  this.setTournamentId = function (id) {
+//    tournamentId = id;
+//  };
+//
+//  this.setClubInitials = function(initials){
+//    clubInitials = initials;
+//  }
+  
   // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
-  this.setClub = function () {
+  this.setClub = function (clubName, clubId) {
     var list = $firebaseArray(new Firebase(clubsUrl));
     list.$add({
-      clubName: 'bob',
-      clubId: 'this.clubId'
+      clubName: clubName,
+      clubId: clubId
     }).then(function (ref) {
         var id = ref.key();
         console.log("added record with id " + id);
@@ -30,6 +34,13 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     });
   };
   
+  this.getClub = function(userId){
+    var deffered = $q.defer();
+    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + userId)).$loaded().then(function (data) {
+        return data;
+    }));
+    return deffered.promise;
+  };
 
   this.setFenncerCheckedIn = function (fencer) {
     //console.log('setFenncerCheckedIn', fencer)
@@ -191,4 +202,20 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
         fbArray[0] = fencer;  //no clue why this works or why i need it, but just save didn't work so I have to set the fencer, and setting any fencer to fbarray[0] changes the correct fencer
         fbArray.$save(fencer);
     };
+  
+  
+
+
+  this.getUser = function(userId){
+    uId = userId.replace('simplelogin:', '');
+    //return $firebaseObject(new Firebase(firebaseUrl + 'users/' + uId));
+    var deffered = $q.defer();
+//    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + userId)).$loaded().then(function (data) {
+    deffered.resolve($firebaseObject(new Firebase(firebaseUrl + 'users/' + uId)).$loaded().then(function (data) {
+        return data;
+    }));
+    return deffered.promise;
+  };
+  
+  
 });
