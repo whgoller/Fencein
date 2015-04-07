@@ -5,8 +5,8 @@ app.config(function ($routeProvider, $httpProvider) {
 
     $routeProvider
     .when('/tournamentSelection', {
-        templateUrl: '/js/pages/tournaments/tournamentSelection.html',
-        controller: 'tournamentSelectionController'
+      templateUrl: '/js/pages/tournaments/tournamentSelection.html',
+      controller: 'tournamentSelectionController'
     }).when('/checkinSelection', {
         templateUrl: '/js/pages/checkin/checkinSelection.html',
         controller: 'checkinSelectionController'
@@ -43,10 +43,14 @@ app.config(function ($routeProvider, $httpProvider) {
       controller: 'dashboardController',
       resolve: {
         userReference: function(firebaseService, $route){
-          return firebaseService.getUser($route.current.params.userId);
+          return firebaseService.getUser($route.current.params.userId).then(function(data){
+            return data;
+          });
         },
-        clubReference: function(environmentService, $route){
-          return environmentService.getClubName();// .getClub($route.current.params.userId);
+        clubReference: function(firebaseService, $route){
+          return firebaseService.getUsersClub($route.current.params.userId).then(function(data){
+            return data;
+          });
         }
 //        userReference: function(firebaseService, $route){
 //          return firebaseService.getUser($route.current.params.userId);

@@ -1,25 +1,31 @@
 var app = angular.module('fencin');
 
-app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
+app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, environmentService) {
+  
   var firebaseUrl = 'https://fencein.firebaseio.com/';
-  var clubUsersUrl = 'https://fencein.firebaseio.com/clubUsers/';
+  var clubUsersUrl = 'https://fencein.firebaseio.com/users/';
   var clubsUrl = 'https://fencein.firebaseio.com/clubs';
   var tournamentsUrl = 'https://fencein.firebaseio.com/clubs/tournaments';
   var equipmentTypeURL = 'https://fencein.firebaseio.com/clubs/equipment/equipmentType';
   var equipmentURL = 'https://fencein.firebaseio.com/clubs/equipment';
   var membersUrl = 'https://fencein.firebaseio.com/members/';
   var fencersToAdd = [];
+  var clubUserInfo;
 //  var tournamentId;
-//  var clubInitials;
+  var clubInitials;
 //
 //  //keeps track of current tournament id called when the tournament is selected
 //  this.setTournamentId = function (id) {
 //    tournamentId = id;
 //  };
 //
-//  this.setClubInitials = function(initials){
-//    clubInitials = initials;
-//  }
+  this.getClubUserInfo = function(){
+    return clubUserInfo;
+  }
+  
+  this.setClubInitials = function(initials){
+    clubInitials = initials;
+  }
   
   // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
   this.setClub = function (clubName, clubId) {
@@ -34,10 +40,13 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q) {
     });
   };
   
-  this.getClub = function(userId){
+  this.getUsersClub = function(userId){
+    uId = userId.replace('simplelogin:', '');
     var deffered = $q.defer();
-    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + userId)).$loaded().then(function (data) {
-        return data;
+    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + uId)).$loaded(function(data){
+      console.log("loadeddata", data);
+      clubUserInfo = data;
+      return data;
     }));
     return deffered.promise;
   };
