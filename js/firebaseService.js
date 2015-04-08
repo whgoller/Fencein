@@ -6,8 +6,8 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
   var clubUsersUrl = 'https://fencein.firebaseio.com/users/';
   var clubsUrl = 'https://fencein.firebaseio.com/clubs';
   var tournamentsUrl = 'https://fencein.firebaseio.com/clubs/tournaments';
-  var equipmentTypeURL = 'https://fencein.firebaseio.com/clubs/equipment/equipmentType';
-  var equipmentURL = 'https://fencein.firebaseio.com/clubs/equipment';
+  var equipmentTypeURL = 'https://fencein.firebaseio.com/equipment/equipmentType';
+  var equipmentURL = 'https://fencein.firebaseio.com/equipment';
   var membersUrl = 'https://fencein.firebaseio.com/members/';
   var fencersToAdd = [];
   var clubUserId;

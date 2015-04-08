@@ -14,6 +14,15 @@ app.service('askfredService', function ($http, $q, keys) {
         return response.data.clubs;
     });
   };
+  
+  this.getClubId = function (id) {
+    return $http({
+        method: 'jsonp',
+        url: 'https://api.askfred.net/v1/club/'+ id + '?_api_key=' + this.apiKey + this.format
+    }).then(function(response){        
+        return response.data.clubs;
+    });
+  };
 
   this.getTournaments = function (tournamentName) {
     return $http({

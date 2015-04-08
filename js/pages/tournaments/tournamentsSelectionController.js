@@ -2,10 +2,24 @@ var app = angular.module('fencin');
 
 app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService, $location) {
     $scope.clubInitials = 'USAFC';
+    //$scope.clubName = 'Utah State Fair Park'
+    $scope.clubId = 251;
     $scope.tournaments = [];
     $scope.fencersInAllEvents = [];
    // $scope.events = [];
 
+//      //will pull the club information based off of the clubInitials from the askfredService.
+//    $scope.getClubInfo = function (clubId) {
+//        askfredService.getClub($scope.clubId).then(function (response) {
+//            console.log(response);
+//            //var club = response[0];
+//            $scope.clubName = response.name;
+//            $scope.clubInitials = response.initials;
+//            //$scope.clubId = response.id;
+//            $scope.getTournamentsList($scope.clubName);
+//        });
+//    };
+  
     //will pull the club information based off of the clubInitials from the askfredService.
     $scope.getClubInfo = function (clubInitials) {
         askfredService.getClub($scope.clubInitials).then(function (response) {
@@ -17,6 +31,12 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         });
     }();
 
+//    $scope.getTournamentsList = function (clubName) {
+//        askfredService.getTournaments(clubName).then(function (response) {
+//            $scope.tournaments = response;
+//        });
+//    }($scope.clubName);
+  
     $scope.getTournamentsList = function (clubName) {
         askfredService.getTournaments(clubName).then(function (response) {
             $scope.tournaments = response;
