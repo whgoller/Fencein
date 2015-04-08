@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.controller('checkinSelectionController', function ($scope, checkinService, firebaseService) {
+app.controller('checkinSelectionController', function ($scope, checkinService, firebaseService, $location) {
   
     $scope.clubName = 'Utah Swords Academy Fencing Club';
     $scope.getTournaments = function () {
@@ -22,9 +22,8 @@ app.controller('checkinSelectionController', function ($scope, checkinService, f
                  break;
              }
          }
-//        $modalInstance.close($scope.selected);
+        //TODO: need to change to use $location 
         window.location.hash = '/checkin';
-        //$('#checkinModal').modal('hide'); //hides the model
     };
 
 

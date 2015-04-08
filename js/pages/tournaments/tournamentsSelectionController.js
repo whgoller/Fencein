@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService) {
+app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService, $location) {
     $scope.clubInitials = 'USAFC';
     $scope.tournaments = [];
     $scope.fencersInAllEvents = [];
@@ -84,39 +84,47 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
             }
         }
         console.log('tournament', tournament);
-        firebaseService.setTournament(tournament);
-        window.location.hash = '/';
+        firebaseService.setTournament(tournament);        
+        //TODO: need to change to use $location and send the user back to the dashboard(welcome page)for the specific user.
+        //var user = firebaseService.getClubUserInfo();
+        //console.log(user);
+        //$location.path('/dashboard/' + user.uid);
+        window.location.hash = '/checkinSelection';
     };
 
 //returns the unique fencers that are registered for the tournament
     var createUniqueFencersArray = function (events) {
         var fencers = [];
         var add = false;
-        for (i = 0; i < events.length; i++) {
-            for (j = 0; j < events[i].preRegisteredFencers.length; j++) {
-                add = true;
-                for (k = 0; k < fencers.length; k++) {
-                    if (fencers[k].competitor_id === events[i].preRegisteredFencers[j].competitor_id) {
-                        add = false;    //duplicate
-                        break;
-                    }
-                }
-                if (add) {
-                    var fencer = {};
-//                    console.log('events[i].preRegisteredFencers[j]', events[i].preRegisteredFencers[j])
-                    fencer.checkedIn = false;
-                    fencer.birthyear = events[i].preRegisteredFencers[j].competitor.birthyear;
-                    fencer.club = events[i].preRegisteredFencers[j].club;
-                    fencer.first_name = events[i].preRegisteredFencers[j].competitor.first_name;
-                    fencer.gender = events[i].preRegisteredFencers[j].competitor.gender;
-                    fencer.last_name = events[i].preRegisteredFencers[j].competitor.last_name;
-                    fencer.usfa_id = events[i].preRegisteredFencers[j].competitor.usfa_id;
-                    fencer.rating = events[i].preRegisteredFencers[j].rating;
-                    fencer.competitor_id = events[i].preRegisteredFencers[j].competitor_id;
-                    fencer.id = events[i].preRegisteredFencers[j].id;
-                    fencers.push(fencer);
-                }
+        if(events){
+          for (i = 0; i < events.length; i++) {
+            if(events[i].preRegisteredFencers){
+              for (j = 0; j < events[i].preRegisteredFencers.length; j++) {
+                  add = true;
+                  for (k = 0; k < fencers.length; k++) {
+                      if (fencers[k].competitor_id === events[i].preRegisteredFencers[j].competitor_id) {
+                          add = false;    //duplicate
+                          break;
+                      }
+                  }
+                  if (add) {
+                      var fencer = {};
+  //                    console.log('events[i].preRegisteredFencers[j]', events[i].preRegisteredFencers[j])
+                      fencer.checkedIn = false;
+                      fencer.birthyear = events[i].preRegisteredFencers[j].competitor.birthyear;
+                      fencer.club = events[i].preRegisteredFencers[j].club;
+                      fencer.first_name = events[i].preRegisteredFencers[j].competitor.first_name;
+                      fencer.gender = events[i].preRegisteredFencers[j].competitor.gender;
+                      fencer.last_name = events[i].preRegisteredFencers[j].competitor.last_name;
+                      fencer.usfa_id = events[i].preRegisteredFencers[j].competitor.usfa_id;
+                      fencer.rating = events[i].preRegisteredFencers[j].rating;
+                      fencer.competitor_id = events[i].preRegisteredFencers[j].competitor_id;
+                      fencer.id = events[i].preRegisteredFencers[j].id;
+                      fencers.push(fencer);
+                  }
+              }
             }
+          }
         }
         return fencers;
     };

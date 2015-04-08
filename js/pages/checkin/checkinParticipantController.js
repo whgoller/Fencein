@@ -88,21 +88,24 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         window.location.hash = '/checkin';
     };
 
-//Will select preregistered events for the fencer.
+    //Will select preregistered events for the fencer.
     var checkEventsPreregistered = function () {
-        for (i = 0; i < $scope.tournamentEvents.length; i++) {
-            if ($scope.tournamentEvents[i].fencerIds.indexOf($scope.currentParticipant.competitor_id) !== -1) {
-                if ($scope.eventsParticipatingIn.indexOf($scope.tournamentEvents[i].full_name) === -1) {
-                    $scope.eventsParticipatingIn.push($scope.tournamentEvents[i].full_name);
-                    //This array is attached to the checked model and auto checks the checkboxes
-                    $scope.tournamentEvents[i].preRegistered = true;
-                }
-                else {
-                    $scope.tournamentEvents[i].preRegistered = false;
-                }
+      for (i = 0; i < $scope.tournamentEvents.length; i++) {
+        //console.log($scope.tournamentEvents[i].fencerIds);
+        //console.log($scope.currentParticipant.competitor_id);
+        if($scope.tournamentEvents[i].fencerIds){
+          if ($scope.tournamentEvents[i].fencerIds.indexOf($scope.currentParticipant.competitor_id) !== -1) {
+            if ($scope.eventsParticipatingIn.indexOf($scope.tournamentEvents[i].full_name) === -1) {
+              $scope.eventsParticipatingIn.push($scope.tournamentEvents[i].full_name);
+              //This array is attached to the checked model and auto checks the checkboxes
+              $scope.tournamentEvents[i].preRegistered = true;
+            } else {
+              $scope.tournamentEvents[i].preRegistered = false;
             }
+          }
         }
-        calculateAmountDue();
+      }
+      calculateAmountDue();
     };
 
     //populates all the events within this tournament

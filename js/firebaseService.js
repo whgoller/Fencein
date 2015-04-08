@@ -10,15 +10,15 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
   var equipmentURL = 'https://fencein.firebaseio.com/clubs/equipment';
   var membersUrl = 'https://fencein.firebaseio.com/members/';
   var fencersToAdd = [];
-  var clubUserInfo;
-//  var tournamentId;
-  var clubInitials;
-//
-//  //keeps track of current tournament id called when the tournament is selected
-//  this.setTournamentId = function (id) {
-//    tournamentId = id;
-//  };
-//
+  var clubUserId;
+  var tournamentId;
+  var clubInitials = "";
+
+  //keeps track of current tournament id called when the tournament is selected
+  this.setTournamentId = function (id) {
+    tournamentId = id;
+  };
+
   this.getClubUserInfo = function(){
     return clubUserInfo;
   }
@@ -45,11 +45,26 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
     var deffered = $q.defer();
     deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + uId)).$loaded(function(data){
       console.log("loadeddata", data);
-      clubUserInfo = data;
+      clubUserId = data.$id;
       return data;
     }));
     return deffered.promise;
   };
+  
+  this.getUser = function(userId){
+    uId = userId.replace('simplelogin:', '');
+    var deffered = $q.defer();
+    deffered.resolve($firebaseObject(new Firebase(firebaseUrl + 'users/' + uId)).$loaded().then(function (data) {
+        clubUserId = data.$id;
+        return data;
+    }));
+    return deffered.promise;
+  };
+  
+  
+  
+  
+  
 
   this.setFenncerCheckedIn = function (fencer) {
     //console.log('setFenncerCheckedIn', fencer)
@@ -215,16 +230,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
   
 
 
-  this.getUser = function(userId){
-    uId = userId.replace('simplelogin:', '');
-    //return $firebaseObject(new Firebase(firebaseUrl + 'users/' + uId));
-    var deffered = $q.defer();
-//    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + userId)).$loaded().then(function (data) {
-    deffered.resolve($firebaseObject(new Firebase(firebaseUrl + 'users/' + uId)).$loaded().then(function (data) {
-        return data;
-    }));
-    return deffered.promise;
-  };
+
   
   
 });
