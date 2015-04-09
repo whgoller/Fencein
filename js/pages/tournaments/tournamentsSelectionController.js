@@ -3,7 +3,7 @@ var app = angular.module('fencin');
 app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService, $location) {
     $scope.clubInitials = 'USAFC';
     //$scope.clubName = 'Utah State Fair Park'
-    $scope.clubId = 251;
+   // $scope.clubId = 251;
     $scope.tournaments = [];
     $scope.fencersInAllEvents = [];
    // $scope.events = [];
@@ -19,6 +19,11 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
 //            $scope.getTournamentsList($scope.clubName);
 //        });
 //    };
+  var firebaseUrl = 'https://fencein.firebaseio.com/';
+  var ref = new Firebase(firebaseUrl)
+  ref.onAuth(function(authData){
+    console.log(authData);
+    if(authData){
   
     //will pull the club information based off of the clubInitials from the askfredService.
     $scope.getClubInfo = function (clubInitials) {
@@ -148,4 +153,10 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         }
         return fencers;
     };
+  
+  
+  
+  
+    }
+  });
 });

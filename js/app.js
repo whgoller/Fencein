@@ -38,6 +38,10 @@ app.config(function ($routeProvider, $httpProvider) {
 //          }
 //        }
 
+    }).when('/dashboard', {
+      templateUrl: '/js/pages/dashboard/dashboard.html',
+      controller: 'dashboardController'
+
     }).when('/dashboard/:userId', {
       templateUrl: '/js/pages/dashboard/dashboard.html',
       controller: 'dashboardController',
@@ -63,4 +67,17 @@ app.config(function ($routeProvider, $httpProvider) {
     .otherwise({
       redirectTo: '/login'
     });
+});
+
+
+app.run(function($rootScope, $location){
+  $rootScope.$on('$routeChangeStart', function(next, current){
+    var ref = new Firebase('https://fencein.firebaseio.com/');
+    ref.onAuth(function(authData){
+      if (!authData){
+        $location.path('/login');
+      }
+      
+    })
+  })
 });

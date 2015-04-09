@@ -4,7 +4,7 @@ app.controller('loginController', function($scope, authService, $location, fireb
   
   //Step 4 of Registration
   var loginCallback = function(user){
-    user.uid = user.uid.replace('simplelogin:', '');
+    //user.uid = user.uid.replace('simplelogin:', '');
     firebaseService.getUser(user.uid).then(function(data){
       $location.path('/dashboard/' + user.uid);
     });

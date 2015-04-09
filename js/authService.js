@@ -65,7 +65,7 @@ app.service('authService', function(){
                     authData.clubName = user.clubName;
                     authData.clubInitials = user.clubInitials;
                     authData.timestamp = new Date().toISOString();
-                    firebaseLogin.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
+                    //firebaseLogin.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
                     cb(authData);
                 }
               });
