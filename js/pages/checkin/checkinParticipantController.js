@@ -75,6 +75,33 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
             window.location.hash = '/equipment';
         };
 
+      
+      $scope.updateMember = function(){
+        console.log('1', $scope.currentParticipant);
+        console.log('1', $scope.currentParticipant.usfa_id);
+        console.log('1', $scope.currentParticipant.first_name);
+        console.log('1', $scope.currentParticipant.last_name);
+        var memberNumber = '';
+        var firstName = '';
+        var lastName = '';
+        
+        if($scope.currentParticipant.usfa_id === undefined){
+          memberNumber = null;
+        } else {
+          memberNumber = $scope.currentParticipant.usfa_id;
+        }     
+        if($scope.currentParticipant.first_name === undefined){
+          firstName = null;
+        } else {
+          firstName = $scope.currentParticipant.first_name;
+        }  
+        if($scope.currentParticipant.last_name === undefined){
+          lastName = null;
+        } else {
+          lastName = $scope.currentParticipant.last_name;
+        }  
+        firebaseService.setUSFAFencerToCheck(memberNumber, firstName, lastName);
+      }
 
         //submits fencer to the database for backroom access. 
         //will need the fencer duplicated per event registered

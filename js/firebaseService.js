@@ -9,6 +9,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
   var equipmentTypeURL = 'https://fencein.firebaseio.com/equipment/equipmentType';
   var equipmentURL = 'https://fencein.firebaseio.com/equipment';
   var membersUrl = 'https://fencein.firebaseio.com/members/';
+  var memberLookupUrl = 'https://fencein.firebaseio.com/membersToUpdate/';
   var fencersToAdd = [];
   var clubUserId;
   var tournamentId;
@@ -130,6 +131,15 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
         return deffered.promise;
     };
 
+    this.setUSFAFencerToCheck = function(membernumber, firstName, lastName){
+      var fencerLookupList = $firebaseArray(new Firebase(memberLookupUrl));
+      console.log('2 : '+  membernumber + ', ' +  firstName  + ', '  + lastName);
+      fencerLookupList.$add({
+        memberNumber: membernumber,
+        firstName: firstName,
+        lastName: lastName
+      });
+    };
 
 //Returns all equipmentTypes in the database
     this.getEquipmentList = function () {
@@ -167,8 +177,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
         if (!(competitor_Id in this.fencers)) {
             console.log('this.fencers.competitor_Id', this.fencers.competitor_Id);
             fencersToAdd.push(this.fencers.competitor_Id);
-        }
-        ;
+        };
     };
 
 
