@@ -48,6 +48,14 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
     $scope.getTournamentEvents = function (selectedTournamentId) {
       //var fencerIds = [];
       askfredService.getSingleTournamentEvents(selectedTournamentId).then(function (events) {
+        console.log(events)
+        if(events){
+          for(var i = 0; i < events.length; i++){
+            if(events[i].fee === "0.00"){
+              events[i].fee = "15.00";
+            }
+          }
+        }
         $scope.events = events;
         console.log('$scope.getTournamentEvents', $scope.events);
         events.map(function (event) {

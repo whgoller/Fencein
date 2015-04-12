@@ -73,9 +73,13 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
   
 
   this.setFenncerCheckedIn = function (fencer) {
-    //console.log('setFenncerCheckedIn', fencer)
+    console.log('setFenncerCheckedIn', fencer)
     var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/checkedInFencers'));
     fbArray.$add(fencer);
+    
+    //Need to modify to prevent duplicate fencers from being inserted into checkedInFencers list per event...
+    //console.log();
+    
   };
   
   this.updateFencerCheckedIn = function(fencer) {

@@ -12,8 +12,9 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         console.log('$scope.currentParticipant', $scope.currentParticipant);
         $scope.totalAmountDue = 0;
         $scope.eventsParticipatingIn = [];
-        var totalEventsParticipatingIn = 0;
+        var totalEventsParticipatingIn;
         var discountAmountperEvent = 5;
+        $scope.discountTotal = 0;
 
         if($scope.currentParticipant !== undefined){
           //Pulls the usfencing.org fencer information 
@@ -64,8 +65,14 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
                       }
                   }
               }
-              var discountTotal = (totalEventsParticipatingIn -1) * discountAmountperEvent;
-              $scope.totalAmountDue = $scope.totalAmountDue - discountTotal;
+              totalEventsParticipatingIn = $scope.eventsParticipatingIn.length;
+              console.log('totalEventsParticipatingIn', totalEventsParticipatingIn);
+              if(totalEventsParticipatingIn > 1){
+                $scope.discountTotal = (totalEventsParticipatingIn - 1) * discountAmountperEvent;
+              } else {
+                $scope.discountTotal = 0;
+              }
+              $scope.totalAmountDue = $scope.totalAmountDue - $scope.discountTotal;
               
           };
 
@@ -117,21 +124,38 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
           //submits fencer to the database for backroom access. 
           //will need the fencer duplicated per event registered
           $scope.submit = function () {
-              //Need to remove fencer from checkin list and add to a checked-in list.
-              firebaseService.checkedIn($scope.currentParticipant);
-              $scope.currentParticipant.details = $scope.fencerDetails;
-              $scope.currentParticipant.inFencingTime = false;
-              $scope.checkInComplete = true;
+            debugger
+            if($scope.fencerDetails){
+              if($scope.fencerDetails.competitive === 'Yes'){
+                if(!$scope.paymentType){
+                  alert("You must select a payment type");
+                  return false;
+                }
+                //Need to remove fencer from checkin list and add to a checked-in list.
+                firebaseService.checkedIn($scope.currentParticipant);
+                $scope.currentParticipant.details = $scope.fencerDetails;
+                $scope.currentParticipant.inFencingTime = false;
+                $scope.checkInComplete = true;
 
-              if ($scope.eventsParticipatingIn.length > 0) {
-                  for (var i = 0; i < $scope.eventsParticipatingIn.length; i++) {
-                      $scope.currentParticipant.eventName = $scope.eventsParticipatingIn[i];
-                      firebaseService.setFenncerCheckedIn($scope.currentParticipant);
-                  }
+                if ($scope.eventsParticipatingIn.length > 0) {
+                    for (var i = 0; i < $scope.eventsParticipatingIn.length; i++) {
+                        $scope.currentParticipant.eventName = $scope.eventsParticipatingIn[i];
+                        firebaseService.setFenncerCheckedIn($scope.currentParticipant);
+                    }
+                }
+                window.location.hash = '/checkin';
+              } else {
+                alert("This fencer cannot be submitted until their membership is updated.");
+                return false;
               }
-              window.location.hash = '/checkin';
+            } //else {
+              //alert("A USAFC membership number is required.");
+            //}
+                
           };
 
+        
+        
           //Will select preregistered events for the fencer.
           var checkEventsPreregistered = function () {
             if($scope.currentParticipant){

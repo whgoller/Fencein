@@ -3,30 +3,42 @@
     <div class="container col-md-6">
       <div class="form-group">
         <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" placeholder="First Name" ng-model="currentParticipant.first_name">
+        <input type="text" class="form-control" id="firstName" placeholder="First Name" ng-model="currentParticipant.first_name" required>
       </div>    
       <div class="form-group">
         <label for="firstName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" placeholder="Last Name"  ng-model="currentParticipant.last_name">
+        <input type="text" class="form-control" id="lastName" placeholder="Last Name"  ng-model="currentParticipant.last_name" required>
       </div>
       <div class="form-group">
         <label for="usfaMembershipNumber">USFA Membership Number</label>
-        <input type="text" class="form-control" id="usfaMembershipNumber" placeholder="USFA Membership Number" ng-model="currentParticipant.usfa_id">
+        <input type="text" class="form-control" id="usfaMembershipNumber" placeholder="USFA Membership Number" ng-model="currentParticipant.usfa_id" required>
       </div>
       <div class="row">
         <div class="col-md-4">
           <label for="birthYear">Birth year</label>
-          <input type="year" class="form-control" id="birthYear" placeholder="Birth year" ng-model="currentParticipant.birthyear">
+          <input type="year" class="form-control" id="birthYear" placeholder="Birth year" ng-model="currentParticipant.birthyear" required>
         </div>
         <div class="col-md-4">
           <label for="rating">Gender</label>
-          <input type="gender" class="form-control" id="gender" placeholder="Gender" ng-model="currentParticipant.gender">
+          <input type="gender" class="form-control" id="gender" placeholder="Gender" ng-model="currentParticipant.gender" required>
+        </div>
+        <div class="col-md-4">
+          <label for="askFredRating">Ask Fred Rating</label>
+          <input type="rating" class="form-control" id="askFredRating" placeholder="Ask Fred Rating" ng-model="currentParticipant.rating">
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <label for="rating">Ask Fred Rating</label>
-          <input type="rating" class="form-control" id="rating" placeholder="Rating" ng-model="currentParticipant.rating">
+          <label for="foilRating">Foil Rating</label>
+          <input type="rating" class="form-control" id="foilRating" placeholder="Foil Rating" ng-model="fencerDetails.foil_rating">
+        </div>
+        <div class="col-md-4">
+          <label for="saberRating">Saber Rating</label>
+          <input type="rating" class="form-control" id="saberRating" placeholder="Saber Rating" ng-model="fencerDetails.saber_rating">
+        </div>
+        <div class="col-md-4">
+          <label for="epeeRating">Epee Rating</label>
+          <input type="rating" class="form-control" id="epeeRating" placeholder="Epee Rating" ng-model="fencerDetails.epee_rating">
         </div>
       </div>
       <div class="row">
@@ -37,6 +49,16 @@
         <div class="col-md-6">
           <label for="typeUSFAMembership">Membership Type</label>
           <input type="text" class="form-control" id="typeUSFAMembership" placeholder="Type of USFA Membership" ng-model="fencerDetails.membership_type">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="membershipExpiration">Membership Epiration</label>
+          <input type="text" class="form-control" id="membershipExpiration" placeholder="USFA Membership Expiration" ng-model="fencerDetails.expiration | date: 'yyyy-MM-ddTHH:mm:ss' ">
+        </div>
+        <div class="col-md-6">
+          <label for="division">Division</label>
+          <input type="text" class="form-control" id="division" placeholder="Division" ng-model="fencerDetails.division">
         </div>
       </div>
       <div class="form-group">
@@ -65,6 +87,16 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <label for="discount">Multi Event Discount:</label>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+              <input type="text" class="form-control" id="discount" placeholder="Multi Event Discount" ng-model="discountTotal">
+            <div class="input-group-addon">.00</div>   
+          </div>
+        </div>
       </div>
       <label for="amountDue">Amount Due:</label>
       <div class="row">
