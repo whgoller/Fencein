@@ -1,15 +1,28 @@
 var app = angular.module('fencin');
 
-app.service('authService', function(){
-  //Just a reference to the firebase endpoint
-  var firebaseUrl = 'https://fencein.firebaseio.com/';
-  
+app.service('authService', function(session, $firebaseAuth, $q){
   //Creates an object using the Firebase Constructor with our endpoint passed in
-  var firebaseLogin = new Firebase(firebaseUrl);
+  var authObj = new Firebase('https://fencein.firebaseio.com/');
+  
+  /* 
+  *  Check whether the user is logged in
+  *  @returns a boolean
+  */
+  this.isLoggedIn = function(){
+    this.loggedIn = session.getAuthData();
+    console.log(this.loggedIn);
+//    return session.getAuthData() !== null;
+    return this.loggedIn !== null;
+  }
 
-  //login method to be called from our controller. The callback is then passed the authenticated user
+  /**
+  *  Log in 
+  *  @param user
+  *  @param callback function
+  *  returns the authenticated user which is then passed into the callback.
+  */
   this.login = function(user, cb){
-    firebaseLogin.authWithPassword({
+    authObj.authWithPassword({
       email : user.email,
       password : user.password
     }, function(err, authData) {
@@ -22,16 +35,28 @@ app.service('authService', function(){
           default:
         }
       } else if (authData) {
+          session.setAuthData(authData);
           // user authenticated with Firebase
           console.log("Logged In! User ID: " + authData.uid);
           cb(authData); //gives the authenticated user to our callback
-      }
+      } 
+//    }, {
+//      remember: "sessionOnly"
     });
   };
+  
 
+  
+  /**
+  *  Register user
+  *  @param user
+  *  @param callback function
+  *    On a successful creation of the user the user is then logged into the sy
+  *  returns the authenticated user which is then passed into the callback.
+  */
   //Step 3 of Registration
   this.register = function(user, cb){
-    firebaseLogin.createUser({
+    authObj.createUser({
       email: user.email,
       password: user.password
     }, function(error) {
@@ -48,7 +73,7 @@ app.service('authService', function(){
           }
         } else {
             console.log("User created successfully");
-            firebaseLogin.authWithPassword({
+            authObj.authWithPassword({
               email : user.email,
               password : user.password
             }, function(err, authData) {
@@ -65,11 +90,26 @@ app.service('authService', function(){
                     authData.clubName = user.clubName;
                     authData.clubInitials = user.clubInitials;
                     authData.timestamp = new Date().toISOString();
-                    //firebaseLogin.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
+//                    authObj.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
+                    authObj.child('users').child(authData.uid).set(authData);
+                    session.setUserIf(authData.uid);
+                    session.setAccessToken(authData.token);
                     cb(authData);
                 }
               });
         }
     });
   };
+  
+  
+  /**
+  *  Log Out
+  *
+  */
+  this.logOut = function(){
+    authObj.unauth();
+    session.destroy();
+  };
+  
+  
 });

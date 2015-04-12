@@ -1,18 +1,27 @@
     <div class="container">
     <div ng-show="!reg">      
       <form class="form-signin" ng-submit="login()">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" ng-model="details.email" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="details.password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+        <div class="row">
+          <h2 class="form-signin-heading">Please sign in</h2>
+          
+          <div class="row col-md-6 col-sm-12">
+            <label for="inputEmail">Email address</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" ng-model="details.email" required autofocus>  
+<!--          </div>-->
+<!--          <div class="row col-md-6 col-sm-12">-->
+            <label for="inputPassword">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="details.password" required>
+          </div>
+  <!--        <div class="checkbox">-->
+  <!--          <label>-->
+  <!--            <input type="checkbox" value="remember-me"> Remember me-->
+  <!--          </label>-->
+  <!--        </div>-->
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
-        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="showReg()">Register</button>
+        <div class="row col-md-6 col-sm-12">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
+          <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="showReg()">Register</button>
+        </div>
       </form>
       </div>
     </div> <!-- /container -->
@@ -20,14 +29,16 @@
     <div ng-show="reg">
         <h2>Register</h2>
         <!-- Step One Of Registration-->
-        <form ng-submit="register()">
-            <p ng-show="error" class="text-danger">{{ error }}</p>
-            <input class="form-control" type="text" placeholder="Club Name" ng-model="details.clubName" required /><br />
-            <input class="form-control" type="text" placeholder="club Initials" ng-model="details.clubInitials" required /><br />
-            <input class="form-control" type="text" placeholder="Full Name" ng-model="details.name" required /><br />
-            <input class="form-control" type="email" placeholder="Email" ng-model="details.email" required /><br />
-            <input class="form-control" type="password" placeholder="Password" ng-model="details.password" required /><br />
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+<!--        <form ng-submit="register()">-->
+        <form>
+          <p ng-show="error" class="text-danger">{{ error }}</p>
+          <input class="form-control" type="text" placeholder="Club Name" ng-model="details.clubName" required /><br />
+          <input class="form-control" type="text" placeholder="club Initials" ng-model="details.clubInitials" required /><br />
+          <input class="form-control" type="text" placeholder="Full Name" ng-model="details.name" required /><br />
+          <input class="form-control" type="email" placeholder="Email" ng-model="details.email" required /><br />
+          <input class="form-control" type="password" placeholder="Password" ng-model="details.password" required /><br />
+          <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="register()">Register</button>
+          <button type="bacBbutton" class="btn btn-lg btn-primary btn-block" ng-click="loginRefresh()">Back to Login</button>
         </form>
     </div>
 

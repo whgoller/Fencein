@@ -1,12 +1,14 @@
 var app = angular.module('fencin');
         
-app.controller('loginController', function($scope, authService, $location, firebaseService, environmentService){
+app.controller('loginController', function($scope, authService, $location, firebaseService, environmentService, $route){
   
   //Step 4 of Registration
   var loginCallback = function(user){
+    console.log(user);
     //user.uid = user.uid.replace('simplelogin:', '');
     firebaseService.getUser(user.uid).then(function(data){
-      $location.path('/dashboard/' + user.uid);
+      $location.path('/dashboard');
+//      $location.path('/dashboard/' + user.uid);
     });
   };
 
@@ -17,6 +19,7 @@ app.controller('loginController', function($scope, authService, $location, fireb
   //Step 2 of Registration
   $scope.register = function () {
     return authService.register($scope.details, loginCallback);
+    
   };
 
 
@@ -25,6 +28,9 @@ app.controller('loginController', function($scope, authService, $location, fireb
   }; 
     
     
-
+  $scope.loginRefresh = function(){
+    $route.reload();
+  }
+  
   
 });

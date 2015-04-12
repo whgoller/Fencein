@@ -1,10 +1,9 @@
 var app = angular.module('fencin');
-app.controller('checkinController', function ($scope, checkinService, firebaseService, $modal) {
-    var firebaseUrl = 'https://fencein.firebaseio.com/';
-  var ref = new Firebase(firebaseUrl)
-  ref.onAuth(function(authData){
-    console.log(authData);
-    if(authData){
+app.controller('checkinController', function ($scope, checkinService, firebaseService, $location, currentAuth) {
+  //var ref = new Firebase('https://fencein.firebaseio.com/');
+  //ref.onAuth(function(authData){
+    console.log(currentAuth);
+    if(currentAuth){
           $scope.participants = [];
           $scope.orderByField = 'firstName';
           $scope.reverseSort = false;
@@ -29,6 +28,11 @@ app.controller('checkinController', function ($scope, checkinService, firebaseSe
       //        }
       //    };
 
+        $scope.emptyFencer = function(){
+          window.location.hash = '/checkinParticipant';
+        };
+      
+      
           $scope.getParticipants = function () {
               firebaseService.getTournamentFencers().then(function (data) {
                   $scope.participants = data;
@@ -53,31 +57,10 @@ app.controller('checkinController', function ($scope, checkinService, firebaseSe
           }();
 
           if (!$scope.currentTournament) {
-              $scope.open = function () {
-                  var modalInstance = $modal.open({
-                      templateUrl: '/js/pages/checkin/checkinModal.html',
-                      controller: 'checkinModalController',
-                      size: 'sm',
-                      resolve: {
-                          tournaments: function () {
-                              return $scope.tournaments;
-                          },
-                          tournamentNames: function () {
-                              return $scope.tournamentNames;
-                          }
-                      }
-                  });
-
-                  modalInstance.result.then(function (selectedItem) {
-                      $scope.currentTournament = selectedItem;
-                      $scope.getParticipants();
-                  }, function () {
-                      console.log('Modal instance');
-                  });
-              }();
+              window.location.hash = '/checkinSelection';
           } else {
               $scope.getParticipants();
           }
     }
-  });
+  //});
 });

@@ -1,12 +1,12 @@
+
 var app = angular.module('fencin');
 
-app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService, $location) {
+app.controller('tournamentSelectionController', function ($scope, askfredService, firebaseService, $location, currentAuth) {
+  
+  if(currentAuth){  
     $scope.clubInitials = 'USAFC';
-    //$scope.clubName = 'Utah State Fair Park'
-   // $scope.clubId = 251;
     $scope.tournaments = [];
     $scope.fencersInAllEvents = [];
-   // $scope.events = [];
 
 //      //will pull the club information based off of the clubInitials from the askfredService.
 //    $scope.getClubInfo = function (clubId) {
@@ -19,11 +19,7 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
 //            $scope.getTournamentsList($scope.clubName);
 //        });
 //    };
-  var firebaseUrl = 'https://fencein.firebaseio.com/';
-  var ref = new Firebase(firebaseUrl)
-  ref.onAuth(function(authData){
-    console.log(authData);
-    if(authData){
+  
   
     //will pull the club information based off of the clubInitials from the askfredService.
     $scope.getClubInfo = function (clubInitials) {
@@ -110,11 +106,8 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
         }
         console.log('tournament', tournament);
         firebaseService.setTournament(tournament);        
-        //TODO: need to change to use $location and send the user back to the dashboard(welcome page)for the specific user.
-        //var user = firebaseService.getClubUserInfo();
-        //console.log(user);
-        //$location.path('/dashboard/' + user.uid);
-        window.location.hash = '/checkinSelection';
+        $location.path('/dashboard');
+        //window.location.hash = '/checkinSelection';
     };
 
 //returns the unique fencers that are registered for the tournament
@@ -158,5 +151,5 @@ app.controller('tournamentSelectionController', function ($scope, askfredService
   
   
     }
-  });
+//  });
 });

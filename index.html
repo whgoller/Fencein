@@ -24,17 +24,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#/dashboard/">Welcome</a>
+          <a class="navbar-brand" href="#/dashboard">Welcome {{session}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="#/checkinSelection">Check In</a></li>
-<!--            <li><a href="#/checkinModal" data-toggle="modal" data-target="#checkinModal">Check In</a></li>-->
             <li><a href="#/backroom">Backroom</a></li>
+            <li><a href="#/tournamentSelection">Tournaments</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#/login">Sign In</a></li>
-            <li><a href="#/tournamentSelection">Tournaments</a></li>
+            <li><a href="#/login" class="ng-cloak" ng-hide="authorized" ng-model="signInLink">Sign In</a></li>
+            <li><a href="#/login" class="ng-cloak" ng-show="authorized" ng-click="signout()" ng-model="signOutLink">Sign Out</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,7 +47,7 @@
 
     <footer class="footer navbar-fixed-bottom">
       <div class="container">
-        <p class="text-muted">&copy; Wendy Goller & Eric Allen 2015 </p>
+        <p class="text-muted">&copy; 2015 Wendy Goller, Eric Allen & Chris Goller</p>
       </div>
     </footer>
 
@@ -73,7 +73,9 @@
     <script src="js/pages/backroom/backroomController.js"></script>
     <script src="js/pages/backroom/backroomService.js"></script>
     <script src="js/pages/login/loginControler.js"></script>
-    <script src="js/authService.js"></script>
+    
+    <script src="js/SessionService.js"></script>
+    <script src="js/AuthService.js"></script>
     <script src="js/pages/equipment/equipmentController.js"></script>
     <script src="js/firebaseService.js"></script>
     <script src="js/pages/checkin/checkinSelectionController.js"></script>

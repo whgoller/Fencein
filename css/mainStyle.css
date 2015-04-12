@@ -82,7 +82,7 @@
 }
 */
 
-#equipmentButton, #submitBtn{
+#equipmentButton, #submitBtn, #memberStatusUpdateButton{
   margin: 15px;
   float: right;
 }

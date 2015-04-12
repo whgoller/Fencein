@@ -42,10 +42,9 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
   };
   
   this.getUsersClub = function(userId){
-    uId = userId.replace('simplelogin:', '');
     var deffered = $q.defer();
-    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + uId)).$loaded(function(data){
-      console.log("loadeddata", data);
+    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + userId)).$loaded(function(data){
+     // console.log("loadeddata", data);
       clubUserId = data.$id;
       return data;
     }));
@@ -53,17 +52,23 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
   };
   
   this.getUser = function(userId){
-    uId = userId.replace('simplelogin:', '');
     var deffered = $q.defer();
-    deffered.resolve($firebaseObject(new Firebase(firebaseUrl + 'users/' + uId)).$loaded().then(function (data) {
+    deffered.resolve($firebaseObject(new Firebase(firebaseUrl + 'users/' + userId)).$loaded().then(function (data) {
         clubUserId = data.$id;
         return data;
     }));
     return deffered.promise;
   };
   
+  this.setUser = function(user){
+    //Creates an object using the Firebase Constructor with our endpoint passed in
+    var list = $firebaseArray(new Firebase('https://fencein.firebaseio.com/users/'));
+
+    // add an item
+    list.$add(user);
+  };
   
-  
+
   
   
 

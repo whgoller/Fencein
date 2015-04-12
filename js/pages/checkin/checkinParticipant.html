@@ -14,6 +14,22 @@
         <input type="text" class="form-control" id="usfaMembershipNumber" placeholder="USFA Membership Number" ng-model="currentParticipant.usfa_id">
       </div>
       <div class="row">
+        <div class="col-md-4">
+          <label for="birthYear">Birth year</label>
+          <input type="year" class="form-control" id="birthYear" placeholder="Birth year" ng-model="currentParticipant.birthyear">
+        </div>
+        <div class="col-md-4">
+          <label for="rating">Gender</label>
+          <input type="gender" class="form-control" id="gender" placeholder="Gender" ng-model="currentParticipant.gender">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="rating">Ask Fred Rating</label>
+          <input type="rating" class="form-control" id="rating" placeholder="Rating" ng-model="currentParticipant.rating">
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-6">
           <label for="membershipCurrent">Membership Current</label>
           <input type="text" class="form-control" id="membershipCurrent" placeholder="Is USFA Membership Current?" ng-model="fencerDetails.competitive">
@@ -23,28 +39,12 @@
           <input type="text" class="form-control" id="typeUSFAMembership" placeholder="Type of USFA Membership" ng-model="fencerDetails.membership_type">
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <label for="birthYear">Birth year</label>
-          <input type="year" class="form-control" id="birthYear" placeholder="Birth year" ng-model="currentParticipant.birthyear">
-        </div>
-        <div class="col-md-4">
-          <label for="rating">Gender</label>
-          <input type="gender" class="form-control" id="gender" placeholder="Gender" ng-model="currentParticipant.gender">
-        </div>
-        <div class="col-md-4">
-          <label for="rating">Rating</label>
-          <input type="rating" class="form-control" id="rating" placeholder="Rating" ng-model="currentParticipant.rating">
-        </div>
+      <div class="form-group">
+        <button id="equipmentButton" type="button" class="btn btn-primary" ng-click="equipmentCheckout()">Equipment checkout</button>
+        <button id="memberStatusUpdateButton" type="button" class="btn btn-primary" ng-click="updateMember()">Update Member</button>
       </div>
-<!--      <div class="form-group">-->
-<!--        <button type="submit" class="btn  btn-primary" ng-click="submit()">Submit</button>-->
-<!--      </div>-->
     </div>
     <div class="container col-md-6">
-<!--      <div class="row">-->
-<!--        <button id="equipmentButton" type="button" class="btn btn-primary" ng-click="equipmentCheckout()">Equipment checkout</button>  -->
-<!--      </div>-->
       <div class="row">
         <table class='table table-striped table-bordered' id='eventTable'  st-table="tournamentEvents">
           <thead>
@@ -86,8 +86,6 @@
       </div>
       <div class="form-group">
         <button id="submitBtn" type="submit" class="btn btn-primary" ng-click="submit()">Submit</button>
-        <button id="equipmentButton" type="button" class="btn btn-primary" ng-click="equipmentCheckout()">Equipment checkout</button>
-        <button id="memberStatusUpdate" type="button" class="btn btn-primary" ng-click="updateMember()">Update Member</button>
       </div>
     </div>    
   </form>

@@ -1,7 +1,7 @@
 var app = angular.module('fencin');
 
 app.controller('equipmentController', function ($scope, firebaseService, checkinService) {
-    var firebaseUrl = 'https://fencein.firebaseio.com/';
+  var firebaseUrl = 'https://fencein.firebaseio.com/';
   var ref = new Firebase(firebaseUrl)
   ref.onAuth(function(authData){
     console.log(authData);
