@@ -29,9 +29,16 @@ app.controller('checkinController', function ($scope, checkinService, firebaseSe
       //    };
 
         $scope.emptyFencer = function(){
-          checkinService.setParticipant({});
+          
+          var newFencer = {
+            first_name:'',
+            last_name: '',
+            usfa_id: null                          
+            };
+          
+          checkinService.setParticipant(newFencer);
           //window.location.hash = '/checkinParticipant';
-          $location.path('/checkinParticipant')
+          $location.path('/checkinParticipant');
         };
       
       

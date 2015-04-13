@@ -147,10 +147,18 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
         memberNumber: membernumber,
         firstName: firstName,
         lastName: lastName
+      }).then(function(ref) {
+        var id = ref.key();
+        console.log("added record with id " + id);
+        return fencerLookupList.$getRecord(id);
+        //fencerLookupList.$indexFor(id); // returns location in the array
       });
     };
+  
+  
+  
 
-//Returns all equipmentTypes in the database
+  //Returns all equipmentTypes in the database
     this.getEquipmentList = function () {
         var deffered = $q.defer();
         deffered.resolve($firebaseArray(new Firebase(equipmentTypeURL)).$loaded().then(function (data) {
@@ -242,7 +250,12 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
         var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/tournamentFencers'));
 
         fbArray[0] = fencer;  //no clue why this works or why i need it, but just save didn't work so I have to set the fencer, and setting any fencer to fbarray[0] changes the correct fencer
+      console.log('fencerexists?', fbArray.$keyAt(fencer));
+      if(fbArray.$keyAt(fencer)){
         fbArray.$save(fencer);
+      } else {
+        fbArray.$add(fencer);
+      }
     };
   
   

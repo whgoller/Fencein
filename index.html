@@ -7,7 +7,9 @@
     <meta name="description" content="Welcome page">
     <meta name="author" content="Wendy Goller">
     <title>Welcome</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">   
+    <link data-require="font-awesome@*" data-semver="4.1.0" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
+
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     <link href="css/mainStyle.css" rel="stylesheet">
   </head>
@@ -43,7 +45,9 @@
     </nav>
 
     <!-- routed content -->
-    <div class="container">
+    <div class="container">    
+<!--      <route-loading-indicator></route-loading-indicator>-->
+<!--      <div ng-if="!isRouteLoading" class="col-lg-12" ng-view=""></div>-->
       <ng-view></ng-view>
     </div>
 
@@ -83,6 +87,8 @@
     <script src="js/pages/checkin/checkinSelectionController.js"></script>
     <script src="js/pages/dashboard/dashboardController.js"></script>
     <script src="js/environmentService.js"></script>
+    <script src="js/pending/pendingSpinner.js"></script>
+<!--    <script src="js/Loading/routeLoadingIndicator.js"></script>-->
     
     
     

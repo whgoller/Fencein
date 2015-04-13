@@ -1,4 +1,4 @@
-var app = angular.module('fencin', ['ngRoute', 'firebase', 'smart-table', 'ui.bootstrap']);
+var app = angular.module('fencin', ['ngRoute', 'firebase', 'smart-table', 'ui.bootstrap', 'pending']);
 
 
 app.factory("Auth", ["$firebaseAuth",
@@ -9,7 +9,7 @@ app.factory("Auth", ["$firebaseAuth",
 ]);
 
 
-app.config(["$routeProvider", function ($routeProvider, $httpProvider, Auth) {
+app.config(["$routeProvider", function ($routeProvider, $httpProvider, Auth, routeLoadingIndicator) {
 
     $routeProvider
       .when('/login', {
