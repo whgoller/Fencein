@@ -123,7 +123,6 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
       //submits fencer to the database for backroom access. 
       //will need the fencer duplicated per event registered
       $scope.submit = function () {
-        debugger
         if($scope.fencerDetails){
           if($scope.fencerDetails.competitive === 'Yes' || $scope.fencerDetails.competitive === true){
             if(!$scope.paymentType){
