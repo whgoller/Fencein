@@ -9,6 +9,8 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
     $scope.currentTournament = checkinService.getCurrentTournament();
     if($scope.currentTournament){
       $scope.currentParticipant = checkinService.getParticipant();
+      var additionalCheckedEvents = checkinService.getEventsChecked();
+      console.log('additionalCheckedEvents', additionalCheckedEvents)
       //console.log('$scope.currentParticipant', $scope.currentParticipant);
       $scope.totalAmountDue = 0;
       $scope.eventsParticipatingIn = [];
@@ -35,6 +37,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
       $scope.eventSelected = function (selected) {
         if ($scope.eventsParticipatingIn.indexOf(selected.full_name) === -1) {
           $scope.eventsParticipatingIn.push(selected.full_name);
+          additionalCheckedEvents.push(selected.full_name);
         } else {
           if ($scope.eventsParticipatingIn.length === 0) {
             $scope.eventsParticipatingIn = [];
@@ -78,6 +81,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
 
       //sends user to the equipment checkout page
       $scope.equipmentCheckout = function () {
+        checkinService.setEventsChecked(additionalCheckedEvents);
         window.location.hash = '/equipment';
       };
 
@@ -168,6 +172,13 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
                 } else {
                   $scope.tournamentEvents[i].preRegistered = false;
                 }
+              }
+            }
+          }
+          if(additionalCheckedEvents.length > 0){
+            for(var i= 0; i < additionalCheckedEvents.length; i++){
+              if($scope.eventsParticipatingIn.indexOf(additionalCheckedEvents[i]) === -1){
+                $scope.eventsParticipatingIn.push(additionalCheckedEvents[i]);
               }
             }
           }

@@ -44,6 +44,17 @@ app.service('checkinService', function (firebaseService) {
     this.getParticipantDetails = function(participant){
       console.log(participant);      
     };
+    
+    this.setEventsChecked = function(eventArray){
+      this.eventsCheckedArray = eventArray;
+    };
+  
+    this.getEventsChecked = function(){
+      if(this.eventsCheckedArray){
+        return this.eventsCheckedArray;
+      }
+      return [];
+    };
   
 });
 
