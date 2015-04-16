@@ -1,10 +1,8 @@
 var app = angular.module('fencin');
 
-app.controller('checkinSelectionController', function ($scope, checkinService, firebaseService, $location, environmentService) {
-  var ref = new Firebase('https://fencein.firebaseio.com/');
-  ref.onAuth(function(authData){
-    console.log(authData);
-    if(authData){
+app.controller('checkinSelectionController', function ($scope, checkinService, firebaseService, $location, environmentService, currentAuth, $location) {
+ 
+    if(currentAuth){
       $scope.clubName = 'Utah Swords Academy Fencing Club';
       $scope.getTournaments = function () {
           firebaseService.getTournaments().then(function (data) {
@@ -26,9 +24,8 @@ app.controller('checkinSelectionController', function ($scope, checkinService, f
                    break;
                }
            }
-          $location.path('/checkin');
+          $location.path('/dashboard');
       };
 
     }
-  });
 });

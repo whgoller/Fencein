@@ -29,9 +29,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#/checkinSelection">Check In</a></li>
+            <li><a href="#/checkinSelection">Select Tournament</a></li>
+            <li><a href="#/checkin">Check In</a></li>
             <li><a href="#/backroom">Backroom</a></li>
-            <li><a href="#/tournamentSelection">Tournaments</a></li>
+            <li><a href="#/equipmentDashboard">Equipment Return</a></li>
+            <li><a href="#/tournamentSelection">Create Tournaments</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
 <!--            <li><a href="#/login" class="ng-cloak" ng-hide="authorized" ng-model="signInLink">Sign In</a></li>-->
@@ -59,9 +61,9 @@
     <script src="js/plugins/jquery-1.11.2.min.js"></script>
     <script src="js/plugins/angular.js"></script>
     <script src="js/plugins/angularfire.min.js"></script>
-    <script src="js/plugins/bootstrap.min.js"></script>
     <script src="js/plugins/angular-route.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
+    <script src="js/plugins/bootstrap.min.js"></script>
     <script src="js/plugins/smart-table.min.js" type="text/javascript"></script>
     <script src="js/plugins/ui-bootstrap-tpls-0.12.1.min.js" type="text/javascript"></script>
 
@@ -70,22 +72,24 @@
     <script src="js/mainService.js"></script>
     <script src="js/keys.js"></script>
     <script src="js/askfredService.js"></script>
+    <script src="js/SessionService.js"></script>
+    <script src="js/AuthService.js"></script>
+    <script src="js/firebaseService.js"></script>
+    <script src="js/environmentService.js"></script>
+    <script src="js/pages/equipment/equipmentService.js"></script>
     <script src="js/mainController.js"></script>
     <script src="js/pages/tournaments/tournamentsSelectionController.js"></script>
     <script src="js/pages/checkin/checkinController.js"></script>
     <script src="js/pages/checkin/checkinService.js"></script>
     <script src="js/pages/checkin/checkinParticipantController.js"></script>
+    <script src="js/pages/checkin/checkinSelectionController.js"></script>
     <script src="js/pages/backroom/backroomController.js"></script>
     <script src="js/pages/backroom/backroomService.js"></script>
     <script src="js/pages/login/loginControler.js"></script>
-    
-    <script src="js/SessionService.js"></script>
-    <script src="js/AuthService.js"></script>
     <script src="js/pages/equipment/equipmentController.js"></script>
-    <script src="js/firebaseService.js"></script>
-    <script src="js/pages/checkin/checkinSelectionController.js"></script>
+    <script src="js/pages/equipment/equipmentDashboardController.js"></script>
     <script src="js/pages/dashboard/dashboardController.js"></script>
-    <script src="js/environmentService.js"></script>
+    
     <script src="js/pending/pendingSpinner.js"></script>
 <!--    <script src="js/Loading/routeLoadingIndicator.js"></script>-->
     

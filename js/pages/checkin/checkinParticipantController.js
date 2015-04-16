@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.controller('checkinParticipantController', function ($scope, checkinService, firebaseService, currentAuth, $location) {
+app.controller('checkinParticipantController', function ($scope, checkinService, firebaseService, currentAuth, $location, equipmentService) {
 
   // var ref = new Firebase('https://fencein.firebaseio.com/')
   //ref.onAuth(function(authData){
@@ -82,6 +82,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
       //sends user to the equipment checkout page
       $scope.equipmentCheckout = function () {
         checkinService.setEventsChecked(additionalCheckedEvents);
+        //equipmentService.setBorrower($scope.currentParticipant)
         window.location.hash = '/equipment';
       };
 
@@ -121,6 +122,21 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
             $scope.fencerDetails = data;
             $scope.currentParticipant.details = $scope.fencerDetails;
           });
+        }
+        if(!memberNumber){
+          if(lastName){            
+            firebaseService.getUSFAFencerByLastName(lastName, firstName).then(function(data){
+              var myArray = [];
+              angular.forEach(data, function(value, key) {
+                myArray.push(key);
+              });   
+              if($scope.currentParticipant.usfa_id === ''){
+                $scope.currentParticipant.usfa_id = myArray[0];
+              }
+              memberNumber = myArray[0];
+              alert('You must push the update member button again once you have the member number populated.')
+            });
+          }
         }
       }
 

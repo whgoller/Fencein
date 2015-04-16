@@ -52,6 +52,15 @@ app.config(["$routeProvider", function ($routeProvider, $httpProvider, Auth, rou
           }]
         }
 
+    }).when('/equipmentDashboard', {
+        templateUrl: '/js/pages/equipment/equipmentDashboard.html',
+        controller: 'equipmentDashboardController',
+        resolve: {
+          // controller will not be loaded until $requireAuth resolves
+          "currentAuth": ["Auth", function(Auth) {
+            return Auth.$requireAuth();
+          }]
+        }
     }).when('/equipment', {
         templateUrl: '/js/pages/equipment/equipment.html',
         controller: 'equipmentController',
@@ -76,19 +85,19 @@ app.config(["$routeProvider", function ($routeProvider, $httpProvider, Auth, rou
       templateUrl: '/js/pages/dashboard/dashboard.html',
       controller: 'dashboardController',
       resolve: {
-        userReference: function(firebaseService, $route){
+        "userReference": function(firebaseService, $route){
           return firebaseService.getUser($route.current.params.userId).then(function(data){
             return data;
           });
         },
-        clubReference: function(firebaseService, $route){
+        "clubReference": function(firebaseService, $route){
           return firebaseService.getUsersClub($route.current.params.userId).then(function(data){
             return data;
           });
         }, // controller will not be loaded until $requireAuth resolves
-          "currentAuth": ["Auth", function(Auth) {
-            return Auth.$requireAuth();
-          }]
+        "currentAuth": ["Auth", function(Auth) {
+          return Auth.$requireAuth();
+        }]
       }
     })
     .otherwise({

@@ -1,20 +1,19 @@
 var app = angular.module('fencin');
 
-app.controller('equipmentController', function ($scope, firebaseService, checkinService) {
-  var firebaseUrl = 'https://fencein.firebaseio.com/';
-  var ref = new Firebase(firebaseUrl)
+app.controller('equipmentController', function ($scope, firebaseService, checkinService, equipmentService, $location, currentAuth) {
+  var ref = new Firebase('https://fencein.firebaseio.com/')
   ref.onAuth(function(authData){
     console.log(authData);
     if(authData){
         $scope.equipmentCheckedOut = [];
         var equipmentListArray = ['Mask','Body Cord','Mask Cord','Electric Lame Saber','Electric Lame Foil','Saber','Foil','White Lame', 'Pants'];
         $scope.equipmentList = [];
-
+        $scope.currentEquipmentSelections = []
 
         $scope.getParticipant = function(){
+          //$scope.participant = equipmentService.getBorrower();
           $scope.participant = checkinService.getParticipant();
         }();
-
 
         $scope.setEquipmentList = function(){
           firebaseService.setEquipmentList(equipmentListArray);
@@ -23,24 +22,35 @@ app.controller('equipmentController', function ($scope, firebaseService, checkin
 
         $scope.getEqupmentList = function(){
           firebaseService.getEquipmentList().then(function(equipment){
-            console.log(equipment);
             $scope.equipmentList = equipment;
-            //$scope.equipmentList = equipment[0].equipmentType
-            console.log($scope.equipmentList);
+            $scope.getEquipmentCheckedOutList();
           });
         }();
 
         $scope.getEquipmentCheckedOutList = function(){
-
+          firebaseService.getEquipmentCheckoutList($scope.participant).then(function(checkedItems){
+            console.log('checkedItems', checkedItems);
+            $scope.currentEquipmentSelections = checkedItems.equipmentList;
+            checkOnload();
+          });
         };
 
+        var checkOnload = function(){
+          for(var i = 0; i < $scope.equipmentList.length; i++){
+            for(var ck = 0; ck < $scope.currentEquipmentSelections.length; ck++){
+              if($scope.equipmentList[i].$id === $scope.currentEquipmentSelections[ck]){
+                $scope.equipmentList[i].checked = true;
+              }
+            }
+          }
+        }
 
         $scope.addRemoveItem = function (item) {
-          console.log(item.$value);
-          if(item.$value){
-            $scope.equipmentCheckedOut.push(item.$value);
+          //console.log(item.$value);
+          if(item.checked){
+            $scope.currentEquipmentSelections.push(item.$value);
           } else {      
-            $scope.equipmentCheckedOut.splice($scope.equipmentCheckedOut.indexOf(item.$value), 1);    //remove it.
+            $scope.currentEquipmentSelections.splice($scope.currentEquipmentSelections.indexOf(item.$value), 1);    //remove it.
           }
         }
 
@@ -48,9 +58,9 @@ app.controller('equipmentController', function ($scope, firebaseService, checkin
         $scope.setEquipmentCheckedOutList = function(){
           var fencerEquipmentCheckedOut = {
             fencer: $scope.participant,
-            equipmentList: $scope.equipmentCheckedOut
+            equipmentList: $scope.currentEquipmentSelections
           };
-          console.log(fencerEquipmentCheckedOut);
+          //console.log(fencerEquipmentCheckedOut);
           firebaseService.setEquipmentCheckoutList(fencerEquipmentCheckedOut);
 
         }

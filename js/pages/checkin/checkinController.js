@@ -2,7 +2,7 @@ var app = angular.module('fencin');
 app.controller('checkinController', function ($scope, checkinService, firebaseService, $location, currentAuth) {
   //var ref = new Firebase('https://fencein.firebaseio.com/');
   //ref.onAuth(function(authData){
-    console.log(currentAuth);
+   // console.log(currentAuth);
     if(currentAuth){
           $scope.participants = [];
           $scope.orderByField = 'firstName';

@@ -56,5 +56,13 @@ app.service('checkinService', function (firebaseService) {
       return [];
     };
   
+    this.setBorrower = function(borrower){
+      this.equipmentBorrower = borrower;
+    };
+    
+    this.getBorrower = function(){
+      return this.equipmentBorrower;
+    };
+  
 });
 

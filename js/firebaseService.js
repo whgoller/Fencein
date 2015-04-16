@@ -7,7 +7,7 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
   var clubsUrl = 'https://fencein.firebaseio.com/clubs';
   var tournamentsUrl = 'https://fencein.firebaseio.com/clubs/tournaments';
   var equipmentTypeURL = 'https://fencein.firebaseio.com/equipment/equipmentType';
-  var equipmentURL = 'https://fencein.firebaseio.com/equipment';
+  //var equipmentURL = 'https://fencein.firebaseio.com/equipment';
   var membersUrl = 'https://fencein.firebaseio.com/members/';
   var memberLookupUrl = 'https://fencein.firebaseio.com/membersToUpdate/';
   var fencersToAdd = [];
@@ -139,6 +139,21 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
         }));
         return deffered.promise;
     };
+  
+    this.getUSFAFencerByLastName = function(lastName, firstsName){
+        var deffered = $q.defer();
+        deffered.resolve($firebaseObject(new Firebase(membersUrl).orderByChild("last_name").equalTo(lastName)).$loaded().then(function (data) {
+          console.log(data);
+            return data;
+        }));
+        return deffered.promise;      
+    };
+  
+//var ref = new Firebase("https://dinosaur-facts.firebaseio.com/dinosaurs");
+//ref.orderByChild("height").equalTo(25).on("child_added", function(snapshot) {
+//  console.log(snapshot.key());
+//});
+  
 
     this.setUSFAFencerToCheck = function(membernumber, firstName, lastName){
       var fencerLookupList = $firebaseArray(new Firebase(memberLookupUrl));
@@ -176,18 +191,47 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
         });
     };
 
+  
     //Creates equipment checkout list in the database
     this.setEquipmentCheckoutList = function (fencerEquipmentObject) {
-        var list = $firebaseArray(new Firebase(equipmentURL + '/equipmentCheckedOut'));
+      var list = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/equipmentCheckedOut'));
+      list[0] = fencerEquipmentObject;
+      if(list.$keyAt(fencerEquipmentObject)){
+        list.$save(fencerEquipmentObject);
+      } else {          
         list.$add(fencerEquipmentObject);
+      }
     };
 
     //returns the equipmentCheckoutList for the tournament.
-    this.getEquipmentCheckoutList = function () {
-
+    //this.getEquipmentCheckoutList = function (competitor_Id, firstName, lastName) {
+    this.getEquipmentCheckoutList = function (participant) {
+      console.log('firebaseparticipant', participant)
+      console.log('firebaseparticipant', participant.competitor_id)
+      console.log('firebaseparticipant', participant.first_name)
+      console.log('firebaseparticipant', participant.last_name)
+      var deffered = $q.defer();
+        deffered.resolve($firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/equipmentCheckedOut/')).$loaded().then(function (data) {
+          if(data){
+            for(var i = 0; i < data.length; i++){
+              if(data[i].fencer.competitor_id === participant.competitor_id || (data[i].fencer.first_name === participant.first_name && data[i].fencer.last_name === participant.last_name)){
+                console.log('equipmentCheckedOut', data);
+                return data[i];
+              }
+            }
+          }
+        }));
+        return deffered.promise;
     };
 
-
+    this.getEquipmentCheckoutListAll = function () {
+        var deffered = $q.defer();
+        deffered.resolve($firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/equipmentCheckedOut/')).$loaded().then(function (data) {
+            console.log('equipment', data);
+            return data;
+        }));
+        return deffered.promise;
+    };
 
 
     this.getFencer = function (competitor_Id) {
@@ -248,7 +292,6 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
     this.checkedIn = function (fencer) {
         fencer.checkedIn = true;
         var fbArray = $firebaseArray(new Firebase(tournamentsUrl + '/' + tournamentId + '/tournament/tournamentFencers'));
-
         fbArray[0] = fencer;  //no clue why this works or why i need it, but just save didn't work so I have to set the fencer, and setting any fencer to fbarray[0] changes the correct fencer
       console.log('fencerexists?', fbArray.$keyAt(fencer));
       if(fbArray.$keyAt(fencer)){
