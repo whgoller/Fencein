@@ -17,7 +17,7 @@ app.controller('equipmentDashboardController', function ($scope, checkinService,
         equipmentService.setBorrower(borrower);
         checkinService.setParticipant(borrower.fencer)
         console.log('borrower', borrower);
-        window.location.hash = '/equipment';
+        //window.location.hash = '/equipment';
     };
 
     if (!$scope.currentTournament) {

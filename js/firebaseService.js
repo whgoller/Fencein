@@ -24,33 +24,33 @@ app.service('firebaseService', function ($firebaseArray, $firebaseObject, $q, en
     return clubUserInfo;
   }
   
-  this.setClubInitials = function(initials){
-    clubInitials = initials;
-  }
+//  this.setClubInitials = function(initials){
+//    clubInitials = initials;
+//  }
   
   // competitorId, competitorFirstName, competitorLastName, competitorRating, competitorYearBorn
-  this.setClub = function (clubName, clubId) {
-    var list = $firebaseArray(new Firebase(clubsUrl));
-    list.$add({
-      clubName: clubName,
-      clubId: clubId
-    }).then(function (ref) {
-        var id = ref.key();
-        console.log("added record with id " + id);
-        list.$indexFor(id); // returns location in the array
-    });
-  };
-  
-  this.getUsersClub = function(userId){
-    var deffered = $q.defer();
-    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + userId)).$loaded(function(data){
-     // console.log("loadeddata", data);
-      clubUserId = data.$id;
-      return data;
-    }));
-    return deffered.promise;
-  };
-  
+//  this.setClub = function (clubName, clubId) {
+//    var list = $firebaseArray(new Firebase(clubsUrl));
+//    list.$add({
+//      clubName: clubName,
+//      clubId: clubId
+//    }).then(function (ref) {
+//        var id = ref.key();
+//        console.log("added record with id " + id);
+//        list.$indexFor(id); // returns location in the array
+//    });
+//  };
+//  
+//  this.getUsersClub = function(userId){
+//    var deffered = $q.defer();
+//    deffered.resolve($firebaseObject(new Firebase(clubUsersUrl + userId)).$loaded(function(data){
+//     // console.log("loadeddata", data);
+//      clubUserId = data.$id;
+//      return data;
+//    }));
+//    return deffered.promise;
+//  };
+//  
   this.getUser = function(userId){
     var deffered = $q.defer();
     deffered.resolve($firebaseObject(new Firebase(firebaseUrl + 'users/' + userId)).$loaded().then(function (data) {

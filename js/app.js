@@ -61,9 +61,19 @@ app.config(["$routeProvider", function ($routeProvider, $httpProvider, Auth, rou
             return Auth.$requireAuth();
           }]
         }
-    }).when('/equipment', {
-        templateUrl: '/js/pages/equipment/equipment.html',
-        controller: 'equipmentController',
+    }).when('/equipmentCheckin', {
+        templateUrl: '/js/pages/equipment/equipmentCheckin.html',
+        controller: 'equipmentCheckinController',
+        resolve: {
+          // controller will not be loaded until $requireAuth resolves
+          "currentAuth": ["Auth", function(Auth) {
+            return Auth.$requireAuth();
+          }]
+        }
+
+    }).when('/equipmentCheckout', {
+        templateUrl: '/js/pages/equipment/equipmentCheckout.html',
+        controller: 'equipmentCheckoutController',
         resolve: {
           // controller will not be loaded until $requireAuth resolves
           "currentAuth": ["Auth", function(Auth) {
@@ -90,11 +100,11 @@ app.config(["$routeProvider", function ($routeProvider, $httpProvider, Auth, rou
             return data;
           });
         },
-        "clubReference": function(firebaseService, $route){
-          return firebaseService.getUsersClub($route.current.params.userId).then(function(data){
-            return data;
-          });
-        }, // controller will not be loaded until $requireAuth resolves
+//        "clubReference": function(firebaseService, $route){
+//          return firebaseService.getUsersClub($route.current.params.userId).then(function(data){
+//            return data;
+//          });
+//        }, // controller will not be loaded until $requireAuth resolves
         "currentAuth": ["Auth", function(Auth) {
           return Auth.$requireAuth();
         }]

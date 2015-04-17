@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.controller('equipmentController', function ($scope, firebaseService, checkinService, equipmentService, $location, currentAuth) {
+app.controller('equipmentCheckoutController', function ($scope, firebaseService, checkinService, equipmentService, $location, currentAuth) {
   var ref = new Firebase('https://fencein.firebaseio.com/')
   ref.onAuth(function(authData){
     console.log(authData);
@@ -30,8 +30,11 @@ app.controller('equipmentController', function ($scope, firebaseService, checkin
         $scope.getEquipmentCheckedOutList = function(){
           firebaseService.getEquipmentCheckoutList($scope.participant).then(function(checkedItems){
             console.log('checkedItems', checkedItems);
-            $scope.currentEquipmentSelections = checkedItems.equipmentList;
-            checkOnload();
+            if(checkedItems){
+              $scope.currentEquipmentSelections = checkedItems.equipmentList;
+              checkOnload();
+            }
+
           });
         };
 

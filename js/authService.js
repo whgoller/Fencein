@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.service('authService', function(session, $firebaseAuth, $q){
+app.service('authService', function(session, $firebaseAuth, $q, $route){
   //Creates an object using the Firebase Constructor with our endpoint passed in
   var authObj = new Firebase('https://fencein.firebaseio.com/');
   
@@ -33,6 +33,8 @@ app.service('authService', function(session, $firebaseAuth, $q){
           case "INVALID_PASSWORD":
           // handle an invalid password
           default:
+            console.log("You are not a Registered user!");
+            alert("You are not a registered user! Please register to proceed.");
         }
       } else if (authData) {
           session.setAuthData(authData);
@@ -64,9 +66,12 @@ app.service('authService', function(session, $firebaseAuth, $q){
           switch (error.code) {
             case "EMAIL_TAKEN":
               console.log("The new user account cannot be created because the email is already in use.");
+              alert("This email is already in use.");
+              
               break;
             case "INVALID_EMAIL":
               console.log("The specified email is not a valid email.");
+              alert("The email you entered is not a valid email.");
               break;
             default:
               console.log("Error creating user:", error);
@@ -87,14 +92,15 @@ app.service('authService', function(session, $firebaseAuth, $q){
                     }
                 } else if (authData){
                     authData.name = user.name;
-                    authData.clubName = user.clubName;
-                    authData.clubInitials = user.clubInitials;
+                    //authData.clubName = user.clubName;
+                    //authData.clubInitials = user.clubInitials;
                     authData.timestamp = new Date().toISOString();
 //                    authObj.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
                     authObj.child('users').child(authData.uid).set(authData);
-                    session.setUserIf(authData.uid);
-                    session.setAccessToken(authData.token);
+                    //session.setUserIf(authData.uid);
+                    //session.setAccessToken(authData.token);
                     cb(authData);
+                  //$route.reload();
                 }
               });
         }

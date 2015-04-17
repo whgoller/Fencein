@@ -83,7 +83,8 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
       $scope.equipmentCheckout = function () {
         checkinService.setEventsChecked(additionalCheckedEvents);
         //equipmentService.setBorrower($scope.currentParticipant)
-        window.location.hash = '/equipment';
+        //window.location.hash = '/equipment';
+        $location.path('/equipmentCheckout');
       };
 
 

@@ -1,0 +1,24 @@
+
+<div class="container">
+  <div class="row">    
+    {{borrower.first_name}} {{borrower.last_name}}
+  </div>
+  <div class="row" >
+    <div class="panel panel-success">
+      <div class="panel-heading">Select Equipment to Check-in</div>
+      <div class="panel-body">  
+        <button class="btn btn-primary" ng-click="equipmentCheckinAll(borrower)">Check Out</button>
+        <div class="checkbox" ng-repeat="equipment in equipmentList">
+          <label>
+            <input type="checkbox" ng-change="addRemoveItem(equipment)" ng-model='equipment.checked'> {{equipment.$id}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="row">
+      <button class="btn btn-primary" ng-click="equipmentCheckInComplete()">Check Out</button>
+    </div>
+  </div>
+</div>
