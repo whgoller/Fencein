@@ -1,5 +1,5 @@
 var app = angular.module('fencin');
-app.controller("mainController", function ($scope, askfredService, firebaseService, checkinService, $firebaseAuth, authService, $rootScope) {
+app.controller("mainController", function ($scope, askfredService, firebaseService, checkinService, $firebaseAuth, authService, $templateCache) {
   
   if(authService.isLoggedIn()){
     $scope.clubName = 'Utah Swords Academy Fencing Club';
@@ -29,7 +29,12 @@ app.controller("mainController", function ($scope, askfredService, firebaseServi
       $scope.authorized = authService.isLoggedIn();
     }
     
-    $rootScope.$broadcast('checkinClicked', true);
+    
+
+
+    
+    
+    
     
     
   }

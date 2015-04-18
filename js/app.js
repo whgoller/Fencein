@@ -134,12 +134,8 @@ app.run(["$rootScope", "$location", function($rootScope, $location, authService,
         $rootScope.auth = authData;
         $rootScope.session = session;
       }
-
     });
     
-//  console.log(event);
-//  console.log(nextRoute);
-//  console.log(currentRoute);
   });
 }]);
 

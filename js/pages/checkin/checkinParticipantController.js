@@ -25,8 +25,6 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
             firebaseService.getUSFAFencer(id).then(function (data) {
               console.log(data.expiration);
               data.expiration = new Date(data.expiration).toDateString();
-              //Date.parse(data.expiration).toDateString;
-              //$filter('date')(data.expiration, "dd/MM/yyyy");
               console.log(data)
               $scope.fencerDetails = data;
             });
@@ -87,17 +85,8 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
       //sends user to the equipment checkout page
       $scope.equipmentCheckout = function () {
         checkinService.setEventsChecked(additionalCheckedEvents);
-        //equipmentService.setBorrower($scope.currentParticipant)
-        //window.location.hash = '/equipment';
         $location.path('/equipmentCheckout');
-      };
-
-      //sends user to the equipment checkout page
-      $scope.returnToCheckin = function () {
-        $location.path('/checkin');
-      };
-      
-      
+      };      
 
       $scope.updateMember = function(){
         var memberNumber = '';
