@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.controller('checkinParticipantController', function ($scope, checkinService, firebaseService, currentAuth, $location, equipmentService) {
+app.controller('checkinParticipantController', function ($scope, checkinService, firebaseService, currentAuth, $location, equipmentService, $filter) {
 
   // var ref = new Firebase('https://fencein.firebaseio.com/')
   //ref.onAuth(function(authData){
@@ -11,7 +11,7 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
       $scope.currentParticipant = checkinService.getParticipant();
       var additionalCheckedEvents = checkinService.getEventsChecked();
       console.log('additionalCheckedEvents', additionalCheckedEvents)
-      //console.log('$scope.currentParticipant', $scope.currentParticipant);
+      console.log('$scope.currentParticipant', $scope.currentParticipant);
       $scope.totalAmountDue = 0;
       $scope.eventsParticipatingIn = [];
       var totalEventsParticipatingIn;
@@ -23,6 +23,11 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         $scope.currentParticipantDetails = function (id) {
           if(id){
             firebaseService.getUSFAFencer(id).then(function (data) {
+              console.log(data.expiration);
+              data.expiration = new Date(data.expiration).toDateString();
+              //Date.parse(data.expiration).toDateString;
+              //$filter('date')(data.expiration, "dd/MM/yyyy");
+              console.log(data)
               $scope.fencerDetails = data;
             });
           } else {
@@ -87,6 +92,12 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
         $location.path('/equipmentCheckout');
       };
 
+      //sends user to the equipment checkout page
+      $scope.returnToCheckin = function () {
+        $location.path('/checkin');
+      };
+      
+      
 
       $scope.updateMember = function(){
         var memberNumber = '';
@@ -180,8 +191,8 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
       var checkEventsPreregistered = function () {
         if($scope.currentParticipant){
           for (i = 0; i < $scope.tournamentEvents.length; i++) {
-            //console.log($scope.tournamentEvents[i].fencerIds);
-            //console.log($scope.currentParticipant.competitor_id);
+            console.log($scope.tournamentEvents[i].fencerIds);
+            console.log($scope.currentParticipant.competitor_id);
             if($scope.tournamentEvents[i].fencerIds){
               if ($scope.tournamentEvents[i].fencerIds.indexOf($scope.currentParticipant.competitor_id) !== -1) {
                 if ($scope.eventsParticipatingIn.indexOf($scope.tournamentEvents[i].full_name) === -1) {
@@ -194,10 +205,12 @@ app.controller('checkinParticipantController', function ($scope, checkinService,
               }
             }
           }
-          if(additionalCheckedEvents.length > 0){
-            for(var i= 0; i < additionalCheckedEvents.length; i++){
-              if($scope.eventsParticipatingIn.indexOf(additionalCheckedEvents[i]) === -1){
-                $scope.eventsParticipatingIn.push(additionalCheckedEvents[i]);
+          if(additionalCheckedEvents){
+            if(additionalCheckedEvents.length > 0){
+              for(var i= 0; i < additionalCheckedEvents.length; i++){
+                if($scope.eventsParticipatingIn.indexOf(additionalCheckedEvents[i]) === -1){
+                  $scope.eventsParticipatingIn.push(additionalCheckedEvents[i]);
+                }
               }
             }
           }

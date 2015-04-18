@@ -1,5 +1,5 @@
 var app = angular.module('fencin');
-app.service('checkinService', function (firebaseService) {
+app.service('checkinService', function (firebaseService, environmentService) {
     this.creditTotal = 0;
     this.cashTotal = 0;
     this.checkTotal = 0;
@@ -9,10 +9,18 @@ app.service('checkinService', function (firebaseService) {
         firebaseService.setTournamentId(this.currentTournament.$id);
     };
     
-    this.getCurrentTournament = function(){
-        return this.currentTournament;
-    };
+//    this.getCurrentTournament = function(){
+//        return this.currentTournament;
+//    };
 
+    this.getCurrentTournament = function(){
+      if(this.currentTournament !== ""){
+        return this.currentTournament;
+      } else {
+        return environmentService.getTournament();
+      }
+    }
+  
     this.setParticipant = function (participant) {
         this.currentParticipant = participant;
     };
@@ -23,20 +31,17 @@ app.service('checkinService', function (firebaseService) {
 
     this.setPaidCredit = function (amount) {
         this.creditTotal += amount;
-//        this.checkedInFencer();
     };
 
     this.setPaidCash = function (amount) {
         this.cashTotal += amount;
-//        this.checkedInFencer();
     };
 
     this.setPaidCheck = function (amount) {
         this.checkTotal += amount;
-//        this.checkedInFencer();
     };
     
-    this.checkedInFencer = function(){
+    this.checkedInFencer = function(){      
         this.currentParticipant.inFencingTime = false;
         firebaseService.setFenncerCheckedIn(this.currentParticipant);
     };
@@ -47,13 +52,14 @@ app.service('checkinService', function (firebaseService) {
     
     this.setEventsChecked = function(eventArray){
       this.eventsCheckedArray = eventArray;
+      console.log('this.eventsCheckedArray', this.eventsCheckedArray)
     };
   
     this.getEventsChecked = function(){
-      if(this.eventsCheckedArray){
+      //if(this.eventsCheckedArray){
         return this.eventsCheckedArray;
-      }
-      return [];
+      //}
+     // return [];
     };
   
     this.setBorrower = function(borrower){

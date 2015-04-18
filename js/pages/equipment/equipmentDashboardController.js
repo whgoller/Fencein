@@ -15,7 +15,7 @@ app.controller('equipmentDashboardController', function ($scope, checkinService,
 
     $scope.getBorrower = function (borrower) {
         equipmentService.setBorrower(borrower);
-        checkinService.setParticipant(borrower.fencer)
+       // checkinService.setParticipant(borrower.fencer)
         console.log('borrower', borrower);
         //window.location.hash = '/equipment';
     };

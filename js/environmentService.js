@@ -36,6 +36,7 @@ app.service('environmentService', function ($window, $http) {
       },
 
       getTournament: function(){
+        console.log('eventService',$window.localStorage.getItem('tournamentId'));
         return $window.localStorage.getItem('tournamentId');
       },
       
@@ -44,7 +45,7 @@ app.service('environmentService', function ($window, $http) {
       },
       
       getCurrentFencerEventsTotal: function(){
-        $window.localStorage.setItem('total', total);
+        return $window.localStorage.setItem('total', total);
       }
       
     }

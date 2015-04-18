@@ -1,6 +1,6 @@
 var app = angular.module('fencin');
 
-app.controller('checkinSelectionController', function ($scope, checkinService, firebaseService, $location, environmentService, currentAuth, $location) {
+app.controller('checkinSelectionController', function ($scope, checkinService, firebaseService, $location, environmentService, currentAuth) {
  
     if(currentAuth){
       $scope.clubName = 'Utah Swords Academy Fencing Club';
@@ -24,7 +24,7 @@ app.controller('checkinSelectionController', function ($scope, checkinService, f
                    break;
                }
            }
-          $location.path('/dashboard');
+          $location.path('/checkin');
       };
 
     }

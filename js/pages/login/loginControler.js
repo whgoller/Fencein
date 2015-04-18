@@ -5,6 +5,7 @@ app.controller('loginController', function($scope, authService, $location, fireb
   //Step 4 of Registration
   var loginCallback = function(user){
     console.log(user);
+    $scope.$emit('login:authorized', true)
     //user.uid = user.uid.replace('simplelogin:', '');
     firebaseService.getUser(user.uid).then(function(data){
       $location.path('/dashboard');
@@ -31,6 +32,5 @@ app.controller('loginController', function($scope, authService, $location, fireb
   $scope.loginRefresh = function(){
     $route.reload();
   }
-  
-  
+
 });

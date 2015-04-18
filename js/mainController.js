@@ -1,11 +1,8 @@
 var app = angular.module('fencin');
-app.controller("mainController", function ($scope, askfredService, firebaseService, checkinService, $firebaseAuth, authService) {
-  
-  //var ref = new Firebase('https://fencein.firebaseio.com/');
-  //$scope.auth = $firebaseAuth(ref);
+app.controller("mainController", function ($scope, askfredService, firebaseService, checkinService, $firebaseAuth, authService, $rootScope) {
   
   if(authService.isLoggedIn()){
-    $scope.tournamentName = 'Utah Swords Academy Fencing Club';
+    $scope.clubName = 'Utah Swords Academy Fencing Club';
     $scope.authorized = true;
 
     $scope.getTournaments = function () {
@@ -13,12 +10,16 @@ app.controller("mainController", function ($scope, askfredService, firebaseServi
         $scope.tournaments = data;
         $scope.tournamentNames = [];
         for(i = 0; i < $scope.tournaments.length; i++){
-          $scope.tournamentNames.push($scope.tournaments[i].tournament.tournamentName);
+          $scope.tournamentNames.push($scope.tournaments[i].tournament.clubName);
         }           
       });
     }();
 
-
+   $scope.$on('login', function (event, data) {
+      console.log(data); // 'Some data'
+    });
+    
+    
     $scope.signout = function(){            
       authService.logOut();
       toggleLogin();
@@ -27,5 +28,9 @@ app.controller("mainController", function ($scope, askfredService, firebaseServi
     var toggleLogin = function(){   
       $scope.authorized = authService.isLoggedIn();
     }
+    
+    $rootScope.$broadcast('checkinClicked', true);
+    
+    
   }
 });

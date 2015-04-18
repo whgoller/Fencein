@@ -37,6 +37,13 @@ app.config(["$routeProvider", function ($routeProvider, $httpProvider, Auth, rou
         templateUrl: '/js/pages/checkin/checkin.html',
         controller: 'checkinController',
         resolve: {
+          "clearCheckin": function(checkinService, $route){
+            checkinService.setParticipant(null);
+            checkinService.setEventsChecked([]);
+            console.log($route);
+            console.log(checkinService.getParticipant());
+            console.log(checkinService.getEventsChecked());
+          },
           // controller will not be loaded until $requireAuth resolves
           "currentAuth": ["Auth", function(Auth) {
             return Auth.$requireAuth();
@@ -118,7 +125,6 @@ app.config(["$routeProvider", function ($routeProvider, $httpProvider, Auth, rou
 
 app.run(["$rootScope", "$location", function($rootScope, $location, authService, session) {
 //    $rootScope.$on("$routeChangeError", function(event, nextRoute, currentRoute) {
- 
   $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute, authService, session){
     var ref = new Firebase('https://fencein.firebaseio.com/');
     ref.onAuth(function(authData){
@@ -130,6 +136,10 @@ app.run(["$rootScope", "$location", function($rootScope, $location, authService,
       }
 
     });
+    
+//  console.log(event);
+//  console.log(nextRoute);
+//  console.log(currentRoute);
   });
 }]);
 
